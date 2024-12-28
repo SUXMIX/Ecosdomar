@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rotina Profissional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -133,13 +134,41 @@
             background-color: white;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0 , 0, 0, 0.5);
             display: none; /* Inicialmente escondido */
-            z-index: 100 1;
+            z-index: 1001;
         }
 
         .confirm-dialog button {
             margin: 5px;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+        }
+
+        .task-info {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .task-date {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .task-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
     </style>
 </head>
@@ -179,8 +208,8 @@
                     routineDiv.innerHTML = `
                         <span>${routine}</span>
                         <div>
-                            <button onclick="openEditDialog(${index})">Editar</button>
-                            <button onclick="openDeleteDialog(${index})">Excluir</button>
+                            <button onclick="openEditDialog(${index})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="openDeleteDialog(${index})"><i class="fa-solid fa-x"></i></button>
                         </div>
                     `;
                     routineDiv.onclick = () => openRoutinePage(index);
@@ -251,9 +280,14 @@
                     const taskDiv = document.createElement('div');
                     taskDiv.className = 'task';
                     taskDiv.innerHTML = `
-                        <span>${task.name} - ${task.dateTime.toLocaleString()}</span>
-                        <button onclick="editTask(${routineIndex}, ${taskIndex})">Editar</button>
-                        <button onclick="openDeleteTaskDialog(${routineIndex}, ${taskIndex})">Excluir</button>
+                        <div class="task-info">
+                            <span>${task.name}</span>
+                            <span class="task-date">${task.dateTime.toLocaleString()}</span>
+                        </div>
+                        <div class="task-buttons">
+                            <button onclick="editTask(${routineIndex}, ${taskIndex})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="openDeleteTaskDialog(${routineIndex}, ${taskIndex})"><i class="fa-solid fa-x"></i></button>
+                        </div>
                     `;
                     taskList.appendChild(taskDiv);
                 });
@@ -346,7 +380,7 @@
 
         function openEditDialog(index) {
             const newRoutine = prompt("Novo nome da rotina:", routines[index]);
-            if (newRoutine) {
+            if (new Routine) {
                 routines[index] = newRoutine;
                 saveData();
                 showRoutines();
