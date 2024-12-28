@@ -95,6 +95,9 @@
             padding: 10px;
             margin: 5px 0;
             border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .routine-header {
@@ -134,23 +137,13 @@
             background-color: white;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0 , 0, 0, 0.5);
+            box-shadow: 0 0  10px rgba(0, 0, 0, 0.5);
             display: none; /* Inicialmente escondido */
             z-index: 1001;
         }
 
         .confirm-dialog button {
             margin: 5px;
-        }
-
-        .task {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            background-color: #e0e0e0;
         }
 
         .task-info {
@@ -167,8 +160,25 @@
 
         .task-buttons {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .task-buttons button {
+            width: 40px; /* Largura fixa para os botões */
+            height: 40px; /* Altura fixa para os botões */
+            border-radius: 50%; /* Botões redondos */
+            background-color: #4F4F4F; /* Cor de fundo */
+            color: white; /* Cor do texto */
+            border: none; /* Sem borda */
+            cursor: pointer; /* Cursor de ponteiro */
+            display: flex; /* Flex para centralizar o ícone */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+        }
+
+        .task-buttons button:hover {
+            background-color: #555; /* Efeito hover para os botões */
         }
     </style>
 </head>
@@ -282,7 +292,7 @@
                     taskDiv.innerHTML = `
                         <div class="task-info">
                             <span>${task.name}</span>
-                            <span class="task-date">${task.dateTime.toLocaleString()}</span>
+                            <span class="task-date">${new Date(task.dateTime).toLocaleString()}</span>
                         </div>
                         <div class="task-buttons">
                             <button onclick="editTask(${routineIndex}, ${taskIndex})"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -315,7 +325,7 @@
 
         function editTask(routineIndex, taskIndex) {
             const newTaskName = prompt("Novo nome do afazer:", tasks[routineIndex][taskIndex].name);
-            const newDateTime = prompt("Nova data e hora (YYYY-MM-DDTHH:MM):", tasks[routineIndex][taskIndex].dateTime.toISOString().slice(0, 16));
+            const newDateTime = prompt("Nova data e hora (YYYY-MM-DDTHH:MM):", new Date(tasks[routineIndex][taskIndex].dateTime).toISOString().slice(0, 16));
             if (newTaskName && newDateTime) {
                 tasks[routineIndex][taskIndex] = { name: newTaskName, dateTime: new Date(newDateTime) };
                 saveData();
@@ -380,7 +390,7 @@
 
         function openEditDialog(index) {
             const newRoutine = prompt("Novo nome da rotina:", routines[index]);
-            if (new Routine) {
+            if (newRoutine) {
                 routines[index] = newRoutine;
                 saveData();
                 showRoutines();
