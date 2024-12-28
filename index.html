@@ -10,9 +10,13 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Define a altura total da página */
         }
 
         .container {
+            flex: 1; /* Faz a container ocupar o espaço restante */
             width: 80%;
             margin: auto;
         }
@@ -24,6 +28,10 @@
             display: flex;
             justify-content: space-around;
             border-radius: 5px; /* Arredondar os cantos da navbar */
+            position: fixed; /* Fixa a navbar na parte inferior */
+            bottom: 0; /* Posiciona a navbar na parte inferior */
+            left: 10%; /* Ajusta a posição da navbar */
+            right: 10%; /* Ajusta a posição da navbar */
         }
 
         .navbar button {
@@ -38,6 +46,7 @@
             background-color: white;
             border-radius: 5px; /* Arredondar os cantos do conteúdo */
             margin-top: 10px;
+            margin-bottom: 60px; /* Espaço para a navbar na parte inferior */
         }
 
         .routine {
@@ -126,7 +135,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             display: none; /* Inicialmente escondido */
-            z-index: 1001;
+            z-index: 100 1;
         }
 
         .confirm-dialog button {
@@ -138,17 +147,17 @@
     <div class="notification" id="notification"></div>
     <div class="confirm-dialog" id="confirmDialog">
         <p id="confirmMessage"></p>
-        <button id="confirmYes">Sim </button>
+        <button id="confirmYes">Sim</button>
         <button id="confirmNo">Não</button>
     </div>
     <div class="container">
-        <nav class="navbar" id="navbar">
-            <button onclick="showRoutines()">Rotinas</button>
-            <button onclick="showCreateRoutinePage()">Criar Rotina</button>
-            <button onclick="showSettings()">Configurações</button>
-        </nav>
         <div id="content" class="content"></div>
     </div>
+    <nav class="navbar" id="navbar">
+        <button onclick="showRoutines()">Rotinas</button>
+        <button onclick="showCreateRoutinePage()">Criar Rotina</button>
+        <button onclick="showSettings()">Configurações</button>
+    </nav>
     <script>
         let routines = JSON.parse(localStorage.getItem('routines')) || [];
         let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
@@ -254,7 +263,7 @@
         }
 
         function openDeleteTaskDialog(routineIndex, taskIndex) {
- currentDeleteIndex = taskIndex;
+            currentDeleteIndex = taskIndex;
             const taskName = tasks[routineIndex][taskIndex].name;
             showConfirmDialog(`Tem certeza que deseja excluir o afazer '${taskName}'?`, () => {
                 deleteTask(routineIndex, taskIndex);
