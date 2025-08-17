@@ -57,6 +57,23 @@
             display: block;
         }
 
+        /* Estilo para o container do vídeo, mantendo a proporção */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção de 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         footer {
             text-align: center;
             padding: 1rem 0;
@@ -85,12 +102,12 @@
         // Array de objetos para armazenar as postagens do blog.
         const posts = [
             {
-                title: "Olá Carlos Eduardo Rodrigues dos Santos",
+                title: "Minha Primeira Postagem",
                 date: "17 de Agosto de 2025",
                 content: `
-                    <p>Olá! Cuidado que você irá tirar nota ruim na matéria de inglês!</p>
-                    <p>Ela colocou a nota no SUAP!</p>
-                `
+                    <p>Olá! Este é meu primeiro post no blog. Estou muito animado para começar a escrever e compartilhar meus pensamentos com vocês. Fiquem ligados para mais novidades!</p>
+                `,
+                videoId: "luipyUSgMY4" // Exemplo de um vídeo do YouTube
             },
             {
                 title: "Dicas para Iniciar um Projeto",
@@ -102,7 +119,8 @@
                         <li>Divida o projeto em tarefas menores.</li>
                         <li>Não tenha medo de pedir ajuda.</li>
                     </ul>
-                `
+                `,
+                videoId: null // Este post não tem um vídeo
             },
             {
                 title: "Um Olhar sobre a Natureza",
@@ -110,7 +128,8 @@
                 content: `
                     <p>Caminhar em uma trilha na floresta me lembra da importância de se desconectar do mundo digital e apreciar as pequenas coisas. O som dos pássaros, o cheiro da terra úmida e a brisa fresca são revigorantes.</p>
                     <p>É um lembrete de que, por mais que a vida seja corrida, a natureza sempre nos oferece um refúgio de paz.</p>
-                `
+                `,
+                videoId: "l6zHjJ-0nL4" // Outro exemplo de vídeo do YouTube
             }
         ];
 
@@ -118,10 +137,27 @@
         function createPostElement(post) {
             const postDiv = document.createElement('div');
             postDiv.classList.add('post');
+
+            let videoHtml = '';
+            // Verifica se o post tem um ID de vídeo para criar o iframe
+            if (post.videoId) {
+                videoHtml = `
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/${post.videoId}" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                `;
+            }
+
             postDiv.innerHTML = `
                 <h2>${post.title}</h2>
                 <span class="post-date">${post.date}</span>
                 <div class="post-content">${post.content}</div>
+                ${videoHtml}
             `;
             return postDiv;
         }
