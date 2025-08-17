@@ -1,414 +1,144 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rotina Profissional</title>
+    <title>Meu Blog Pessoal</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            color: #333;
             margin: 0;
             padding: 0;
-            transition: background-color 0.5s ease; /* Transição suave para a cor de fundo */
         }
 
-        .container {
-            width: 80%;
-            margin: auto;
-        }
-
-        .navbar {
+        header {
             background-color: #333;
-            color: white;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-            border-radius: 5px; /* Arredondar os cantos da navbar */
-        }
-
-        .navbar button {
-            background: none;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease; /* Transição suave para o fundo do botão */
-        }
-
-        .navbar button:hover {
-            background-color: rgba(255, 255, 255, 0.1); /* Efeito hover para os botões */
-        }
-
-        .content {
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px; /* Arredondar os cantos do conteúdo */
-            margin-top: 10px;
-            opacity: 0; /* Começa invisível */
-            transform: translateY(20px); /* Move para baixo */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Transição suave */
-        }
-
-        .content.show {
-            opacity: 1; /* Torna visível */
-            transform: translateY(0); /* Move para a posição original */
-        }
-
-        .routine {
-            background-color: #4F4F4F;
-            color: white;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px; /* Arredondar os cantos das rotinas */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
-            transition: background-color 0.3s ease; /* Transição suave para o fundo */
-        }
-
-        .routine:hover {
-            background-color: #555; /* Efeito hover para as rotinas */
-        }
-
-        .routine button {
-            background: none;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        input[type="text"], input[type="datetime-local"] {
-            border-radius: 5px; /* Arredondar os cantos do campo de entrada */
-            padding: 10px;
-            border: 1px solid #ccc;
-            width: calc(100% - 22px); /* Ajusta a largura para incluir padding */
-            margin-bottom: 10px; /* Espaçamento abaixo do campo de entrada */
-        }
-
-        button {
-            border-radius: 5px; /* Arredondar os cantos dos botões */
-            padding: 10px 15px;
-            background-color: #4F4F4F;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease; /* Transição suave para o fundo do botão */
-        }
-
-        button:hover {
-            background-color: #555; /* Efeito hover para os botões */
-        }
-
-        .task {
-            background-color: #e0e0e0;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
-
-        .routine-header {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            border-radius: 5px 5px 0 0; /* Arredondar apenas o topo */
+            color: #fff;
+            padding: 1rem 0;
             text-align: center;
         }
 
-        .back-button {
-            background-color: #4F4F4F;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 20px;
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
         }
 
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #4F4F4F;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            display: none; /* Inicialmente escondido */
-            z-index: 1000;
+        header p {
+            margin: 0.5rem 0 0;
         }
 
-        .confirm-dialog {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: none; /* Inicialmente escondido */
-            z-index: 1001;
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
-        .confirm-dialog button {
-            margin: 5px;
+        .post {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .post h2 {
+            color: #1a1a1a;
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .post .post-date {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="notification" id="notification"></div>
-    <div class="confirm-dialog" id="confirmDialog">
-        <p id="confirmMessage"></p>
-        <button id="confirmYes">Sim</button>
-        <button id="confirmNo">Não</button>
-    </div>
-    <div class="container">
-        <nav class="navbar" id="navbar">
-            <button onclick="showRoutines()">Rotinas</button>
-            <button onclick="showCreateRoutinePage()">Criar Rotina</button>
-            <button onclick="showSettings()">Configurações</button>
-        </nav>
-        <div id="content" class="content"></div>
-    </div>
+    <header>
+        <h1>Meu Blog</h1>
+        <p>Um espaço para meus pensamentos e histórias.</p>
+    </header>
+
+    <main id="posts-container">
+        </main>
+
+    <footer>
+        <p>&copy; 2025 Seu Nome. Todos os direitos reservados.</p>
+    </footer>
+
     <script>
-        let routines = JSON.parse(localStorage.getItem('routines')) || [];
-        let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-        let currentDeleteIndex = null;
-        let currentEditIndex = null;
-
-        function showRoutines() {
-            const content = document.getElementById('content');
-            const navbar = document.getElementById('navbar');
-            navbar.style.display = 'flex';
-            content.classList.remove('show'); // Remove a classe de animação
-
-            setTimeout(() => {
-                content.innerHTML = '';
-                if (routines.length === 0) {
-                    content.innerHTML = '<p>Nenhuma rotina criada</p>';
-                } else {
-                    routines.forEach((routine, index) => {
-                        const routineDiv = document.createElement('div');
-                        routineDiv.className = 'routine';
-                        routineDiv.innerHTML = `
-                            <span>${routine}</span>
-                            <div>
-                                <button onclick="openEditDialog(${index})">Editar</button>
-                                <button onclick="openDeleteDialog(${index})">Excluir</button>
-                            </div>
-                        `;
-                        routineDiv.onclick = () => openRoutinePage(index);
-                        content.appendChild(routineDiv);
-                    });
-                }
-                content.classList.add('show'); // Adiciona a classe de animação
-            }, 300); // Tempo para garantir que o conteúdo seja limpo antes da animação
-        }
-
-        function openRoutinePage(index) {
-            const content = document.getElementById('content');
-            const navbar = document.getElementById('navbar');
-            navbar.style.display = 'none';
-            const routineName = routines[index];
-            content.classList.remove('show'); // Remove a classe de animação
-
-            setTimeout(() => {
-                content.innerHTML = `
-                    <button class="back-button" onclick="showRoutines()">Voltar</button>
-                    <div class="routine-header">${routineName}</div>
-                    <div class="content">
-                        <h2>Adicionar Afazer</h2>
-                        <input type="text" id="taskInput" placeholder="Nome do afazer">
-                        <input type="datetime-local" id="taskDateTime" placeholder="Data e Hora">
-                        <button onclick="addTask(${index})">Adicionar</button>
-                        <h3>Afazeres:</h3>
-                        <div id="taskList"></div>
-                    </div>
-                `;
-                displayTasks(index);
-                content.classList.add('show'); // Adiciona a classe de animação
-            }, 300); // Tempo para garantir que o conteúdo seja limpo antes da animação
-        }
-
-        function addTask(routineIndex) {
-            const input = document.getElementById('taskInput');
-            const dateTimeInput = document.getElementById('taskDateTime');
-            const newTask = input.value.trim();
-            const dateTime = new Date(dateTimeInput.value);
-
-            if (newTask && dateTime) {
-                if (!tasks[routineIndex]) {
-                    tasks[routineIndex] = [];
-                }
-                tasks[routineIndex].push({ name: newTask, dateTime: dateTime });
-                input.value = '';
-                dateTimeInput.value = '';
-                saveData();
-                displayTasks(routineIndex);
-                scheduleNotification(newTask, dateTime);
-                showNotification(`Afazer '${newTask}' adicionado com sucesso!`);
-            } else {
-                alert("Por favor, insira um nome e uma data/hora para o afazer.");
+        // Array de objetos para armazenar as postagens do blog.
+        const posts = [
+            {
+                title: "Minha Primeira Postagem",
+                date: "17 de Agosto de 2025",
+                content: `
+                    <p>Olá! Este é meu primeiro post no blog. Estou muito animado para começar a escrever e compartilhar meus pensamentos com vocês. Fiquem ligados para mais novidades!</p>
+                    <p>A ideia é usar este espaço para falar sobre tecnologia, hobbies e algumas histórias pessoais. Espero que gostem do conteúdo!</p>
+                `
+            },
+            {
+                title: "Dicas para Iniciar um Projeto",
+                date: "10 de Agosto de 2025",
+                content: `
+                    <p>Começar um novo projeto pode ser desafiador, mas com o planejamento certo, tudo se torna mais fácil. Aqui estão algumas dicas que sempre me ajudam:</p>
+                    <ul>
+                        <li>Defina objetivos claros e alcançáveis.</li>
+                        <li>Divida o projeto em tarefas menores.</li>
+                        <li>Não tenha medo de pedir ajuda.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Um Olhar sobre a Natureza",
+                date: "05 de Agosto de 2025",
+                content: `
+                    <p>Caminhar em uma trilha na floresta me lembra da importância de se desconectar do mundo digital e apreciar as pequenas coisas. O som dos pássaros, o cheiro da terra úmida e a brisa fresca são revigorantes.</p>
+                    <p>É um lembrete de que, por mais que a vida seja corrida, a natureza sempre nos oferece um refúgio de paz.</p>
+                `
             }
+        ];
+
+        // Função para criar o HTML de uma única postagem
+        function createPostElement(post) {
+            const postDiv = document.createElement('div');
+            postDiv.classList.add('post');
+            postDiv.innerHTML = `
+                <h2>${post.title}</h2>
+                <span class="post-date">${post.date}</span>
+                <div class="post-content">${post.content}</div>
+            `;
+            return postDiv;
         }
 
-        function scheduleNotification(taskName, dateTime) {
-            const now = new Date();
-            const timeToNotification = dateTime - now;
+        // Função para renderizar todas as postagens na página
+        function renderPosts() {
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = ''; 
 
-            if (timeToNotification > 0) {
-                setTimeout(() => {
-                    showNotification(`Tarefa para concluir: Conclua a tarefa: ${taskName}`);
-                }, timeToNotification);
-            }
-        }
-
-        function displayTasks(routineIndex) {
-            const taskList = document.getElementById('taskList');
-            taskList.innerHTML = '';
-
-            if (tasks[routineIndex] && tasks[routineIndex].length > 0) {
-                tasks[routineIndex].forEach((task, taskIndex) => {
-                    const taskDiv = document.createElement('div');
-                    taskDiv.className = 'task';
-                    taskDiv.innerHTML = `
-                        <span>${task.name} - ${task.dateTime.toLocaleString()}</span>
-                        <button onclick="editTask(${routineIndex}, ${taskIndex})">Editar</button>
-                        <button onclick="openDeleteTaskDialog(${routineIndex}, ${taskIndex})">Excluir</button>
-                    `;
-                    taskList.appendChild(taskDiv);
-                });
-            } else {
-                taskList.innerHTML = '<p>Nenhum afazer adicionado.</p>';
-            }
-        }
-
-        function openDeleteTaskDialog(routineIndex, taskIndex) {
-            currentDeleteIndex = taskIndex;
-            const taskName = tasks[routineIndex][taskIndex].name;
-            showConfirmDialog(`Tem certeza que deseja excluir o afazer '${taskName}'?`, () => {
-                deleteTask(routineIndex, taskIndex);
+            posts.forEach(post => {
+                const postElement = createPostElement(post);
+                postsContainer.appendChild(postElement);
             });
         }
 
-        function deleteTask(routineIndex, taskIndex) {
-            const deletedTask = tasks[routineIndex][taskIndex].name;
-            tasks[routineIndex].splice(taskIndex, 1);
-            saveData();
-            displayTasks(routineIndex);
-            showNotification(`Afazer '${deletedTask}' excluído com sucesso!`);
-            closeConfirmDialog();
-        }
-
-        function editTask(routineIndex, taskIndex) {
-            const newTaskName = prompt("Novo nome do afazer:", tasks[routineIndex][taskIndex].name);
-            const newDateTime = prompt("Nova data e hora (YYYY-MM-DDTHH:MM):", tasks[routineIndex][taskIndex].dateTime.toISOString().slice(0, 16));
-            if (newTaskName && newDateTime) {
-                tasks[routineIndex][taskIndex] = { name: newTaskName, dateTime: new Date(newDateTime) };
-                saveData();
-                displayTasks(routineIndex);
-                showNotification(`Afazer editado para '${newTaskName}' com sucesso!`);
-            }
-        }
-
-        function showConfirmDialog(message, onConfirm) {
-            const confirmDialog = document.getElementById('confirmDialog');
-            const confirmMessage = document.getElementById('confirmMessage');
-            confirmMessage.innerText = message;
-            confirmDialog.style.display = 'block';
-
-            document.getElementById('confirmYes').onclick = () => {
-                onConfirm();
-                closeConfirmDialog();
-            };
-
-            document.getElementById('confirmNo').onclick = closeConfirmDialog;
-        }
-
-        function closeConfirmDialog() {
-            const confirmDialog = document.getElementById('confirmDialog');
-            confirmDialog.style.display = 'none';
-        }
-
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.innerText = message;
-            notification.style.display = 'block';
-
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
-
-        function showCreateRoutinePage() {
-            const content = document.getElementById('content');
-            const navbar = document.getElementById('navbar');
-            navbar.style.display = 'flex';
-            content.classList.remove('show'); // Remove a classe de animação
-
-            setTimeout(() => {
-                content.innerHTML = `
-                    <h2>Criar Nova Rotina</h2>
-                    <input type="text" id="routineInput" placeholder="Nome da nova rotina">
-                    <button onclick="addRoutine()"> Criar</button>
-                `;
-                content.classList.add('show'); // Adiciona a classe de animação
-            }, 300); // Tempo para garantir que o conteúdo seja limpo antes da animação
-        }
-
-        function addRoutine() {
-            const input = document.getElementById('routineInput');
-            const newRoutine = input.value.trim();
-            if (newRoutine) {
-                routines.push(newRoutine);
-                input.value = '';
-                saveData();
-                showRoutines();
-                showNotification(`Rotina '${newRoutine}' criada com sucesso!`);
-            } else {
-                alert("Por favor, insira um nome para a rotina.");
-            }
-        }
-
-        function openEditDialog(index) {
-            const newRoutine = prompt("Novo nome da rotina:", routines[index]);
-            if (newRoutine) {
-                routines[index] = newRoutine;
-                saveData();
-                showRoutines();
-                showNotification(`Rotina editada para '${newRoutine}' com sucesso!`);
-            }
-        }
-
-        function openDeleteDialog(index) {
-            const routineName = routines[index];
-            showConfirmDialog(`Tem certeza que deseja excluir a rotina '${routineName}'?`, () => {
-                routines.splice(index, 1);
-                delete tasks[index];
-                saveData();
-                showRoutines();
-                showNotification(`Rotina '${routineName}' excluída com sucesso!`);
-            });
-        }
-
-        function saveData() {
-            localStorage.setItem('routines', JSON.stringify(routines));
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
-
-        function showSettings() {
-            const content = document.getElementById('content');
-            const navbar = document.getElementById('navbar');
-            navbar.style.display = 'flex';
-            content.classList.remove('show'); // Remove a classe de animação
-
-            setTimeout(() => {
-                content.innerHTML = '<h2>Configurações</h2><p>Em breve...</p>';
-                content.classList.add('show'); // Adiciona a classe de animação
-            }, 300); // Tempo para garantir que o conteúdo seja limpo antes da animação
-        }
-
-        showRoutines();
+        // Chama a função para renderizar as postagens quando a página é carregada
+        document.addEventListener('DOMContentLoaded', renderPosts);
     </script>
 </body>
 </html>
-
