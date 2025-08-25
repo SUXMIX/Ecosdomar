@@ -1,215 +1,221 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nome do Seu Projeto de Ciências</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <style>
-        /* Definindo variáveis de cores para fácil customização */
-        :root {
-            --cor-principal: #4a90e2; /* Um azul suave */
-            --cor-fundo: #f4f7f6;
-            --cor-fundo-alternativa: #ffffff;
-            --cor-texto: #333333;
-            --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Reset básico e fonte suave */
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif; /* Fonte moderna e limpa */
-            background-color: var(--cor-fundo);
-            color: var(--cor-texto);
-            line-height: 1.6;
-            scroll-behavior: smooth; /* Para a rolagem do link ser suave */
-        }
-
-        /* Estilo do cabeçalho (hero section) */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* Fundo em gradiente suave */
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-
-        /* O famoso botão arredondado! */
-        .btn-arredondado {
-            display: inline-block;
-            padding: 15px 30px;
-            border-radius: 50px; /* Isso deixa ele bem arredondado */
-            background-color: var(--cor-principal);
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: var(--sombra-suave);
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
-        }
-
-        .btn-arredondado:hover {
-            transform: translateY(-5px); /* Efeito de "levantar" ao passar o mouse */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Estilo padrão das seções */
-        .secao {
-            padding: 80px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-            overflow: hidden; /* Garante que as animações não causem barras de rolagem indesejadas */
-        }
-
-        .secao h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .alternate-bg {
-            background-color: var(--cor-fundo-alternativa);
-        }
-
-        /* Galeria de mídias */
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .galeria img, .galeria video {
-            width: 100%;
-            height: auto;
-            border-radius: 15px; /* Bordas arredondadas nas mídias */
-            box-shadow: var(--sombra-suave);
-            object-fit: cover;
-        }
-
-        /* --- A MÁGICA DA ANIMAÇÃO SUAVE --- */
-
-        /* Esconde os elementos antes de aparecerem */
-        .fade-in-element {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        /* Torna os elementos visíveis com uma animação suave */
-        .fade-in-element.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Animação inicial para o cabeçalho */
-        .fade-in {
-            animation: fadeInAnimation 1s ease-in forwards;
-            opacity: 0;
-        }
-        .fade-in:nth-child(2) { animation-delay: 0.3s; }
-        .fade-in:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes fadeInAnimation {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-        }
-    </style>
+    <title>Projeto de Ciências - Apresentação</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <header class="hero">
-        <h1 class="fade-in">O Nome Incrível do Nosso Projeto</h1>
-        <p class="fade-in">Uma breve descrição do que ele faz e por que é importante.</p>
-        <a href="#construcao" class="btn-arredondado fade-in">Veja como construímos</a>
+        <div class="container">
+            <h1 class="hero-title">Projeto de Ciências</h1>
+            <p class="hero-subtitle">Descobrindo o mundo através da ciência</p>
+        </div>
     </header>
 
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#construcao">Como Construímos</a></li>
+                <li><a href="#testes">Testes</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#videos">Vídeos</a></li>
+                <li><a href="#resultados">Resultados</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <main>
-        <section id="construcao" class="secao">
-            <h2 class="fade-in-element">A Construção Passo a Passo</h2>
-            <p class="fade-in-element">Aqui mostramos todo o processo, desde a ideia inicial até o protótipo final. Utilizamos materiais simples e muita criatividade.</p>
-            <div class="galeria fade-in-element">
-                <img src="assets/foto1.jpg" alt="Descrição da foto 1">
-                <video controls src="assets/video_construcao.mp4"></video>
-                <img src="assets/foto2.jpg" alt="Descrição da foto 2">
+        <section id="sobre" class="section">
+            <div class="container">
+                <h2 class="section-title">Sobre o Projeto</h2>
+                <div class="content-grid">
+                    <div class="text-content">
+                        <p>Este projeto explora conceitos fundamentais de ciência através de experimentos práticos e observações cuidadosas. Nosso objetivo é entender melhor os fenômenos naturais e suas aplicações no mundo real.</p>
+                        <div class="project-info">
+                            <div class="info-item">
+                                <strong>Tema:</strong> <span>Fenômenos Naturais e suas Aplicações</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Período:</strong> <span>3 meses de pesquisa e desenvolvimento</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Equipe:</strong> <span>Grupo de pesquisa em ciências</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-content">
+                        <img src="https://placehold.co/600x400?text=Projeto+de+Ciências+em+ação" alt="Projeto de ciências sendo desenvolvido" class="responsive-img">
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="testes" class="secao alternate-bg">
-            <h2 class="fade-in-element">Testes e Resultados</h2>
-            <p class="fade-in-element">A hora da verdade! Veja o projeto em ação e confira os dados que coletamos durante os testes.</p>
-             <div class="galeria fade-in-element">
-                <video controls src="assets/video_teste.mp4" width="600"></video>
-                <p class="fade-in-element">Nossos resultados mostraram que a eficiência do nosso protótipo atingiu 85%, superando a hipótese inicial de 70%.</p>
+        <section id="construcao" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Como Construímos</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>Planejamento</h3>
+                            <p>Definição dos objetivos, pesquisa bibliográfica e seleção de materiais necessários para o experimento.</p>
+                            <img src="https://placehold.co/500x300?text=Planejamento+e+pesquisa" alt="Planejamento do projeto" class="timeline-img">
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>Coleta de Materiais</h3>
+                            <p>Seleção cuidadosa de todos os componentes e ferramentas necessárias para a construção do experimento.</p>
+                            <img src="https://placehold.co/500x300?text=Materiais+e+ferramentas" alt="Materiais do projeto" class="timeline-img">
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>Montagem</h3>
+                            <p>Processo de construção passo a passo, com atenção aos detalhes técnicos e segurança.</p>
+                            <img src="https://placehold.co/500x300?text=Processo+de+montagem" alt="Montagem do experimento" class="timeline-img">
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        
-        <section id="conclusao" class="secao">
-            <h2 class="fade-in-element">Conclusão</h2>
-            <p class="fade-in-element">Após a construção e os testes, concluímos que nossa hipótese foi confirmada. O projeto não só funcionou como esperado, mas também nos ensinou valiosas lições sobre trabalho em equipe e resolução de problemas. Existem melhorias futuras que podem ser implementadas, como...</p>
+
+        <section id="testes" class="section">
+            <div class="container">
+                <h2 class="section-title">Testes e Experimentos</h2>
+                <div class="test-grid">
+                    <div class="test-card">
+                        <h3>Teste Inicial</h3>
+                        <p>Primeira validação do experimento com condições controladas.</p>
+                        <img src="https://placehold.co/400x300?text=Teste+inicial+do+experimento" alt="Primeiro teste do experimento" class="test-img">
+                    </div>
+                    <div class="test-card">
+                        <h3>Coleta de Dados</h3>
+                        <p>Registro sistemático de todas as observações e medições realizadas.</p>
+                        <img src="https://placehold.co/400x300?text=Coleta+de+dados+e+observações" alt="Coleta de dados científicos" class="test-img">
+                    </div>
+                    <div class="test-card">
+                        <h3>Análise de Resultados</h3>
+                        <p>Interpretação dos dados coletados e comparação com as hipóteses iniciais.</p>
+                        <img src="https://placehold.co/400x300?text=Análise+e+interpretação+dos+dados" alt="Análise de resultados científicos" class="test-img">
+                    </div>
+                </div>
+            </div>
         </section>
 
+        <section id="galeria" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Galeria de Imagens</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300?text=Montagem+inicial" alt="Montagem inicial do projeto" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <p>Montagem inicial</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300?text=Detalhes+técnicos" alt="Detalhes técnicos do experimento" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <p>Detalhes técnicos</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300?text=Testes+em+ação" alt="Testes sendo realizados" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <p>Testes em ação</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300?text=Resultados+visuais" alt="Resultados visuais do experimento" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <p>Resultados visuais</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300?text=Equipe+de+trabalho" alt="Equipe trabalhando no projeto" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <p>Equipe de trabalho</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/400x300?text=Apresentação+final" alt="Apresentação final do projeto" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <p>Apresentação final</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="videos" class="section">
+            <div class="container">
+                <h2 class="section-title">Vídeos do Projeto</h2>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-placeholder">
+                            <div class="play-button">▶</div>
+                            <p>Construção do Experimento</p>
+                        </div>
+                        <h3>Processo de Montagem</h3>
+                        <p>Vídeo completo mostrando cada etapa da construção do experimento.</p>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-placeholder">
+                            <div class="play-button">▶</div>
+                            <p>Testes e Resultados</p>
+                        </div>
+                        <h3>Execução dos Testes</h3>
+                        <p>Registro em vídeo de todos os testes realizados e seus resultados.</p>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-placeholder">
+                            <div class="play-button">▶</div>
+                            <p>Análise Final</p>
+                        </div>
+                        <h3>Conclusões do Projeto</h3>
+                        <p>Análise detalhada dos resultados obtidos e suas implicações científicas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resultados" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Resultados e Conclusões</h2>
+                <div class="results-content">
+                    <div class="result-card">
+                        <h3>Descobertas Principais</h3>
+                        <ul>
+                            <li>Validação da hipótese inicial sobre o fenômeno estudado</li>
+                            <li>Identificação de variáveis críticas no processo</li>
+                            <li>Correlação entre teoria e prática observada</li>
+                        </ul>
+                    </div>
+                    <div class="result-card">
+                        <h3>Impacto do Projeto</h3>
+                        <p>Este projeto demonstrou a importância da metodologia científica na resolução de problemas reais, fornecendo insights valiosos para futuras pesquisas.</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Próximos Passos</h3>
+                        <p>Baseado nos resultados obtidos, identificamos oportunidades para expandir a pesquisa e explorar novas aplicações dos conceitos estudados.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>Projeto de Ciências - 2025</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Projeto de Ciências. Desenvolvido com paixão pela ciência.</p>
+        </div>
     </footer>
 
-    <script>
-        // Função para animação de scroll suave
-        document.addEventListener("DOMContentLoaded", function() {
-            // Seleciona todos os elementos que queremos animar ao rolar
-            const elementsToAnimate = document.querySelectorAll('.fade-in-element');
-
-            // Se não houver elementos para animar, não faz nada
-            if (elementsToAnimate.length === 0) {
-                return;
-            }
-
-            // O IntersectionObserver é uma API do navegador que observa quando
-            // um elemento entra ou sai da tela. É muito mais performático que
-            // outras técnicas.
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    // Se o elemento está visível na tela (isIntersecting)
-                    if (entry.isIntersecting) {
-                        // Adiciona a classe 'visible' para ativar a animação do CSS
-                        entry.target.classList.add('visible');
-                        // Para de observar o elemento para a animação não repetir
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                // A animação começa quando 15% do elemento estiver visível
-                threshold: 0.15 
-            });
-
-            // Pede ao observer para observar cada um dos nossos elementos
-            elementsToAnimate.forEach(element => {
-                observer.observe(element);
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
