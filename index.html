@@ -3,179 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O meu blog para a vida!</title>
-    <meta name="description" content="Me chamo Vitor da Costa e este é o meu primeiro blog pessoal.">
-    
+    <title>Nome do Seu Projeto de Ciências</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
+        /* Definindo variáveis de cores para fácil customização */
+        :root {
+            --cor-principal: #4a90e2; /* Um azul suave */
+            --cor-fundo: #f4f7f6;
+            --cor-fundo-alternativa: #ffffff;
+            --cor-texto: #333333;
+            --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reset básico e fonte suave */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
             margin: 0;
-            padding: 0;
+            font-family: 'Poppins', sans-serif; /* Fonte moderna e limpa */
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Para a rolagem do link ser suave */
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
+        /* Estilo do cabeçalho (hero section) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* Fundo em gradiente suave */
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-
-        header p {
-            margin: 0.5rem 0 0;
-        }
-
-        main {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .post {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .post h2 {
-            color: #1a1a1a;
-            font-size: 2rem;
-            margin-top: 0;
-        }
-
-        .post .post-date {
-            color: #777;
-            font-size: 0.9rem;
+        .hero h1 {
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            display: block;
         }
 
-        /* Estilo para o container do vídeo, mantendo a proporção */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* Proporção de 16:9 */
-            height: 0;
-            overflow: hidden;
-            margin-top: 2rem;
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* O famoso botão arredondado! */
+        .btn-arredondado {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px; /* Isso deixa ele bem arredondado */
+            background-color: var(--cor-principal);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: var(--sombra-suave);
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+        }
+
+        .btn-arredondado:hover {
+            transform: translateY(-5px); /* Efeito de "levantar" ao passar o mouse */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Estilo padrão das seções */
+        .secao {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            overflow: hidden; /* Garante que as animações não causem barras de rolagem indesejadas */
+        }
+
+        .secao h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .alternate-bg {
+            background-color: var(--cor-fundo-alternativa);
+        }
+
+        /* Galeria de mídias */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .galeria img, .galeria video {
             width: 100%;
-            height: 100%;
+            height: auto;
+            border-radius: 15px; /* Bordas arredondadas nas mídias */
+            box-shadow: var(--sombra-suave);
+            object-fit: cover;
+        }
+
+        /* --- A MÁGICA DA ANIMAÇÃO SUAVE --- */
+
+        /* Esconde os elementos antes de aparecerem */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Torna os elementos visíveis com uma animação suave */
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animação inicial para o cabeçalho */
+        .fade-in {
+            animation: fadeInAnimation 1s ease-in forwards;
+            opacity: 0;
+        }
+        .fade-in:nth-child(2) { animation-delay: 0.3s; }
+        .fade-in:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInAnimation {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
             text-align: center;
-            padding: 1rem 0;
+            padding: 20px;
             background-color: #333;
-            color: #fff;
-            position: relative;
-            bottom: 0;
-            width: 100%;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Meu Blog</h1>
-        <p>Um espaço para meus pensamentos e histórias.</p>
+
+    <header class="hero">
+        <h1 class="fade-in">O Nome Incrível do Nosso Projeto</h1>
+        <p class="fade-in">Uma breve descrição do que ele faz e por que é importante.</p>
+        <a href="#construcao" class="btn-arredondado fade-in">Veja como construímos</a>
     </header>
 
-    <main id="posts-container">
-        </main>
+    <main>
+        <section id="construcao" class="secao">
+            <h2 class="fade-in-element">A Construção Passo a Passo</h2>
+            <p class="fade-in-element">Aqui mostramos todo o processo, desde a ideia inicial até o protótipo final. Utilizamos materiais simples e muita criatividade.</p>
+            <div class="galeria fade-in-element">
+                <img src="assets/foto1.jpg" alt="Descrição da foto 1">
+                <video controls src="assets/video_construcao.mp4"></video>
+                <img src="assets/foto2.jpg" alt="Descrição da foto 2">
+            </div>
+        </section>
+
+        <section id="testes" class="secao alternate-bg">
+            <h2 class="fade-in-element">Testes e Resultados</h2>
+            <p class="fade-in-element">A hora da verdade! Veja o projeto em ação e confira os dados que coletamos durante os testes.</p>
+             <div class="galeria fade-in-element">
+                <video controls src="assets/video_teste.mp4" width="600"></video>
+                <p class="fade-in-element">Nossos resultados mostraram que a eficiência do nosso protótipo atingiu 85%, superando a hipótese inicial de 70%.</p>
+            </div>
+        </section>
+        
+        <section id="conclusao" class="secao">
+            <h2 class="fade-in-element">Conclusão</h2>
+            <p class="fade-in-element">Após a construção e os testes, concluímos que nossa hipótese foi confirmada. O projeto não só funcionou como esperado, mas também nos ensinou valiosas lições sobre trabalho em equipe e resolução de problemas. Existem melhorias futuras que podem ser implementadas, como...</p>
+        </section>
+
+    </main>
 
     <footer>
-        <p>&copy; 2025 Seu Nome. Todos os direitos reservados.</p>
+        <p>Projeto de Ciências - 2025</p>
     </footer>
 
     <script>
-        // Array de objetos para armazenar as postagens do blog.
-        const posts = [
-            {
-                title: "Minha Primeira Postagem",
-                date: "17 de Agosto de 2025",
-                content: `
-                    <p>Olá! Este é meu primeiro post no blog. Estou muito animado para começar a escrever e compartilhar meus pensamentos com vocês. Fiquem ligados para mais novidades!</p>
-                `,
-                videoId: "luipyUSgMY4" // Exemplo de um vídeo do YouTube
-            },
-            {
-                title: "Dicas para Iniciar um Projeto",
-                date: "10 de Agosto de 2025",
-                content: `
-                    <p>Começar um novo projeto pode ser desafiador, mas com o planejamento certo, tudo se torna mais fácil. Aqui estão algumas dicas que sempre me ajudam:</p>
-                    <ul>
-                        <li>Defina objetivos claros e alcançáveis.</li>
-                        <li>Divida o projeto em tarefas menores.</li>
-                        <li>Não tenha medo de pedir ajuda.</li>
-                    </ul>
-                `,
-                videoId: null // Este post não tem um vídeo
-            },
-            {
-                title: "Um Olhar sobre a Natureza",
-                date: "05 de Agosto de 2025",
-                content: `
-                    <p>Caminhar em uma trilha na floresta me lembra da importância de se desconectar do mundo digital e apreciar as pequenas coisas. O som dos pássaros, o cheiro da terra úmida e a brisa fresca são revigorantes.</p>
-                    <p>É um lembrete de que, por mais que a vida seja corrida, a natureza sempre nos oferece um refúgio de paz.</p>
-                `,
-                videoId: "l6zHjJ-0nL4" // Outro exemplo de vídeo do YouTube
-            }
-        ];
+        // Função para animação de scroll suave
+        document.addEventListener("DOMContentLoaded", function() {
+            // Seleciona todos os elementos que queremos animar ao rolar
+            const elementsToAnimate = document.querySelectorAll('.fade-in-element');
 
-        // Função para criar o HTML de uma única postagem
-        function createPostElement(post) {
-            const postDiv = document.createElement('div');
-            postDiv.classList.add('post');
-
-            let videoHtml = '';
-            // Verifica se o post tem um ID de vídeo para criar o iframe
-            if (post.videoId) {
-                videoHtml = `
-                    <div class="video-container">
-                        <iframe 
-                            src="https://www.youtube.com/embed/${post.videoId}" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                `;
+            // Se não houver elementos para animar, não faz nada
+            if (elementsToAnimate.length === 0) {
+                return;
             }
 
-            postDiv.innerHTML = `
-                <h2>${post.title}</h2>
-                <span class="post-date">${post.date}</span>
-                <div class="post-content">${post.content}</div>
-                ${videoHtml}
-            `;
-            return postDiv;
-        }
-
-        // Função para renderizar todas as postagens na página
-        function renderPosts() {
-            const postsContainer = document.getElementById('posts-container');
-            postsContainer.innerHTML = ''; 
-
-            posts.forEach(post => {
-                const postElement = createPostElement(post);
-                postsContainer.appendChild(postElement);
+            // O IntersectionObserver é uma API do navegador que observa quando
+            // um elemento entra ou sai da tela. É muito mais performático que
+            // outras técnicas.
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // Se o elemento está visível na tela (isIntersecting)
+                    if (entry.isIntersecting) {
+                        // Adiciona a classe 'visible' para ativar a animação do CSS
+                        entry.target.classList.add('visible');
+                        // Para de observar o elemento para a animação não repetir
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                // A animação começa quando 15% do elemento estiver visível
+                threshold: 0.15 
             });
-        }
 
-        // Chama a função para renderizar as postagens quando a página é carregada
-        document.addEventListener('DOMContentLoaded', renderPosts);
+            // Pede ao observer para observar cada um dos nossos elementos
+            elementsToAnimate.forEach(element => {
+                observer.observe(element);
+            });
+        });
     </script>
 </body>
 </html>
