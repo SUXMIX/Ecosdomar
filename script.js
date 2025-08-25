@@ -424,6 +424,25 @@ document.addEventListener('DOMContentLoaded', function() {
             menuToggle.innerHTML = '☰';
         }
     });
+    
+    // Fechar o menu ao clicar em um link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (menuOpen && window.innerWidth <= 768) {
+                menuOpen = false;
+                navList.style.display = '';
+                navList.style.flexDirection = '';
+                navList.style.position = '';
+                navList.style.top = '';
+                navList.style.left = '';
+                navList.style.right = '';
+                navList.style.background = '';
+                navList.style.boxShadow = '';
+                navList.style.padding = '';
+                menuToggle.innerHTML = '☰';
+            }
+        });
+    });
 
     // Show/hide menu toggle based on screen size
     function checkScreenSize() {
