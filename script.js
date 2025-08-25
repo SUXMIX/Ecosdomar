@@ -396,52 +396,64 @@ document.addEventListener('DOMContentLoaded', function() {
     // Insert menu toggle before nav list
     navList.parentNode.insertBefore(menuToggle, navList);
 
+    // Função para abrir o menu mobile
+    function openMobileMenu() {
+        navList.style.display = 'flex';
+        navList.style.flexDirection = 'column';
+        navList.style.position = 'absolute';
+        navList.style.top = '100%';
+        navList.style.left = '0';
+        navList.style.right = '0';
+        navList.style.background = 'white';
+        navList.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        navList.style.padding = '1rem';
+        navList.style.zIndex = '1000';
+        menuToggle.innerHTML = '✕';
+        menuOpen = true;
+    }
+    
+    // Função para fechar o menu mobile
+    function closeMobileMenu() {
+        navList.style.display = '';
+        navList.style.flexDirection = '';
+        navList.style.position = '';
+        navList.style.top = '';
+        navList.style.left = '';
+        navList.style.right = '';
+        navList.style.background = '';
+        navList.style.boxShadow = '';
+        navList.style.padding = '';
+        navList.style.zIndex = '';
+        menuToggle.innerHTML = '☰';
+        menuOpen = false;
+    }
+    
     // Mobile menu functionality
     let menuOpen = false;
-    menuToggle.addEventListener('click', function() {
-        menuOpen = !menuOpen;
+    menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation(); // Evita propagação do evento
+        
         if (menuOpen) {
-            navList.style.display = 'flex';
-            navList.style.flexDirection = 'column';
-            navList.style.position = 'absolute';
-            navList.style.top = '100%';
-            navList.style.left = '0';
-            navList.style.right = '0';
-            navList.style.background = 'white';
-            navList.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-            navList.style.padding = '1rem';
-            menuToggle.innerHTML = '✕';
+            closeMobileMenu();
         } else {
-            navList.style.display = '';
-            navList.style.flexDirection = '';
-            navList.style.position = '';
-            navList.style.top = '';
-            navList.style.left = '';
-            navList.style.right = '';
-            navList.style.background = '';
-            navList.style.boxShadow = '';
-            navList.style.padding = '';
-            menuToggle.innerHTML = '☰';
+            openMobileMenu();
         }
     });
     
     // Fechar o menu ao clicar em um link
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(e) {
             if (menuOpen && window.innerWidth <= 768) {
-                menuOpen = false;
-                navList.style.display = '';
-                navList.style.flexDirection = '';
-                navList.style.position = '';
-                navList.style.top = '';
-                navList.style.left = '';
-                navList.style.right = '';
-                navList.style.background = '';
-                navList.style.boxShadow = '';
-                navList.style.padding = '';
-                menuToggle.innerHTML = '☰';
+                closeMobileMenu();
             }
         });
+    });
+    
+    // Fechar o menu ao clicar fora dele
+    document.addEventListener('click', function(e) {
+        if (menuOpen && !navList.contains(e.target) && e.target !== menuToggle) {
+            closeMobileMenu();
+        }
     });
 
     // Show/hide menu toggle based on screen size
