@@ -118,8 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const closeBtn = lightbox.querySelector('.lightbox-close');
             closeBtn.style.cssText = `
                 position: absolute;
-                top: -40px;
-                right: 0;
+                top: -50px;
+                right: -15px;
                 color: white;
                 font-size: 2rem;
                 cursor: pointer;
@@ -129,8 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 align-items: center;
                 justify-content: center;
                 border-radius: 50%;
-                background: rgba(255,255,255,0.2);
+                background: rgba(255,255,255,0.3);
                 transition: background 0.3s ease;
+                text-align: center;
+                line-height: 40px;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                box-shadow: 0 0 10px rgba(0,0,0,0.3);
             `;
             
             // Show lightbox
@@ -408,7 +413,24 @@ document.addEventListener('DOMContentLoaded', function() {
         navList.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
         navList.style.padding = '1rem';
         navList.style.zIndex = '1000';
+        
+        // Melhorar o botão de fechar
         menuToggle.innerHTML = '✕';
+        menuToggle.style.fontSize = '1.8rem';
+        menuToggle.style.fontFamily = 'Arial, sans-serif';
+        menuToggle.style.display = 'flex';
+        menuToggle.style.alignItems = 'center';
+        menuToggle.style.justifyContent = 'center';
+        menuToggle.style.width = '40px';
+        menuToggle.style.height = '40px';
+        menuToggle.style.position = 'absolute';
+        menuToggle.style.right = '20px';
+        menuToggle.style.top = '15px';
+        menuToggle.style.zIndex = '2000';
+        menuToggle.style.backgroundColor = 'rgba(255,255,255,0.9)';
+        menuToggle.style.borderRadius = '50%';
+        menuToggle.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+        
         menuOpen = true;
     }
     
@@ -424,20 +446,52 @@ document.addEventListener('DOMContentLoaded', function() {
         navList.style.boxShadow = '';
         navList.style.padding = '';
         navList.style.zIndex = '';
+        
+        // Restaurar o botão de menu
         menuToggle.innerHTML = '☰';
+        menuToggle.style.position = 'relative';
+        menuToggle.style.right = '';
+        menuToggle.style.top = '';
+        menuToggle.style.backgroundColor = '';
+        menuToggle.style.boxShadow = '';
+        menuToggle.style.borderRadius = '';
+        
         menuOpen = false;
     }
     
     // Mobile menu functionality
     let menuOpen = false;
+    
+    // Garantir que o menuToggle seja clicável
+    menuToggle.style.cssText = `
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+        z-index: 1001; /* Garantir que fique acima de tudo */
+        position: relative;
+    `;
+    
     menuToggle.addEventListener('click', function(e) {
+        e.preventDefault(); // Previne comportamento padrão
         e.stopPropagation(); // Evita propagação do evento
         
+        console.log('Menu toggle clicked, menuOpen:', menuOpen);
+        
         if (menuOpen) {
+            console.log('Closing menu');
             closeMobileMenu();
         } else {
+            console.log('Opening menu');
             openMobileMenu();
         }
+        
+        // Forçar a atualização do estado visual
+        checkScreenSize();
     });
     
     // Fechar o menu ao clicar em um link
@@ -459,13 +513,48 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show/hide menu toggle based on screen size
     function checkScreenSize() {
         if (window.innerWidth <= 768) {
-            menuToggle.style.display = 'block';
-            navList.style.display = menuOpen ? 'flex' : 'none';
+            // Modo mobile
+            if (!menuOpen) {
+                // Menu fechado
+                menuToggle.style.display = 'flex';
+                menuToggle.style.alignItems = 'center';
+                menuToggle.style.justifyContent = 'center';
+                menuToggle.innerHTML = '☰';
+                menuToggle.style.position = 'relative';
+                menuToggle.style.right = '';
+                menuToggle.style.top = '';
+                menuToggle.style.backgroundColor = '';
+                menuToggle.style.boxShadow = '';
+                menuToggle.style.borderRadius = '';
+                navList.style.display = 'none';
+            } else {
+                // Menu aberto
+                menuToggle.style.display = 'flex';
+                menuToggle.style.alignItems = 'center';
+                menuToggle.style.justifyContent = 'center';
+                menuToggle.innerHTML = '✕';
+                menuToggle.style.position = 'absolute';
+                menuToggle.style.right = '20px';
+                menuToggle.style.top = '15px';
+                menuToggle.style.zIndex = '2000';
+                menuToggle.style.backgroundColor = 'rgba(255,255,255,0.9)';
+                menuToggle.style.borderRadius = '50%';
+                menuToggle.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+                navList.style.display = 'flex';
+            }
         } else {
+            // Modo desktop
             menuToggle.style.display = 'none';
             navList.style.display = 'flex';
+            navList.style.flexDirection = '';
+            navList.style.position = '';
+            navList.style.top = '';
+            navList.style.left = '';
+            navList.style.right = '';
+            navList.style.background = '';
+            navList.style.boxShadow = '';
+            navList.style.padding = '';
             menuOpen = false;
-            menuToggle.innerHTML = '☰';
         }
     }
 
