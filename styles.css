@@ -151,6 +151,8 @@ body.menu-open {
         
         background: linear-gradient(135deg, #667eea, #764ba2);
         
+        z-index: 1005; /* <<< CORREÇÃO APLICADA AQUI */
+        
         flex-direction: column;
         justify-content: center;
         align-items: center;
