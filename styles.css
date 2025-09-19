@@ -19,52 +19,30 @@ body {
     overflow-x: hidden;
 }
 
+/* Trava a rolagem da página quando o menu está aberto */
+body.menu-open {
+    overflow: hidden;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* ===========================
-   SEÇÃO HERO
-   =========================== */
-.hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 100px 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
+/* Acessibilidade: para leitores de tela */
+.sr-only {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
-    animation: float 20s ease-in-out infinite;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    animation: fadeInUp 1s ease-out;
-    position: relative;
-    z-index: 2;
-}
-
-.hero-subtitle {
-    font-size: 1.5rem;
-    font-weight: 300;
-    opacity: 0.9;
-    animation: fadeInUp 1s ease-out 0.2s both;
-    position: relative;
-    z-index: 2;
-}
 
 /* ===========================
    BARRA DE NAVEGAÇÃO
@@ -75,7 +53,7 @@ body {
     box-shadow: 0 2px 20px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
-    z-index: 1000; /* Z-index alto para ficar acima de tudo */
+    z-index: 1000;
     transition: all 0.3s ease;
 }
 
@@ -83,8 +61,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    position: relative; /* Necessário para posicionar o botão mobile */
+    min-height: 70px;
 }
 
 .nav-list {
@@ -92,7 +70,7 @@ body {
     justify-content: center;
     list-style: none;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-list a {
@@ -113,91 +91,113 @@ body {
 }
 
 /* ===========================
-   MENU HAMBURGER (MOBILE)
+   ESTILOS DO MENU MOBILE
    =========================== */
+
+/* Esconde o botão em telas de desktop */
 .menu-toggle {
-    display: none; /* Escondido por padrão em telas maiores */
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 22px;
-    cursor: pointer;
-    z-index: 1010; /* Acima da navbar mas abaixo do menu aberto */
-    background: none;
-    border: none;
+    display: none;
 }
 
-.menu-toggle span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: #333;
-    border-radius: 3px;
-    position: absolute;
-    left: 0;
-    transition: all 0.35s ease-in-out;
-}
+/* Regras para telas menores (mobile) */
+@media (max-width: 850px) {
+    
+    /* Exibe e estiliza o botão "hamburger" */
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 24px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1010; /* Fica acima de tudo, exceto o menu aberto */
+        
+        /* Posiciona o botão no canto direito da navbar */
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-.menu-toggle span:nth-child(1) { top: 0; }
-.menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
-.menu-toggle span:nth-child(3) { bottom: 0; }
+    .hamburger-line {
+        width: 30px;
+        height: 3px;
+        background-color: #333;
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out;
+    }
 
+    /* Animação do Hamburger para "X" quando o menu abre */
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+    /* Estiliza a lista de links para o modo overlay */
+    .nav-list {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Ocupa a tela inteira */
+        
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        
+        /* Esconde o menu fora da tela por padrão */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.35s ease-in-out, visibility 0.35s ease-in-out, transform 0.35s ease-in-out;
+    }
 
-/* ESTADO ABERTO DO MENU - Animação do Hamburger para "X" */
-body.menu-open .menu-toggle span:nth-child(1) {
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    background-color: white;
-}
-body.menu-open .menu-toggle span:nth-child(2) {
-    opacity: 0;
-}
-body.menu-open .menu-toggle span:nth-child(3) {
-    bottom: 50%;
-    transform: translateY(50%) rotate(-45deg);
-    background-color: white;
+    /* Mostra o menu quando o botão é clicado */
+    .nav-list[data-visible="true"] {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-list a {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 500;
+        opacity: 0.9;
+    }
+    
+    .nav-list a:hover {
+        opacity: 1;
+        transform: scale(1.1);
+        background: none; /* Remove o fundo do hover de desktop */
+        box-shadow: none;
+    }
 }
 
 
 /* ===========================
-   SEÇÕES GERAIS
+   OUTROS ESTILOS (SEU CÓDIGO ORIGINAL)
    =========================== */
-.section {
-    padding: 80px 0;
-    position: relative;
-}
 
-.bg-light {
-    background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%);
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: #2d3748;
-    position: relative;
-    animation: fadeInUp 0.8s ease-out;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    border-radius: 2px;
-}
-
-/* ===========================
-   CONTEÚDOS (Grid, Cards, etc.) - Sem alterações
-   =========================== */
+.hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 100px 0; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>'); animation: float 20s ease-in-out infinite; }
+.hero-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; animation: fadeInUp 1s ease-out; position: relative; z-index: 2; }
+.hero-subtitle { font-size: 1.5rem; font-weight: 300; opacity: 0.9; animation: fadeInUp 1s ease-out 0.2s both; position: relative; z-index: 2; }
+.section { padding: 80px 0; position: relative; }
+.bg-light { background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%); }
+.section-title { font-size: 2.5rem; font-weight: 600; text-align: center; margin-bottom: 3rem; color: #2d3748; position: relative; animation: fadeInUp 0.8s ease-out; }
+.section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: linear-gradient(90deg, #667eea, #764ba2); border-radius: 2px; }
 .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; animation: slideInLeft 0.8s ease-out; }
 .text-content p { font-size: 1.1rem; margin-bottom: 2rem; color: #4a5568; line-height: 1.8; }
 .project-info { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid rgba(102, 126, 234, 0.1); }
@@ -209,6 +209,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
 .timeline { position: relative; max-width: 800px; margin: 0 auto; }
 .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #667eea, #764ba2); border-radius: 2px; transform: translateX(-50%); }
 .timeline-item { position: relative; margin-bottom: 4rem; animation: fadeInUp 0.8s ease-out; }
+@media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-marker { left: 20px; } .timeline-item:nth-child(odd) .timeline-content, .timeline-item:nth-child(even) .timeline-content { margin-left: 60px; margin-right: 0; text-align: left; } }
 .timeline-item:nth-child(odd) .timeline-content { margin-right: 60%; text-align: right; }
 .timeline-item:nth-child(even) .timeline-content { margin-left: 60%; text-align: left; }
 .timeline-marker { position: absolute; left: 50%; top: 0; width: 40px; height: 40px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); z-index: 2; }
@@ -244,10 +245,6 @@ body.menu-open .menu-toggle span:nth-child(3) {
 .result-card li { padding: 0.5rem 0; position: relative; padding-left: 1.5rem; }
 .result-card li::before { content: '✓'; position: absolute; left: 0; color: #667eea; font-weight: bold; }
 .footer { background: #2d3748; color: white; text-align: center; padding: 2rem 0; }
-
-/* ===========================
-   ANIMAÇÕES E CUSTOMIZAÇÕES
-   =========================== */
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
@@ -257,93 +254,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
 ::-webkit-scrollbar-track { background: #f1f1f1; }
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #667eea, #764ba2); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #5a67d8, #6b46c1); }
-
-/* ===========================
-   AJUSTES PARA SEÇÕES ESPECÍFICAS
-   =========================== */
-#saneamento .content-grid,
-#análise .content-grid,
-#proposta .content-grid,
-#observações .content-grid {
-    grid-template-columns: 1fr !important;
-    justify-items: center;
-}
-#saneamento .text-content, #análise .text-content, #proposta .text-content, #observações .text-content {
-    max-width: 700px;
-    margin: 0 auto;
-}
-#saneamento .text-content p, #análise .text-content p, #proposta .text-content p, #observações .text-content p {
-    text-align: justify;
-}
-#saneamento .project-info {
-    margin: 0 auto;
-    max-width: 400px;
-}
-
-/* ===========================
-   DESIGN RESPONSIVO
-   =========================== */
-@media (max-width: 768px) {
-    .hero-title { font-size: 2.5rem; }
-    .hero-subtitle { font-size: 1.2rem; }
-    .content-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .timeline::before { left: 20px; }
-    .timeline-item:nth-child(odd) .timeline-content,
-    .timeline-item:nth-child(even) .timeline-content { margin-left: 60px; margin-right: 0; text-align: left; }
-    .timeline-marker { left: 20px; }
-    .section { padding: 40px 0; }
-    .section-title { font-size: 2rem; }
-
-    /* Estilos do Menu Mobile */
-    .menu-toggle {
-        display: block;
-    }
-    
-    .nav-list {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100vh;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.98), rgba(118, 75, 162, 0.98));
-        backdrop-filter: blur(10px);
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-        
-        margin: 0;
-        padding: 0;
-        
-        transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    body.menu-open .nav-list {
-        transform: translateX(0);
-    }
-    
-    body.menu-open {
-        overflow: hidden; /* Evita rolagem do site quando o menu está aberto */
-    }
-
-    .nav-list a {
-        color: white;
-        font-size: 1.5rem;
-        padding: 0.5rem 2rem;
-    }
-    .nav-list a:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateY(0); /* Reset do efeito hover de desktop */
-        box-shadow: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .container { padding: 0 15px; }
-    .hero { padding: 60px 0; }
-    .hero-title { font-size: 2rem; }
-    .gallery-grid, .test-grid, .video-grid, .results-content { grid-template-columns: 1fr; }
-}
+#saneamento .content-grid, #análise .content-grid, #proposta .content-grid, #observações .content-grid { grid-template-columns: 1fr !important; justify-items: center; }
+#saneamento .text-content, #análise .text-content, #proposta .text-content, #observações .text-content { max-width: 700px; margin: 0 auto; }
+#saneamento .text-content p, #análise .text-content p, #proposta .text-content p, #observações .text-content p { text-align: justify; }
+#saneamento .project-info { margin: 0 auto; max-width: 400px; }
