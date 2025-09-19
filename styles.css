@@ -1,5 +1,5 @@
 /* ===========================
-   CSS FINAL E CORRIGIDO
+   CSS FINAL - V3 (Animação do Menu Corrigida)
    =========================== */
 
 /* ===========================
@@ -103,7 +103,7 @@ body.menu-open {
     .menu-toggle {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between; /* Alterado para space-between */
         width: 30px;
         height: 24px;
         background: transparent;
@@ -115,6 +115,9 @@ body.menu-open {
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
+        /* Adicionado para conter as linhas durante a animação */
+        -webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
     }
 
     .hamburger-line {
@@ -122,12 +125,22 @@ body.menu-open {
         height: 3px;
         background-color: #333;
         border-radius: 10px;
-        transition: all 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        transform-origin: center; /* Garante que a rotação aconteça no centro da linha */
     }
 
-    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
-    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) { opacity: 0; }
-    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+    /* ANIMAÇÃO CORRIGIDA - ROTAÇÃO NO LUGAR */
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+        transform: translateY(10.5px) rotate(45deg); /* Move para o centro e gira */
+    }
+
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+        opacity: 0; /* A linha do meio some */
+    }
+
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+       transform: translateY(-10.5px) rotate(-45deg); /* Move para o centro e gira */
+    }
     
     .nav-list {
         position: fixed;
@@ -198,7 +211,6 @@ body.menu-open {
     position: relative; 
     margin-bottom: 4rem; 
     animation: fadeInUp 0.8s ease-out;
-    /* Força a aceleração por hardware e previne bugs de renderização */
     transform: translateZ(0);
 }
 .timeline-item:nth-child(odd) .timeline-content { margin-right: 60%; text-align: right; }
