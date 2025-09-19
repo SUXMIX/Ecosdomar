@@ -66,8 +66,6 @@ body {
     top: 0;
     z-index: 100;
     transition: all 0.3s ease;
-    /* For positioning relative to contain menu toggle */
-    position: relative;
 }
 
 .nav-list {
@@ -77,8 +75,6 @@ body {
     padding: 1rem 0;
     flex-wrap: wrap;
     gap: 2rem;
-    transition: max-height 0.3s ease;
-    overflow: visible;
 }
 
 .nav-list a {
@@ -102,62 +98,6 @@ body {
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-}
-
-/* Menu hambúrguer */
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  width: 30px;
-  height: 25px;
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  z-index: 110;
-}
-
-.menu-toggle .hamburger,
-.menu-toggle .hamburger::before,
-.menu-toggle .hamburger::after {
-  content: '';
-  display: block;
-  background-color: #333;
-  height: 3px;
-  border-radius: 2px;
-  position: absolute;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.menu-toggle .hamburger {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.menu-toggle .hamburger::before {
-  top: -10px;
-}
-
-.menu-toggle .hamburger::after {
-  bottom: -10px;
-}
-
-.menu-toggle.active .hamburger {
-  background-color: transparent;
-}
-
-.menu-toggle.active .hamburger::before {
-  transform: rotate(45deg);
-  top: 0;
-}
-
-.menu-toggle.active .hamburger::after {
-  transform: rotate(-45deg);
-  bottom: 0;
 }
 
 /* Sections */
@@ -606,36 +546,9 @@ body {
         left: 20px;
     }
     
-    /* Nav list hidden by default on mobile */
     .nav-list {
         flex-direction: column;
         gap: 0.5rem;
-        max-height: 0;
-        overflow: hidden;
-        padding: 0;
-        transition: max-height 0.3s ease;
-    }
-    
-    /* Show nav list when active */
-    .nav-list.active {
-        max-height: 500px; /* enough to show all items */
-        padding: 1rem 0;
-        gap: 1rem;
-    }
-    
-    .nav-list li {
-        text-align: center;
-    }
-    
-    .nav-list a {
-        padding: 0.75rem 1rem;
-        display: block;
-        font-size: 1.2rem;
-    }
-    
-    /* Show menu toggle button */
-    .menu-toggle {
-        display: block;
     }
     
     .section {
@@ -678,4 +591,46 @@ html {
     width: 8px;
 }
 
-::-webkit-scroll
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #5a67d8, #6b46c1);
+}
+
+/* ===========================
+   Ajustes para seções saneamento, análise, proposta e observações
+   =========================== */
+#saneamento .content-grid,
+#análise .content-grid,
+#proposta .content-grid,
+#observações .content-grid {
+    grid-template-columns: 1fr !important;
+    justify-items: center;
+}
+
+#saneamento .text-content,
+#análise .text-content,
+#proposta .text-content,
+#observações .text-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#saneamento .text-content p,
+#análise .text-content p,
+#proposta .text-content p,
+#observações .text-content p {
+    text-align: justify;
+}
+
+#saneamento .project-info {
+    margin: 0 auto;
+    max-width: 400px;
+}
