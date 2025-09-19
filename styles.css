@@ -604,7 +604,9 @@ html {
     background: linear-gradient(180deg, #5a67d8, #6b46c1);
 }
 
-/* Para as seções saneamento, análise, proposta e observações, usar uma coluna só para o grid e centralizar conteúdo */
+/* ===========================
+   Ajustes para seções saneamento, análise, proposta e observações
+   =========================== */
 #saneamento .content-grid,
 #análise .content-grid,
 #proposta .content-grid,
@@ -612,14 +614,7 @@ html {
     grid-template-columns: 1fr !important;
     justify-items: center;
 }
-/* Justificar texto */
-#saneamento .text-content p,
-#análise .text-content p,
-#proposta .text-content p,
-#observações .text-content p {
-    text-align: justify;
-}
-/* Centralizar e limitar largura do container de texto */
+
 #saneamento .text-content,
 #análise .text-content,
 #proposta .text-content,
@@ -627,7 +622,14 @@ html {
     max-width: 700px;
     margin: 0 auto;
 }
-/* Centralizar a caixinha project-info */
+
+#saneamento .text-content p,
+#análise .text-content p,
+#proposta .text-content p,
+#observações .text-content p {
+    text-align: justify;
+}
+
 #saneamento .project-info {
     margin: 0 auto;
     max-width: 400px;
