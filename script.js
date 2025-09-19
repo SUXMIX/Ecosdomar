@@ -1,5 +1,45 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
+
+    // ===================================
+    // CÓDIGO DO MENU MOBILE (NOVO E MELHORADO)
+    // ===================================
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navList = document.querySelector('.nav-list');
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    // 1. Abrir e fechar o menu ao clicar no botão
+    menuToggle.addEventListener('click', () => {
+        const isVisible = navList.getAttribute('data-visible') === 'true';
+        
+        // Alterna o estado de visibilidade
+        if (isVisible) {
+            navList.setAttribute('data-visible', 'false');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('menu-open'); // Libera o scroll
+        } else {
+            navList.setAttribute('data-visible', 'true');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('menu-open'); // Trava o scroll
+        }
+    });
+
+    // 2. Fechar o menu ao clicar em um dos links
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Fecha o menu apenas se ele estiver aberto
+            if (navList.getAttribute('data-visible') === 'true') {
+                navList.setAttribute('data-visible', 'false');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('menu-open');
+            }
+        });
+    });
+
+
+    // ===================================
+    // CÓDIGO ORIGINAL (ANIMAÇÕES, ETC.)
+    // ===================================
+
     // Animações de scroll
     const observerOptions = {
         threshold: 0.1,
@@ -31,48 +71,13 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
         }
     });
-
-    // ===================================
-    // NOVO CÓDIGO DO MENU MOBILE
-    // ===================================
     
-    // Inserir o botão do menu no HTML via JS
-    const menuToggle = document.createElement('button');
-    menuToggle.className = 'menu-toggle';
-    menuToggle.setAttribute('aria-label', 'Abrir menu');
-    menuToggle.innerHTML = `
-        <span></span>
-        <span></span>
-        <span></span>
-    `;
-    const navbarContainer = document.querySelector('.navbar .container');
-    navbarContainer.appendChild(menuToggle);
-
-    const navList = document.querySelector('.nav-list');
-    const navLinks = document.querySelectorAll('.nav-list a');
-
-    // Função para abrir/fechar menu
-    const toggleMenu = () => {
-        document.body.classList.toggle('menu-open');
-    };
-
-    // Evento de clique no botão
-    menuToggle.addEventListener('click', toggleMenu);
-
-    // Fechar o menu ao clicar em um link
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (document.body.classList.contains('menu-open')) {
-                toggleMenu();
-            }
-        });
-    });
-
-    // ===================================
-    // INTERAÇÕES DA PÁGINA (Lightbox, Vídeos, etc.)
-    // Seu código original para estas funcionalidades pode ser mantido aqui
-    // ...
-    // ===================================
-
-    console.log('🚀 Site do Projeto de Ciências carregado com sucesso!');
+    // ================================================================
+    // AQUI VOCÊ PODE ADICIONAR SEU CÓDIGO ANTIGO DE LIGHTBOX E MODAIS
+    // Por exemplo:
+    // const galleryItems = document.querySelectorAll('.gallery-item');
+    // galleryItems.forEach(item => { ... });
+    // ================================================================
+    
+    console.log('🚀 Site do Projeto de Ciências carregado com a nova versão do menu!');
 });
