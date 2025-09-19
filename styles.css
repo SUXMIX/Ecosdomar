@@ -1,4 +1,8 @@
 /* ===========================
+   CSS FINAL E CORRIGIDO
+   =========================== */
+
+/* ===========================
    ESTILOS GERAIS E BASE
    =========================== */
 * {
@@ -19,7 +23,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Trava a rolagem da página quando o menu está aberto */
 body.menu-open {
     overflow: hidden;
 }
@@ -30,7 +33,6 @@ body.menu-open {
     padding: 0 20px;
 }
 
-/* Acessibilidade: para leitores de tela */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -61,7 +63,7 @@ body.menu-open {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Necessário para posicionar o botão mobile */
+    position: relative;
     min-height: 70px;
 }
 
@@ -91,18 +93,13 @@ body.menu-open {
 }
 
 /* ===========================
-   ESTILOS DO MENU MOBILE
+   MENU MOBILE
    =========================== */
-
-/* Esconde o botão em telas de desktop */
 .menu-toggle {
     display: none;
 }
 
-/* Regras para telas menores (mobile) */
 @media (max-width: 850px) {
-    
-    /* Exibe e estiliza o botão "hamburger" */
     .menu-toggle {
         display: flex;
         flex-direction: column;
@@ -113,9 +110,7 @@ body.menu-open {
         border: none;
         cursor: pointer;
         padding: 0;
-        z-index: 1010; /* Fica acima de tudo, exceto o menu aberto */
-        
-        /* Posiciona o botão no canto direito da navbar */
+        z-index: 1010;
         position: absolute;
         right: 20px;
         top: 50%;
@@ -130,42 +125,28 @@ body.menu-open {
         transition: all 0.3s ease-in-out;
     }
 
-    /* Animação do Hamburger para "X" quando o menu abre */
-    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
-        transform: rotate(45deg) translate(7px, 7px);
-    }
-    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
-        opacity: 0;
-    }
-    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -7px);
-    }
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
     
-    /* Estiliza a lista de links para o modo overlay */
     .nav-list {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh; /* Ocupa a tela inteira */
-        
+        height: 100vh;
         background: linear-gradient(135deg, #667eea, #764ba2);
-        
         z-index: 1005; 
-        
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 2rem;
-        
-        /* Esconde o menu fora da tela por padrão */
         opacity: 0;
         visibility: hidden;
         transform: translateY(-20px);
         transition: opacity 0.35s ease-in-out, visibility 0.35s ease-in-out, transform 0.35s ease-in-out;
     }
 
-    /* Mostra o menu quando o botão é clicado */
     .nav-list[data-visible="true"] {
         opacity: 1;
         visibility: visible;
@@ -182,14 +163,13 @@ body.menu-open {
     .nav-list a:hover {
         opacity: 1;
         transform: scale(1.1);
-        background: none; /* Remove o fundo do hover de desktop */
+        background: none;
         box-shadow: none;
     }
 }
 
-
 /* ===========================
-   OUTROS ESTILOS
+   ESTILOS GERAIS DAS SEÇÕES
    =========================== */
 
 .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 100px 0; text-align: center; position: relative; overflow: hidden; }
@@ -209,19 +189,46 @@ body.menu-open {
 .responsive-img { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
 .responsive-img:hover { transform: scale(1.05); }
 
-/* Timeline com a correção */
+/* =========================================================
+   TIMELINE COM CORREÇÃO FINAL DE RENDERIZAÇÃO
+   ========================================================= */
 .timeline { position: relative; max-width: 800px; margin: 0 auto; }
-.timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #667eea, #764ba2); border-radius: 2px; transform: translateX(-50%); z-index: 0; /* <-- CORREÇÃO APLICADA */ }
-.timeline-item { position: relative; margin-bottom: 4rem; animation: fadeInUp 0.8s ease-out; }
+.timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #667eea, #764ba2); border-radius: 2px; transform: translateX(-50%); z-index: 0; }
+.timeline-item { 
+    position: relative; 
+    margin-bottom: 4rem; 
+    animation: fadeInUp 0.8s ease-out;
+    /* Força a aceleração por hardware e previne bugs de renderização */
+    transform: translateZ(0);
+}
 .timeline-item:nth-child(odd) .timeline-content { margin-right: 60%; text-align: right; }
 .timeline-item:nth-child(even) .timeline-content { margin-left: 60%; text-align: left; }
 .timeline-marker { position: absolute; left: 50%; top: 0; width: 40px; height: 40px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); z-index: 2; }
-.timeline-content { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid rgba(102, 126, 234, 0.1); transition: transform 0.3s ease; position: relative; z-index: 1; /* <-- CORREÇÃO APLICADA */ }
+.timeline-content { 
+    background: white; 
+    padding: 2rem; 
+    border-radius: 20px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+    border: 1px solid rgba(102, 126, 234, 0.1); 
+    transition: transform 0.3s ease; 
+    position: relative; 
+    z-index: 1;
+}
 .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
 .timeline-content h3 { color: #667eea; margin-bottom: 1rem; font-size: 1.3rem; }
 .timeline-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-top: 1rem; }
 
-@media (max-width: 768px) { .timeline::before { left: 20px; } .timeline-marker { left: 20px; } .timeline-item:nth-child(odd) .timeline-content, .timeline-item:nth-child(even) .timeline-content { margin-left: 60px; margin-right: 0; text-align: left; } }
+@media (max-width: 768px) { 
+    .timeline::before { left: 20px; } 
+    .timeline-marker { left: 20px; } 
+    .timeline-item:nth-child(odd) .timeline-content, 
+    .timeline-item:nth-child(even) .timeline-content { 
+        margin-left: 60px; 
+        margin-right: 0; 
+        text-align: left; 
+    } 
+}
+/* ========================================================= */
 
 .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 2rem; }
 .test-card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid rgba(102, 126, 234, 0.1); transition: all 0.3s ease; animation: fadeInUp 0.8s ease-out; }
