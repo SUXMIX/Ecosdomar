@@ -604,7 +604,7 @@ html {
     background: linear-gradient(180deg, #5a67d8, #6b46c1);
 }
 
-/* Para as seções saneamento e análise, usar uma coluna só para o grid */
+/* Para as seções saneamento, análise, proposta e observações, usar uma coluna só para o grid e centralizar conteúdo */
 #saneamento .content-grid,
 #análise .content-grid,
 #proposta .content-grid,
@@ -612,12 +612,20 @@ html {
     grid-template-columns: 1fr !important;
     justify-items: center;
 }
-/* Centralizar texto */
+/* Justificar texto */
 #saneamento .text-content p,
 #análise .text-content p,
 #proposta .text-content p,
 #observações .text-content p {
     text-align: justify;
+}
+/* Centralizar e limitar largura do container de texto */
+#saneamento .text-content,
+#análise .text-content,
+#proposta .text-content,
+#observações .text-content {
+    max-width: 700px;
+    margin: 0 auto;
 }
 /* Centralizar a caixinha project-info */
 #saneamento .project-info {
