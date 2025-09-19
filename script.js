@@ -382,178 +382,74 @@ document.addEventListener('DOMContentLoaded', function() {
         progressBar.style.width = scrollPercent + '%';
     });
 
-    // Add mobile menu toggle (for smaller screens)
-    const navList = document.querySelector('.nav-list');
-    const menuToggle = document.createElement('button');
-    menuToggle.innerHTML = '☰';
-    menuToggle.className = 'menu-toggle';
-    menuToggle.style.cssText = `
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 5px;
-        transition: background 0.3s ease;
-    `;
+    // ======== MENU HAMBÚRGUER RESPONSIVO ========
 
-    // Insert menu toggle before nav list
+    const navList = document.querySelector('.nav-list');
+
+    // Criar botão menu-toggle (hambúrguer)
+    const menuToggle = document.createElement('button');
+    menuToggle.setAttribute('aria-label', 'Abrir menu');
+    menuToggle.className = 'menu-toggle';
+    menuToggle.innerHTML = '<span class="hamburger"></span>';
+
+    // Inserir botão antes da nav-list
     navList.parentNode.insertBefore(menuToggle, navList);
 
-    // Função para abrir o menu mobile
+    let menuOpen = false;
+
+    // Função para abrir menu
     function openMobileMenu() {
-        navList.style.display = 'flex';
-        navList.style.flexDirection = 'column';
-        navList.style.position = 'absolute';
-        navList.style.top = '100%';
-        navList.style.left = '0';
-        navList.style.right = '0';
-        navList.style.background = 'white';
-        navList.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-        navList.style.padding = '1rem';
-        navList.style.zIndex = '1000';
-        
-        // Melhorar o botão de fechar
-        menuToggle.innerHTML = '✕';
-        menuToggle.style.fontSize = '1.8rem';
-        menuToggle.style.fontFamily = 'Arial, sans-serif';
-        menuToggle.style.display = 'flex';
-        menuToggle.style.alignItems = 'center';
-        menuToggle.style.justifyContent = 'center';
-        menuToggle.style.width = '40px';
-        menuToggle.style.height = '40px';
-        menuToggle.style.position = 'absolute';
-        menuToggle.style.right = '20px';
-        menuToggle.style.top = '15px';
-        menuToggle.style.zIndex = '2000';
-        menuToggle.style.backgroundColor = 'rgba(255,255,255,0.9)';
-        menuToggle.style.borderRadius = '50%';
-        menuToggle.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-        
+        navList.classList.add('active');
+        menuToggle.classList.add('active');
+        menuToggle.setAttribute('aria-label', 'Fechar menu');
         menuOpen = true;
     }
-    
-    // Função para fechar o menu mobile
+
+    // Função para fechar menu
     function closeMobileMenu() {
-        navList.style.display = '';
-        navList.style.flexDirection = '';
-        navList.style.position = '';
-        navList.style.top = '';
-        navList.style.left = '';
-        navList.style.right = '';
-        navList.style.background = '';
-        navList.style.boxShadow = '';
-        navList.style.padding = '';
-        navList.style.zIndex = '';
-        
-        // Restaurar o botão de menu
-        menuToggle.innerHTML = '☰';
-        menuToggle.style.position = 'relative';
-        menuToggle.style.right = '';
-        menuToggle.style.top = '';
-        menuToggle.style.backgroundColor = '';
-        menuToggle.style.boxShadow = '';
-        menuToggle.style.borderRadius = '';
-        
+        navList.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-label', 'Abrir menu');
         menuOpen = false;
     }
-    
-    // Mobile menu functionality
-    let menuOpen = false;
-    
-    // Garantir que o menuToggle seja clicável
-    menuToggle.style.cssText = `
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 5px;
-        transition: background 0.3s ease;
-        z-index: 1001; /* Garantir que fique acima de tudo */
-        position: relative;
-    `;
-    
-    menuToggle.addEventListener('click', function(e) {
-        e.preventDefault(); // Previne comportamento padrão
-        e.stopPropagation(); // Evita propagação do evento
-        
-        console.log('Menu toggle clicked, menuOpen:', menuOpen);
-        
+
+    // Alternar menu ao clicar no botão
+    menuToggle.addEventListener('click', () => {
         if (menuOpen) {
-            console.log('Closing menu');
             closeMobileMenu();
         } else {
-            console.log('Opening menu');
             openMobileMenu();
         }
-        
-        // Forçar a atualização do estado visual
-        checkScreenSize();
     });
-    
-    // Fechar o menu ao clicar em um link
+
+    // Fechar menu ao clicar em um link (em mobile)
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', () => {
             if (menuOpen && window.innerWidth <= 768) {
                 closeMobileMenu();
             }
         });
     });
-    
-    // Fechar o menu ao clicar fora dele
-    document.addEventListener('click', function(e) {
+
+    // Fechar menu ao clicar fora (em mobile)
+    document.addEventListener('click', (e) => {
         if (menuOpen && !navList.contains(e.target) && e.target !== menuToggle) {
             closeMobileMenu();
         }
     });
 
-    // Show/hide menu toggle based on screen size
+    // Ajustar visibilidade do menu e botão ao redimensionar
     function checkScreenSize() {
         if (window.innerWidth <= 768) {
-            // Modo mobile
+            menuToggle.style.display = 'block';
             if (!menuOpen) {
-                // Menu fechado
-                menuToggle.style.display = 'flex';
-                menuToggle.style.alignItems = 'center';
-                menuToggle.style.justifyContent = 'center';
-                menuToggle.innerHTML = '☰';
-                menuToggle.style.position = 'relative';
-                menuToggle.style.right = '';
-                menuToggle.style.top = '';
-                menuToggle.style.backgroundColor = '';
-                menuToggle.style.boxShadow = '';
-                menuToggle.style.borderRadius = '';
-                navList.style.display = 'none';
+                navList.classList.remove('active');
             } else {
-                // Menu aberto
-                menuToggle.style.display = 'flex';
-                menuToggle.style.alignItems = 'center';
-                menuToggle.style.justifyContent = 'center';
-                menuToggle.innerHTML = '✕';
-                menuToggle.style.position = 'absolute';
-                menuToggle.style.right = '20px';
-                menuToggle.style.top = '15px';
-                menuToggle.style.zIndex = '2000';
-                menuToggle.style.backgroundColor = 'rgba(255,255,255,0.9)';
-                menuToggle.style.borderRadius = '50%';
-                menuToggle.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-                navList.style.display = 'flex';
+                navList.classList.add('active');
             }
         } else {
-            // Modo desktop
             menuToggle.style.display = 'none';
-            navList.style.display = 'flex';
-            navList.style.flexDirection = '';
-            navList.style.position = '';
-            navList.style.top = '';
-            navList.style.left = '';
-            navList.style.right = '';
-            navList.style.background = '';
-            navList.style.boxShadow = '';
-            navList.style.padding = '';
+            navList.classList.remove('active');
             menuOpen = false;
         }
     }
