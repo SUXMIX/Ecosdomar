@@ -608,7 +608,7 @@ html {
 #saneamento .content-grid,
 #análise .content-grid,
 #proposta .content-grid,
-#observações .content-grid{
+#observações .content-grid {
     grid-template-columns: 1fr !important;
     justify-items: center;
 }
@@ -616,7 +616,7 @@ html {
 #saneamento .text-content p,
 #análise .text-content p,
 #proposta .text-content p,
-#observações .text-content p{
+#observações .text-content p {
     text-align: justify;
 }
 /* Centralizar a caixinha project-info */
