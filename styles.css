@@ -604,21 +604,19 @@ html {
     background: linear-gradient(180deg, #5a67d8, #6b46c1);
 }
 
-/* Centralizar conteúdo da coluna texto nas seções saneamento e análise */
+/* Para as seções saneamento e análise, usar uma coluna só para o grid */
 #saneamento .content-grid,
 #análise .content-grid {
-    justify-content: center; /* centraliza as colunas no grid */
+    grid-template-columns: 1fr !important;
+    justify-items: center;
 }
-/* Forçar a coluna de texto a ocupar menos espaço e centralizar seu conteúdo */
-#saneamento .text-content,
-#análise .text-content {
-    max-width: 600px;
-    margin: 0 auto;
+/* Centralizar texto */
+#saneamento .text-content p,
+#análise .text-content p {
     text-align: center;
 }
 /* Centralizar a caixinha project-info */
-#saneamento .project-info,
-#análise .project-info {
+#saneamento .project-info {
     margin: 0 auto;
     max-width: 400px;
 }
