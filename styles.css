@@ -604,19 +604,21 @@ html {
     background: linear-gradient(180deg, #5a67d8, #6b46c1);
 }
 
-/* ===========================
-   Centralizar texto e caixinha
-   nas seções saneamento e análise
-   =========================== */
+/* Centralizar conteúdo da coluna texto nas seções saneamento e análise */
+#saneamento .content-grid,
+#análise .content-grid {
+    justify-content: center; /* centraliza as colunas no grid */
+}
+/* Forçar a coluna de texto a ocupar menos espaço e centralizar seu conteúdo */
 #saneamento .text-content,
 #análise .text-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
     text-align: center;
 }
-
+/* Centralizar a caixinha project-info */
 #saneamento .project-info,
 #análise .project-info {
     margin: 0 auto;
+    max-width: 400px;
 }
