@@ -606,14 +606,18 @@ html {
 
 /* Para as seções saneamento e análise, usar uma coluna só para o grid */
 #saneamento .content-grid,
-#análise .content-grid {
+#análise .content-grid,
+#proposta .content-grid,
+#observações .content-grid{
     grid-template-columns: 1fr !important;
     justify-items: center;
 }
 /* Centralizar texto */
 #saneamento .text-content p,
-#análise .text-content p {
-    text-align: center;
+#análise .text-content p,
+#proposta .text-content p,
+#observações .text-content p{
+    text-align: justify;
 }
 /* Centralizar a caixinha project-info */
 #saneamento .project-info {
