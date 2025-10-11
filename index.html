@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecos do Mar - SNCeT</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/nMtK3KDK/1.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ===== CONFIGURAÇÕES GLOBAIS E RESET ===== */
+        :root {
+            --primary-color: #065193;
+            --secondary-color: #FFFFFF;
+            --accent-color: #42d3ff;
+            --background-glass: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(255, 255, 255, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,584 +28,581 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #001f3f 0%, #065193 50%, #001f3f 100%);
-            color: #fff;
-            overflow-x: hidden;
-            line-height: 1.6;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            overflow: hidden; /* Essencial para o efeito de slide */
+        }
+        
+        /* Container principal que gerencia a rolagem de slides */
+        .main-container {
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            -ms-overflow-style: none; /* IE e Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+        .main-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari e Opera */
         }
 
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        /* Slide Structure */
         .slide {
             height: 100vh;
             width: 100vw;
-            position: relative;
+            scroll-snap-align: start;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .slide.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide.prev {
-            transform: translateX(-100%);
-        }
-
-        .slide-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            text-align: center;
+            align-items: center;
+            padding: 80px 40px;
             position: relative;
-            z-index: 2;
+            overflow: hidden;
         }
 
-        .slide-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 800;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #fff, #00BFFF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: slideInUp 1s ease;
-        }
-
-        .slide-text {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            animation: slideInUp 1s ease 0.2s both;
-        }
-
-        /* Navbar */
+        /* ===== CABEÇALHO FIXO ===== */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
+            padding: 15px 40px;
             z-index: 1000;
-            background: rgba(0, 31, 63, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .navbar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            background: rgba(6, 81, 147, 0.5);
+            backdrop-filter: blur(10px);
         }
 
-        .logo {
+        .logo-img {
             height: 50px;
-            background: none;
         }
 
-        .logo img {
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .nav-list {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-list a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-            padding: 8px 20px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-list a:hover {
-            color: #fff;
-            background: rgba(0, 191, 255, 0.2);
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 24px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            z-index: 1010;
-        }
-
-        .hamburger-line {
-            width: 30px;
-            height: 3px;
-            background: #fff;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
-            transform: translateY(10.5px) rotate(45deg);
-        }
-
-        .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
-            transform: translateY(-10.5px) rotate(-45deg);
-        }
-
-        /* Hero Slide */
-        .hero-slide {
-            background: linear-gradient(135deg, #065193 0%, #00BFFF 100%);
-            position: relative;
-        }
-
-        .hero-slide::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0, 191, 255, 0.2) 0%, transparent 70%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-            margin-bottom: 3rem;
-            animation: slideInUp 1s ease 0.4s both;
-        }
-
-        .hero-cta {
-            display: inline-block;
-            padding: 18px 50px;
-            background: linear-gradient(135deg, #065193, #00BFFF);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(6, 81, 147, 0.3);
-            animation: slideInUp 1s ease 0.6s both;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 50px rgba(0, 191, 255, 0.5);
-        }
-
-        /* Particles */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(0, 191, 255, 0.6);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
-
-        /* Interactive Elements */
-        .interactive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            animation: slideInUp 1s ease 0.8s both;
-        }
-
-        .interactive-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .interactive-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .interactive-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            border-color: #00BFFF;
-            box-shadow: 0 20px 40px rgba(0, 191, 255, 0.3);
-        }
-
-        .interactive-card:hover::before {
-            left: 100%;
-        }
-
-        .interactive-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-        }
-
-        .interactive-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-
-        .interactive-card p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
-        }
-
-        /* Timeline as Interactive Cards */
-        .timeline-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            animation: slideInUp 1s ease 0.8s both;
-        }
-
-        /* Gallery Interactive */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-            animation: slideInUp 1s ease 0.8s both;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(6, 81, 147, 0.9));
-            color: #fff;
-            padding: 1rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        /* Modal for Interactivity */
-        .modal {
-            display: none;
+        /* ===== NAVEGAÇÃO LATERAL ===== */
+        .slide-nav {
             position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 80%;
-            max-height: 80%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .modal img {
-            max-width: 100%;
-            max-height: 60vh;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            color: #fff;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: #00BFFF;
-        }
-
-        /* Authors Grid */
-        .authors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            animation: slideInUp 1s ease 0.8s both;
-        }
-
-        .author-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .author-card:hover {
-            transform: translateY(-5px);
-            border-color: #00BFFF;
-            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3);
-        }
-
-        .author-image-wrapper {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1rem;
-            position: relative;
-            border-radius: 50%;
-            padding: 3px;
-            background: linear-gradient(135deg, #065193, #00BFFF);
-        }
-
-        .author-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #001f3f;
-        }
-
-        .author-card h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        /* Navigation Dots */
-        .nav-dots {
-            position: fixed;
             right: 30px;
-            top: 50%;
             transform: translateY(-50%);
+            z-index: 1001;
+            list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            z-index: 1001;
+            gap: 15px;
         }
 
-        .dot {
+        .slide-nav li a {
+            display: block;
             width: 12px;
             height: 12px;
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
-
-        .dot.active {
-            background: #00BFFF;
+        
+        .slide-nav li a.active {
+            background-color: var(--accent-color);
             transform: scale(1.2);
         }
 
-        /* Swipe Arrows */
-        .arrow {
-            position: fixed;
+        .slide-nav li a .tooltip {
+            position: absolute;
             top: 50%;
+            right: 25px;
             transform: translateY(-50%);
-            background: rgba(6, 81, 147, 0.8);
-            color: #fff;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            z-index: 1001;
-        }
-
-        .arrow-left {
-            left: 30px;
-        }
-
-        .arrow-right {
-            right: 30px;
-        }
-
-        .arrow:hover {
-            background: #00BFFF;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        /* Project Info Cards */
-        .project-info {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            text-align: left;
-        }
-
-        .info-item {
-            display: flex;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            justify-content: space-between;
-        }
-
-        .info-item:last-child {
-            border-bottom: none;
-        }
-
-        .info-item strong {
-            background: linear-gradient(135deg, #065193, #00BFFF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
             font-weight: 600;
-            min-width: 100px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        /* Animations */
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
+        .slide-nav li a:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        /* ===== ESTILOS GERAIS DE CONTEÚDO ===== */
+        .content-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.5; }
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-            25% { transform: translateY(-100px) translateX(50px); opacity: 0.6; }
-            50% { transform: translateY(-200px) translateX(-30px); opacity: 0.4; }
-            75% { transform: translateY(-150px) translateX(70px); opacity: 0.7; }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: rgba(255, 255, 255, 0.85);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* ===== HERO (PRIMEIRO SLIDE) ===== */
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color), var(--accent-color));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-text 5s linear infinite;
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-list {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(0, 31, 63, 0.98);
-                backdrop-filter: blur(20px);
+        @keyframes gradient-text {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(66, 211, 255, 0.3);
+        }
+        
+        .hero-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(66, 211, 255, 0.5);
+        }
+
+        /* ===== GRIDS (TESTES, GALERIA, AUTORES) ===== */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+        
+        /* ===== CARDS ESTILIZADOS ===== */
+        .card {
+            background: var(--background-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+        
+        .card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Específico para Autores */
+        .author-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Específico para Galeria */
+        .gallery-card {
+            overflow: hidden;
+            padding: 0;
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .gallery-card:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-card .card-content {
+            padding: 1.5rem;
+        }
+
+        /* ===== SEÇÃO SOBRE ===== */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            text-align: left;
+        }
+        .about-content img {
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* ===== MODAL (JANELA POP-UP) ===== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--primary-color);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent-color);
+            text-align: center;
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-content h3 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding-top: 2rem;
+            text-align: center;
+        }
+        .institution-logo {
+            max-width: 250px;
+            margin-bottom: 1rem;
+        }
+        .footer p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 60px 20px;
+            }
+            .navbar {
+                padding: 10px 20px;
+            }
+            .logo-img {
+                height: 40px;
+            }
+            .slide-nav {
+                right: 15px;
+            }
+            .about-content {
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2.5rem;
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-20px);
-                transition: all 0.3s ease;
             }
-
-            .nav-list[data-visible="true"] {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-            }
-
-            .nav-list a {
-                font-size: 1.8rem;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav-dots, .arrow {
-                display: none;
-            }
-
-            .slide-content {
-                padding: 0 15px;
+            .about-content img {
+                max-width: 80%;
             }
         }
 
-        @media (max-width: 640px
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#hero"><img src="https://i.ibb.co/VWhWB1yy/2.png" alt="Ecos do Mar Logo" class="logo-img"></a>
+    </header>
+
+    <nav class="slide-nav" id="slide-nav">
+        </nav>
+
+    <div class="main-container">
+        
+        <section id="hero" class="slide" data-title="Início">
+            <div class="content-wrapper">
+                <h1 class="hero-title">Ecos do Mar</h1>
+                <p class="hero-subtitle">Descubra nosso projeto para a SNCeT Irecê 2025!</p>
+                <a href="#sobre" class="hero-cta">Explorar Projeto</a>
+            </div>
+        </section>
+
+        <section id="sobre" class="slide" data-title="Sobre">
+            <div class="content-wrapper about-content">
+                <img src="https://i.postimg.cc/WzXkHNPg/Design-sem-nome-2.png" alt="Projeto de ciências">
+                <div>
+                    <h2 class="section-title">Sobre o Projeto</h2>
+                    <p>Este projeto explora conceitos fundamentais de ciência através de experimentos práticos e observações cuidadosas. Nosso objetivo é entender melhor os fenômenos naturais e suas aplicações no mundo real.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="construcao" class="slide" data-title="Construção">
+            <div class="content-wrapper">
+                <h2 class="section-title">Como Construímos</h2>
+                <div class="grid-container">
+                    <div class="card">
+                        <h3>1. Planejamento</h3>
+                        <p>Definição dos objetivos, pesquisa bibliográfica e seleção de materiais necessários.</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. Coleta de Materiais</h3>
+                        <p>Seleção cuidadosa de todos os componentes e ferramentas para a construção.</p>
+                    </div>
+                    <div class="card">
+                        <h3>3. Montagem</h3>
+                        <p>Processo de construção passo a passo, com atenção aos detalhes técnicos e segurança.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testes" class="slide" data-title="Testes">
+             <div class="content-wrapper">
+                <h2 class="section-title">Testes e Experimentos</h2>
+                <div class="grid-container">
+                    <div class="card">
+                        <h3>Teste Inicial</h3>
+                        <p>Primeira validação do experimento com condições controladas.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Coleta de Dados</h3>
+                        <p>Registro sistemático de todas as observações e medições realizadas.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Análise de Resultados</h3>
+                        <p>Interpretação dos dados e comparação com as hipóteses iniciais.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="saneamento" class="slide" data-title="Pesquisa">
+            <div class="content-wrapper">
+                <h2 class="section-title">Pesquisa: Saneamento Básico</h2>
+                <p>Com o intuito de compreender a situação atual e a percepção das pessoas, foi aplicado um questionário via Google Forms. As questões contemplaram acesso à água, coleta de resíduos, esgotamento sanitário e drenagem urbana.</p>
+                <div class="grid-container">
+                    <div class="card">
+                        <h4>Resultados Gerais</h4>
+                        <p>Embora existam avanços, persistem desafios. Falhas na coleta de resíduos, esgoto e, principalmente, drenagem, demonstram que parte da população permanece sem acesso a serviços essenciais.</p>
+                    </div>
+                     <div class="card">
+                        <h4>Observações</h4>
+                        <p>No IFBA Irecê, a limpeza dos reservatórios é regular, mas a higienização dos bebedouros pode ser mais frequente. O campus utiliza tanto a rede pública de esgoto quanto fossas sépticas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="galeria" class="slide" data-title="Galeria">
+            <div class="content-wrapper">
+                <h2 class="section-title">Galeria de Imagens</h2>
+                <div class="grid-container">
+                    <div class="card gallery-card" data-modal-image="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png" data-modal-title="Montagem Inicial">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png" alt="Montagem inicial">
+                        <div class="card-content"><h3>Montagem Inicial</h3></div>
+                    </div>
+                    <div class="card gallery-card" data-modal-image="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png" data-modal-title="Detalhes Técnicos">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png" alt="Detalhes técnicos">
+                        <div class="card-content"><h3>Detalhes Técnicos</h3></div>
+                    </div>
+                    <div class="card gallery-card" data-modal-image="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png" data-modal-title="Testes em Ação">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png" alt="Testes em ação">
+                        <div class="card-content"><h3>Testes em Ação</h3></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="autores" class="slide" data-title="Autores">
+            <div class="content-wrapper">
+                <h2 class="section-title">Autores do Projeto</h2>
+                <div class="grid-container">
+                    <div class="card author-card" data-modal-image="https://i.postimg.cc/yNwB4kx4/Beatriz.jpg" data-modal-title="Ana Beatriz Bastos Martins">
+                        <img src="https://i.postimg.cc/yNwB4kx4/Beatriz.jpg" alt="Ana Beatriz Bastos Martins">
+                        <h3>Ana Beatriz Bastos Martins</h3>
+                    </div>
+                    <div class="card author-card" data-modal-image="https://i.postimg.cc/9fBPsqJz/Carlos.jpg" data-modal-title="Carlos Eduardo Rodrigues dos Santos">
+                        <img src="https://i.postimg.cc/9fBPsqJz/Carlos.jpg" alt="Carlos Eduardo Rodrigues dos Santos">
+                        <h3>Carlos Eduardo Rodrigues dos Santos</h3>
+                    </div>
+                    <div class="card author-card" data-modal-image="https://i.postimg.cc/zG41Ggdf/Eduarda-Pereira.jpg" data-modal-title="Eduarda Pereira de Almeida Silva">
+                        <img src="https://i.postimg.cc/zG41Ggdf/Eduarda-Pereira.jpg" alt="Eduarda Pereira de Almeida Silva">
+                        <h3>Eduarda Pereira de Almeida Silva</h3>
+                    </div>
+                     <div class="card author-card" data-modal-image="https://i.ibb.co/CKhmm6LP/Glenda.jpg" data-modal-title="Glenda Alicrim de Almeida">
+                        <img src="https://i.ibb.co/CKhmm6LP/Glenda.jpg" alt="Glenda Alicrim de Almeida">
+                        <h3>Glenda Alicrim de Almeida</h3>
+                    </div>
+                    </div>
+                 <footer class="footer">
+                    <img src="https://i.postimg.cc/7Y5WjFxK/MARCA-IFBA-CAMPUS-HORIZONTAL-completa-negativa-BRANCA-IRECE.png" alt="IFBA Campus Irecê" class="institution-logo">
+                    <p>&copy; 2025 Ecos do Mar. Desenvolvido com paixão pela ciência.</p>
+                </footer>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <img src="" alt="Imagem em destaque" id="modal-img">
+            <h3 id="modal-title"></h3>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mainContainer = document.querySelector('.main-container');
+            const slides = document.querySelectorAll('.slide');
+            const slideNav = document.getElementById('slide-nav');
+            
+            // --- GERAÇÃO DA NAVEGAÇÃO LATERAL ---
+            slides.forEach((slide, index) => {
+                const navItem = document.createElement('li');
+                const navLink = document.createElement('a');
+                navLink.href = `#${slide.id}`;
+                
+                const tooltip = document.createElement('span');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = slide.dataset.title;
+                navLink.appendChild(tooltip);
+
+                navItem.appendChild(navLink);
+                slideNav.appendChild(navItem);
+            });
+
+            const navLinks = document.querySelectorAll('.slide-nav a');
+
+            // --- LÓGICA DO SCROLL E OBSERVER PARA ATIVAR NAVEGAÇÃO ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${activeId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.6 }); // 60% da seção visível para ativar
+
+            slides.forEach(slide => observer.observe(slide));
+
+            // --- LÓGICA DO MODAL ---
+            const modal = document.getElementById('modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            
+            const clickableItems = document.querySelectorAll('.gallery-card, .author-card');
+
+            clickableItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const imgSrc = item.dataset.modalImage;
+                    const titleText = item.dataset.modalTitle;
+
+                    modalImg.src = imgSrc;
+                    modalTitle.textContent = titleText;
+                    modal.classList.add('active');
+                });
+            });
+
+            const closeModal = () => {
+                modal.classList.remove('active');
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
