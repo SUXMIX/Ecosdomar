@@ -5,604 +5,1045 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecos do Mar - SNCeT</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/nMtK3KDK/1.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ===== CONFIGURAÇÕES GLOBAIS E RESET ===== */
-        :root {
-            --primary-color: #065193;
-            --secondary-color: #FFFFFF;
-            --accent-color: #42d3ff;
-            --background-glass: rgba(255, 255, 255, 0.05);
-            --border-glass: rgba(255, 255, 255, 0.2);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fff;
+            color: #333;
+            overflow-x: hidden;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            overflow: hidden; /* Essencial para o efeito de slide */
+        /* Navigation Header */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(6, 81, 147, 0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(6, 81, 147, 0.08);
         }
-        
-        /* Container principal que gerencia a rolagem de slides */
-        .main-container {
-            height: 100vh;
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            -ms-overflow-style: none; /* IE e Edge */
-            scrollbar-width: none; /* Firefox */
+
+        .logo-container img {
+            height: 50px;
         }
-        .main-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari e Opera */
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #065193;
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(6, 81, 147, 0.5);
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #065193;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-arrow:hover:not(:disabled) {
+            background: #00D9FF;
+            transform: scale(1.1);
+        }
+
+        .nav-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Slides Container */
+        .slides-wrapper {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slides-container {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .slide {
-            height: 100vh;
-            width: 100vw;
-            scroll-snap-align: start;
+            min-width: 100vw;
+            min-height: 100vh;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        /* Hero Slide */
+        .hero-slide {
+            background: linear-gradient(135deg, #065193 0%, #043d6e 50%, #022947 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px 40px;
+            color: white;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        /* ===== CABEÇALHO FIXO ===== */
-        .navbar {
-            position: fixed;
-            top: 0;
+        .hero-slide::before {
+            content: '';
+            position: absolute;
             width: 100%;
-            padding: 15px 40px;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
+            height: 100%;
+            background: url('https://i.ibb.co/nMtK3KDK/1.png') no-repeat center;
+            background-size: 50%;
+            opacity: 0.05;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+        }
+
+        .hero-logo {
+            max-width: 500px;
+            width: 90%;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #00D9FF;
+            margin-bottom: 50px;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            color: white;
+            font-size: 14px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Content Slides */
+        .content-slide {
+            background: linear-gradient(to bottom, #f8fbff 0%, #ffffff 100%);
+            padding: 100px 40px 60px;
+        }
+
+        .slide-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .slide-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #065193;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #065193, #00D9FF);
+            border-radius: 2px;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
             align-items: center;
-            background: rgba(6, 81, 147, 0.5);
-            backdrop-filter: blur(10px);
         }
 
-        .logo-img {
-            height: 50px;
+        .text-block p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 20px;
         }
 
-        /* ===== NAVEGAÇÃO LATERAL ===== */
-        .slide-nav {
-            position: fixed;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            z-index: 1001;
-            list-style: none;
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(6, 81, 147, 0.1);
+            border: 2px solid #065193;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(6, 81, 147, 0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item strong {
+            color: #065193;
+            min-width: 120px;
+            font-weight: 600;
+        }
+
+        .interactive-image {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(6, 81, 147, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 217, 255, 0.3);
+        }
+
+        /* Timeline */
+        .timeline-container {
+            display: flex;
+            gap: 30px;
+            padding: 30px 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        .timeline-card {
+            min-width: 350px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(6, 81, 147, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            scroll-snap-align: start;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+        }
+
+        .timeline-number {
+            background: linear-gradient(135deg, #065193, #00D9FF);
+            color: white;
+            font-size: 3rem;
+            font-weight: 900;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .timeline-text {
+            padding: 25px;
+        }
+
+        .timeline-text h3 {
+            color: #065193;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .info-card-item {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(6, 81, 147, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .info-card-item:hover {
+            transform: translateY(-10px);
+            border-color: #00D9FF;
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+        }
+
+        .info-card-item h3 {
+            color: #065193;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .info-card-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .gallery-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            height: 280px;
+            box-shadow: 0 10px 40px rgba(6, 81, 147, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(6, 81, 147, 0.95));
+            padding: 60px 20px 20px;
+            color: white;
+            font-weight: 600;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-card:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Authors Grid */
+        .authors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .author-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(6, 81, 147, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .author-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
+        }
+
+        .author-image-wrapper {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #065193, #00D9FF);
+        }
+
+        .author-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+
+        .author-card h3 {
+            color: #065193;
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* Footer Slide */
+        .footer-slide {
+            background: linear-gradient(135deg, #022947 0%, #043d6e 50%, #065193 100%);
             display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-
-        .slide-nav li a {
-            display: block;
-            width: 12px;
-            height: 12px;
-            background-color: transparent;
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .slide-nav li a.active {
-            background-color: var(--accent-color);
-            transform: scale(1.2);
-        }
-
-        .slide-nav li a .tooltip {
-            position: absolute;
-            top: 50%;
-            right: 25px;
-            transform: translateY(-50%);
-            background: var(--accent-color);
-            color: var(--primary-color);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .slide-nav li a:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-        }
-
-
-        /* ===== ESTILOS GERAIS DE CONTEÚDO ===== */
-        .content-wrapper {
-            max-width: 1200px;
-            width: 100%;
+            justify-content: center;
+            align-items: center;
+            color: white;
             text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease forwards;
         }
 
-        @keyframes fadeIn {
+        .footer-content {
+            max-width: 800px;
+            padding: 40px;
+        }
+
+        .institution-logo {
+            max-width: 400px;
+            width: 90%;
+            margin: 30px 0;
+            opacity: 0.9;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalAppear 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #065193;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #00D9FF;
+            transform: rotate(90deg);
+        }
+
+        .modal-image {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .modal-title {
+            color: #065193;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .modal-text {
+            color: #444;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 2rem;
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            max-width: 800px;
-            margin: 0 auto 1.5rem;
-            color: rgba(255, 255, 255, 0.85);
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
-        /* ===== HERO (PRIMEIRO SLIDE) ===== */
-        .hero-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color), var(--accent-color));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradient-text 5s linear infinite;
-        }
-
-        @keyframes gradient-text {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-        }
-
-        .hero-cta {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--accent-color);
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(66, 211, 255, 0.3);
-        }
-        
-        .hero-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(66, 211, 255, 0.5);
-        }
-
-        /* ===== GRIDS (TESTES, GALERIA, AUTORES) ===== */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            width: 100%;
-        }
-        
-        /* ===== CARDS ESTILIZADOS ===== */
-        .card {
-            background: var(--background-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 1.5rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        }
-
-        .card h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            color: var(--accent-color);
-            margin-bottom: 0.8rem;
-            font-size: 1.4rem;
-        }
-        
-        .card p {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        /* Específico para Autores */
-        .author-card img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        /* Específico para Galeria */
-        .gallery-card {
-            overflow: hidden;
-            padding: 0;
-        }
-        .gallery-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-        .gallery-card:hover img {
-            transform: scale(1.1);
-        }
-        .gallery-card .card-content {
-            padding: 1.5rem;
-        }
-
-        /* ===== SEÇÃO SOBRE ===== */
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            text-align: left;
-        }
-        .about-content img {
-            max-width: 400px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* ===== MODAL (JANELA POP-UP) ===== */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: var(--primary-color);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid var(--accent-color);
-            text-align: center;
-            max-width: 90vw;
-            max-height: 90vh;
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.4s ease;
-        }
-
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-content img {
-            max-width: 100%;
-            max-height: 60vh;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-        }
-        
-        .modal-content h3 {
-            color: var(--accent-color);
-            font-size: 1.8rem;
-            margin-top: 1rem;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 2rem;
-            color: var(--secondary-color);
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            padding-top: 2rem;
-            text-align: center;
-        }
-        .institution-logo {
-            max-width: 250px;
-            margin-bottom: 1rem;
-        }
-        .footer p {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* ===== RESPONSIVIDADE ===== */
-        @media (max-width: 768px) {
-            .slide {
-                padding: 60px 20px;
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
             }
-            .navbar {
-                padding: 10px 20px;
+            to {
+                opacity: 1;
+                transform: scale(1);
             }
-            .logo-img {
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .nav-header {
+                padding: 15px 20px;
+            }
+
+            .logo-container img {
                 height: 40px;
             }
-            .slide-nav {
-                right: 15px;
-            }
-            .about-content {
-                flex-direction: column;
-            }
-            .about-content img {
-                max-width: 80%;
+
+            .timeline-card {
+                min-width: 280px;
             }
         }
-
     </style>
 </head>
 <body>
-
-    <header class="navbar">
-        <a href="#hero"><img src="https://i.ibb.co/VWhWB1yy/2.png" alt="Ecos do Mar Logo" class="logo-img"></a>
-    </header>
-
-    <nav class="slide-nav" id="slide-nav">
-        </nav>
-
-    <div class="main-container">
-        
-        <section id="hero" class="slide" data-title="Início">
-            <div class="content-wrapper">
-                <h1 class="hero-title">Ecos do Mar</h1>
-                <p class="hero-subtitle">Descubra nosso projeto para a SNCeT Irecê 2025!</p>
-                <a href="#sobre" class="hero-cta">Explorar Projeto</a>
+    <!-- Navigation Header -->
+    <div class="nav-header">
+        <div class="logo-container">
+            <img src="https://i.ibb.co/VWhWB1yy/2.png" alt="Ecos do Mar">
+        </div>
+        <div class="nav-controls">
+            <div class="nav-dots" id="navDots"></div>
+            <div class="nav-arrows">
+                <button class="nav-arrow" id="prevBtn">←</button>
+                <button class="nav-arrow" id="nextBtn">→</button>
             </div>
-        </section>
-
-        <section id="sobre" class="slide" data-title="Sobre">
-            <div class="content-wrapper about-content">
-                <img src="https://i.postimg.cc/WzXkHNPg/Design-sem-nome-2.png" alt="Projeto de ciências">
-                <div>
-                    <h2 class="section-title">Sobre o Projeto</h2>
-                    <p>Este projeto explora conceitos fundamentais de ciência através de experimentos práticos e observações cuidadosas. Nosso objetivo é entender melhor os fenômenos naturais e suas aplicações no mundo real.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="construcao" class="slide" data-title="Construção">
-            <div class="content-wrapper">
-                <h2 class="section-title">Como Construímos</h2>
-                <div class="grid-container">
-                    <div class="card">
-                        <h3>1. Planejamento</h3>
-                        <p>Definição dos objetivos, pesquisa bibliográfica e seleção de materiais necessários.</p>
-                    </div>
-                    <div class="card">
-                        <h3>2. Coleta de Materiais</h3>
-                        <p>Seleção cuidadosa de todos os componentes e ferramentas para a construção.</p>
-                    </div>
-                    <div class="card">
-                        <h3>3. Montagem</h3>
-                        <p>Processo de construção passo a passo, com atenção aos detalhes técnicos e segurança.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="testes" class="slide" data-title="Testes">
-             <div class="content-wrapper">
-                <h2 class="section-title">Testes e Experimentos</h2>
-                <div class="grid-container">
-                    <div class="card">
-                        <h3>Teste Inicial</h3>
-                        <p>Primeira validação do experimento com condições controladas.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Coleta de Dados</h3>
-                        <p>Registro sistemático de todas as observações e medições realizadas.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Análise de Resultados</h3>
-                        <p>Interpretação dos dados e comparação com as hipóteses iniciais.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="saneamento" class="slide" data-title="Pesquisa">
-            <div class="content-wrapper">
-                <h2 class="section-title">Pesquisa: Saneamento Básico</h2>
-                <p>Com o intuito de compreender a situação atual e a percepção das pessoas, foi aplicado um questionário via Google Forms. As questões contemplaram acesso à água, coleta de resíduos, esgotamento sanitário e drenagem urbana.</p>
-                <div class="grid-container">
-                    <div class="card">
-                        <h4>Resultados Gerais</h4>
-                        <p>Embora existam avanços, persistem desafios. Falhas na coleta de resíduos, esgoto e, principalmente, drenagem, demonstram que parte da população permanece sem acesso a serviços essenciais.</p>
-                    </div>
-                     <div class="card">
-                        <h4>Observações</h4>
-                        <p>No IFBA Irecê, a limpeza dos reservatórios é regular, mas a higienização dos bebedouros pode ser mais frequente. O campus utiliza tanto a rede pública de esgoto quanto fossas sépticas.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="galeria" class="slide" data-title="Galeria">
-            <div class="content-wrapper">
-                <h2 class="section-title">Galeria de Imagens</h2>
-                <div class="grid-container">
-                    <div class="card gallery-card" data-modal-image="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png" data-modal-title="Montagem Inicial">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png" alt="Montagem inicial">
-                        <div class="card-content"><h3>Montagem Inicial</h3></div>
-                    </div>
-                    <div class="card gallery-card" data-modal-image="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png" data-modal-title="Detalhes Técnicos">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png" alt="Detalhes técnicos">
-                        <div class="card-content"><h3>Detalhes Técnicos</h3></div>
-                    </div>
-                    <div class="card gallery-card" data-modal-image="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png" data-modal-title="Testes em Ação">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png" alt="Testes em ação">
-                        <div class="card-content"><h3>Testes em Ação</h3></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="autores" class="slide" data-title="Autores">
-            <div class="content-wrapper">
-                <h2 class="section-title">Autores do Projeto</h2>
-                <div class="grid-container">
-                    <div class="card author-card" data-modal-image="https://i.postimg.cc/yNwB4kx4/Beatriz.jpg" data-modal-title="Ana Beatriz Bastos Martins">
-                        <img src="https://i.postimg.cc/yNwB4kx4/Beatriz.jpg" alt="Ana Beatriz Bastos Martins">
-                        <h3>Ana Beatriz Bastos Martins</h3>
-                    </div>
-                    <div class="card author-card" data-modal-image="https://i.postimg.cc/9fBPsqJz/Carlos.jpg" data-modal-title="Carlos Eduardo Rodrigues dos Santos">
-                        <img src="https://i.postimg.cc/9fBPsqJz/Carlos.jpg" alt="Carlos Eduardo Rodrigues dos Santos">
-                        <h3>Carlos Eduardo Rodrigues dos Santos</h3>
-                    </div>
-                    <div class="card author-card" data-modal-image="https://i.postimg.cc/zG41Ggdf/Eduarda-Pereira.jpg" data-modal-title="Eduarda Pereira de Almeida Silva">
-                        <img src="https://i.postimg.cc/zG41Ggdf/Eduarda-Pereira.jpg" alt="Eduarda Pereira de Almeida Silva">
-                        <h3>Eduarda Pereira de Almeida Silva</h3>
-                    </div>
-                     <div class="card author-card" data-modal-image="https://i.ibb.co/CKhmm6LP/Glenda.jpg" data-modal-title="Glenda Alicrim de Almeida">
-                        <img src="https://i.ibb.co/CKhmm6LP/Glenda.jpg" alt="Glenda Alicrim de Almeida">
-                        <h3>Glenda Alicrim de Almeida</h3>
-                    </div>
-                    </div>
-                 <footer class="footer">
-                    <img src="https://i.postimg.cc/7Y5WjFxK/MARCA-IFBA-CAMPUS-HORIZONTAL-completa-negativa-BRANCA-IRECE.png" alt="IFBA Campus Irecê" class="institution-logo">
-                    <p>&copy; 2025 Ecos do Mar. Desenvolvido com paixão pela ciência.</p>
-                </footer>
-            </div>
-        </section>
-
+        </div>
     </div>
 
+    <!-- Slides Wrapper -->
+    <div class="slides-wrapper">
+        <div class="slides-container" id="slidesContainer">
+            
+            <!-- Slide 1: Hero -->
+            <div class="slide hero-slide">
+                <div class="hero-content">
+                    <img src="https://i.ibb.co/9H4kDrVH/3.png" alt="Ecos do Mar" class="hero-logo">
+                    <p class="hero-subtitle">Descubra nosso projeto para a SNCeT Irecê 2025!</p>
+                </div>
+                <div class="scroll-indicator">
+                    <div style="font-size: 24px;">↓</div>
+                    Use as setas para navegar
+                </div>
+            </div>
+
+            <!-- Slide 2: Sobre -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Sobre o Projeto</h2>
+                    </div>
+                    <div class="info-grid">
+                        <div class="text-block">
+                            <p>Este projeto explora conceitos fundamentais de ciência através de experimentos práticos e observações cuidadosas. Nosso objetivo é entender melhor os fenômenos naturais e suas aplicações no mundo real.</p>
+                            <div class="info-card">
+                                <div class="info-item">
+                                    <strong>Tema:</strong> <span>Fenômenos Naturais e suas Aplicações</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Período:</strong> <span>3 meses de pesquisa e desenvolvimento</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Equipe:</strong> <span>Grupo de pesquisa em ciências</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image-block">
+                            <img src="https://i.postimg.cc/WzXkHNPg/Design-sem-nome-2.png" alt="Projeto" class="interactive-image" onclick="openModal('Sobre o Projeto', 'https://i.postimg.cc/WzXkHNPg/Design-sem-nome-2.png', 'Este projeto explora conceitos fundamentais de ciência através de experimentos práticos e observações cuidadosas. Nosso objetivo é entender melhor os fenômenos naturais e suas aplicações no mundo real.')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Construção -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Como Construímos</h2>
+                    </div>
+                    <div class="timeline-container">
+                        <div class="timeline-card" onclick="openModal('Planejamento', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d6ded32c-ebc1-4674-842f-90b47494db5f.png', 'Definição dos objetivos, pesquisa bibliográfica e seleção de materiais necessários para o experimento.')">
+                            <div class="timeline-number">1</div>
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d6ded32c-ebc1-4674-842f-90b47494db5f.png" class="timeline-image">
+                            <div class="timeline-text">
+                                <h3>Planejamento</h3>
+                                <p>Definição dos objetivos e pesquisa bibliográfica</p>
+                            </div>
+                        </div>
+                        <div class="timeline-card" onclick="openModal('Coleta de Materiais', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb880cf6-a559-451b-bafb-be07e9bc61b0.png', 'Seleção cuidadosa de todos os componentes e ferramentas necessárias para a construção do experimento.')">
+                            <div class="timeline-number">2</div>
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb880cf6-a559-451b-bafb-be07e9bc61b0.png" class="timeline-image">
+                            <div class="timeline-text">
+                                <h3>Coleta de Materiais</h3>
+                                <p>Seleção de componentes e ferramentas</p>
+                            </div>
+                        </div>
+                        <div class="timeline-card" onclick="openModal('Montagem', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1b4561b6-a7e1-498f-9a0f-0b588b7c8d40.png', 'Processo de construção passo a passo, com atenção aos detalhes técnicos e segurança.')">
+                            <div class="timeline-number">3</div>
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1b4561b6-a7e1-498f-9a0f-0b588b7c8d40.png" class="timeline-image">
+                            <div class="timeline-text">
+                                <h3>Montagem</h3>
+                                <p>Construção com atenção aos detalhes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Testes -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Testes e Experimentos</h2>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="info-card-item" onclick="openModal('Teste Inicial', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e894bd79-5e57-4313-a606-f67fbf6fa53a.png', 'Primeira validação do experimento com condições controladas para garantir a viabilidade do projeto.')">
+                            <h3>Teste Inicial</h3>
+                            <p>Primeira validação do experimento com condições controladas.</p>
+                        </div>
+                        <div class="info-card-item" onclick="openModal('Coleta de Dados', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4af993c4-7b2f-4209-bc8d-102356a74f70.png', 'Registro sistemático de todas as observações e medições realizadas durante os experimentos.')">
+                            <h3>Coleta de Dados</h3>
+                            <p>Registro sistemático de todas as observações e medições realizadas.</p>
+                        </div>
+                        <div class="info-card-item" onclick="openModal('Análise de Resultados', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c3a6a016-2f00-43ed-aa39-3226acd75df5.png', 'Interpretação dos dados coletados e comparação com as hipóteses iniciais do projeto.')">
+                            <h3>Análise de Resultados</h3>
+                            <p>Interpretação dos dados coletados e comparação com as hipóteses iniciais.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Saneamento -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Pesquisa: Saneamento Básico</h2>
+                    </div>
+                    <div class="text-block" style="max-width: 900px; margin: 0 auto;">
+                        <p>O saneamento básico é um elemento essencial para a promoção da saúde pública e para a melhoria da qualidade de vida da população. Com o intuito de compreender a situação atual e a percepção das pessoas em relação a esse tema, foi aplicado um questionário por meio do Google Forms, respondido por um grupo de participantes. As questões contemplaram aspectos como acesso à água, coleta de resíduos sólidos, esgotamento sanitário e drenagem urbana.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Resultados da Pesquisa -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Resultados da Pesquisa</h2>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="info-card-item">
+                            <h3>Acesso à água potável</h3>
+                            <p>A maioria dos participantes (95,2%) declarou possuir acesso à água potável em suas residências.</p>
+                        </div>
+                        <div class="info-card-item">
+                            <h3>Tratamento da água</h3>
+                            <p>42,9% afirmaram receber água tratada, mas não confiam plenamente na sua qualidade; 52,4% informaram que recebem água tratada e confiam no serviço; enquanto 4,7% relataram não receber água tratada.</p>
+                        </div>
+                        <div class="info-card-item">
+                            <h3>Esgotamento sanitário</h3>
+                            <p>90% dos respondentes disseram que suas residências são atendidas pela rede de esgoto, enquanto 10% afirmaram não ter acesso a esse serviço.</p>
+                        </div>
+                        <div class="info-card-item">
+                            <h3>Coleta de lixo</h3>
+                            <p>95,2% relataram que a coleta de resíduos ocorre regularmente, em dias específicos da semana.</p>
+                        </div>
+                        <div class="info-card-item">
+                            <h3>Drenagem urbana</h3>
+                            <p>66,7% afirmaram residir em áreas sem infraestrutura adequada para o escoamento de águas pluviais. Além disso, 28,6% declararam enfrentar problemas com alagamentos em períodos de chuva.</p>
+                        </div>
+                        <div class="info-card-item">
+                            <h3>Informação sobre saneamento</h3>
+                            <p>Apenas 23,8% dos participantes disseram receber informações sobre saneamento básico.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Análise -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Análise da Pesquisa</h2>
+                    </div>
+                    <div class="text-block" style="max-width: 900px; margin: 0 auto;">
+                        <p>Os dados evidenciam que, embora existam avanços no acesso a serviços de saneamento básico, ainda persistem desafios significativos. As falhas observadas na coleta de resíduos, no esgotamento sanitário e, principalmente, na drenagem urbana demonstram que parte da população permanece sem acesso integral a serviços essenciais.</p>
+                        <p>Nesse sentido, o saneamento básico deve ser tratado como prioridade, uma vez que está diretamente relacionado à saúde, ao bem-estar e à preservação ambiental.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Propostas -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Propostas</h2>
+                    </div>
+                    <div class="text-block" style="max-width: 900px; margin: 0 auto;">
+                        <p>Nosso trabalho busca promover maior visibilidade para a importância do saneamento básico, incentivando práticas como a reutilização da água, o monitoramento da sua qualidade e a conscientização da população acerca desse tema. O objetivo é contribuir para a melhoria da saúde pública, para a proteção do meio ambiente e para a garantia de qualidade de vida a todos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Observações -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Observações Complementares</h2>
+                    </div>
+                    <div class="text-block" style="max-width: 900px; margin: 0 auto;">
+                        <p>Durante a visita aos reservatórios de água, no IFBA Campus- Irecê, acompanhada por um dos responsáveis pela área, foi possível observar que o sistema apresenta características de nível intermediário. Constatou-se que a limpeza dos reservatórios ocorre regularmente a cada seis meses, e que a água já chega tratada pela rede pública.</p>
+                        <p>No entanto, verificou-se que os bebedouros necessitam de maior frequência de higienização — idealmente a cada três meses — a fim de garantir melhores condições de uso. É importante destacar que a higienização geral do campus é realizada de forma estável e sem interrupções, contribuindo para o bem-estar da comunidade escolar.</p>
+                        <p>Em relação ao esgotamento sanitário, observou-se que parte das instalações é atendida pela rede pública, enquanto outra parcela faz uso de fossas sépticas como alternativa para o descarte de efluentes. Essa realidade demonstra a necessidade de manutenção periódica das fossas, bem como de investimentos para ampliar a cobertura da rede de esgoto.</p>
+                        <p>Assim, torna-se essencial conscientizar a direção geral sobre a importância de ampliar os investimentos em limpeza, manutenção preventiva e modernização das estruturas, assegurando qualidade contínua no fornecimento de água, na destinação adequada dos resíduos e, consequentemente, melhores condições de saúde para todos os alunos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Galeria -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Galeria de Imagens</h2>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="gallery-card" onclick="openModal('Montagem inicial', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png', 'Primeiras etapas da montagem do experimento com preparação dos materiais.')">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png" class="gallery-image">
+                            <div class="gallery-overlay">Montagem inicial</div>
+                        </div>
+                        <div class="gallery-card" onclick="openModal('Detalhes técnicos', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png', 'Aspectos técnicos e detalhes importantes da construção do projeto.')">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png" class="gallery-image">
+                            <div class="gallery-overlay">Detalhes técnicos</div>
+                        </div>
+                        <div class="gallery-card" onclick="openModal('Testes em ação', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png', 'Realização dos testes experimentais e coleta de dados.')">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png" class="gallery-image">
+                            <div class="gallery-overlay">Testes em ação</div>
+                        </div>
+                        <div class="gallery-card" onclick="openModal('Resultados visuais', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4aea5c04-c4b7-47c8-9f69-05df7ac6ea9f.png', 'Visualização dos resultados obtidos durante os experimentos.')">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4aea5c04-c4b7-47c8-9f69-05df7ac6ea9f.png" class="gallery-image">
+                            <div class="gallery-overlay">Resultados visuais</div>
+                        </div>
+                        <div class="gallery-card" onclick="openModal('Equipe de trabalho', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f5625b48-40d0-4a5a-934b-5d4dc8b203f8.png', 'Nossa equipe em ação durante o desenvolvimento do projeto.')">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f5625b48-40d0-4a5a-934b-5d4dc8b203f8.png" class="gallery-image">
+                            <div class="gallery-overlay">Equipe de trabalho</div>
+                        </div>
+                        <div class="gallery-card" onclick="openModal('Apresentação final', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bd863663-078e-478b-8875-547a054a44de.png', 'Momento da apresentação do projeto na feira de ciências.')">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bd863663-078e-478b-8875-547a054a44de.png" class="gallery-image">
+                            <div class="gallery-overlay">Apresentação final</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Resultados Finais -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Resultados e Conclusões</h2>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="info-card-item">
+                            <h3>Descobertas Principais</h3>
+                            <p>• Validação da hipótese inicial sobre o fenômeno estudado<br><br>
+                            • Identificação de variáveis críticas no processo<br><br>
+                            • Correlação entre teoria e prática observada</p>
+                        </div>
+                        <div class="info-card-item">
+                            <h3>Impacto do Projeto</h3>
+                            <p>Este projeto demonstrou a importância da metodologia científica na resolução de problemas reais, fornecendo insights valiosos para futuras pesquisas.</p>
+                        </div>
+                        <div class="info-card-item">
+                            <h3>Próximos Passos</h3>
+                            <p>Baseado nos resultados obtidos, identificamos oportunidades para expandir a pesquisa e explorar novas aplicações dos conceitos estudados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Autores -->
+            <div class="slide content-slide">
+                <div class="slide-content">
+                    <div class="slide-header">
+                        <h2 class="slide-title">Autores do Projeto</h2>
+                    </div>
+                    <div class="authors-grid">
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.postimg.cc/yNwB4kx4/Beatriz.jpg" alt="Ana Beatriz" class="author-img">
+                            </div>
+                            <h3>Ana Beatriz Bastos Martins</h3>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.postimg.cc/9fBPsqJz/Carlos.jpg" alt="Carlos Eduardo" class="author-img">
+                            </div>
+                            <h3>Carlos Eduardo Rodrigues dos Santos</h3>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.postimg.cc/zG41Ggdf/Eduarda-Pereira.jpg" alt="Eduarda Pereira" class="author-img">
+                            </div>
+                            <h3>Eduarda Pereira de Almeida Silva</h3>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.ibb.co/CKhmm6LP/Glenda.jpg" alt="Glenda Alicrim" class="author-img">
+                            </div>
+                            <h3>Glenda Alicrim de Almeida</h3>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.postimg.cc/hvQqTFSV/Isabelly.jpg" alt="Isabelly dos Santos" class="author-img">
+                            </div>
+                            <h3>Isabelly dos Santos Silva</h3>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.postimg.cc/pdjLj1ZN/Isis.jpg" alt="Isis Sthefany" class="author-img">
+                            </div>
+                            <h3>Isis Sthefany Soares dos Santos</h3>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.ibb.co/bMWqYwsw/Luiza.jpg" alt="Luiza Mendes" class="author-img">
+                            </div>
+                            <h3>Luiza Mendes Melo</h3>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.postimg.cc/Pr3vgbmL/Lukayan.jpg" alt="Lukayan Neiva" class="author-img">
+                            </div>
+                            <h3>Lukayan Neiva Barreto</h3>
+                        </div>
+                        <div class="author-card">
+                            <div class="author-image-wrapper">
+                                <img src="https://i.postimg.cc/K8TXL9Vb/OUTRASOA.jpg" alt="Vitor da Costa" class="author-img">
+                            </div>
+                            <h3>Vitor da Costa</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Footer -->
+            <div class="slide footer-slide">
+                <div class="footer-content">
+                    <h2 style="font-size: 3rem; margin-bottom: 30px; font-weight: 800;">Obrigado!</h2>
+                    <p style="font-size: 1.3rem; margin-bottom: 30px; opacity: 0.9;">Instituição:</p>
+                    <img src="https://i.postimg.cc/7Y5WjFxK/MARCA-IFBA-CAMPUS-HORIZONTAL-completa-negativa-BRANCA-IRECE.png" alt="IFBA" class="institution-logo">
+                    <p style="font-size: 1.1rem; opacity: 0.8; margin-top: 30px;">&copy; 2025 Ecos do Mar. Desenvolvido com paixão pela ciência.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
     <div class="modal" id="modal">
         <div class="modal-content">
-            <button class="close-modal" id="close-modal">&times;</button>
-            <img src="" alt="Imagem em destaque" id="modal-img">
-            <h3 id="modal-title"></h3>
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img id="modalImage" src="" alt="" class="modal-image">
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <p id="modalText" class="modal-text"></p>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mainContainer = document.querySelector('.main-container');
-            const slides = document.querySelectorAll('.slide');
-            const slideNav = document.getElementById('slide-nav');
-            
-            // --- GERAÇÃO DA NAVEGAÇÃO LATERAL ---
-            slides.forEach((slide, index) => {
-                const navItem = document.createElement('li');
-                const navLink = document.createElement('a');
-                navLink.href = `#${slide.id}`;
-                
-                const tooltip = document.createElement('span');
-                tooltip.className = 'tooltip';
-                tooltip.textContent = slide.dataset.title;
-                navLink.appendChild(tooltip);
+        let currentSlide = 0;
+        const totalSlides = 13;
+        const container = document.getElementById('slidesContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
 
-                navItem.appendChild(navLink);
-                slideNav.appendChild(navItem);
+        // Initialize navigation dots
+        function initNavDots() {
+            const dotsContainer = document.getElementById('navDots');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            if (index < 0 || index >= totalSlides) return;
+            currentSlide = index;
+            container.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            updateNavigation();
+        }
+
+        // Next slide
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+
+        // Previous slide
+        function prevSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+
+        // Update navigation state
+        function updateNavigation() {
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
             });
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
 
-            const navLinks = document.querySelectorAll('.slide-nav a');
+        // Event listeners for arrow buttons
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
 
-            // --- LÓGICA DO SCROLL E OBSERVER PARA ATIVAR NAVEGAÇÃO ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const activeId = entry.target.id;
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${activeId}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, { threshold: 0.6 }); // 60% da seção visível para ativar
-
-            slides.forEach(slide => observer.observe(slide));
-
-            // --- LÓGICA DO MODAL ---
-            const modal = document.getElementById('modal');
-            const closeModalBtn = document.getElementById('close-modal');
-            const modalImg = document.getElementById('modal-img');
-            const modalTitle = document.getElementById('modal-title');
-            
-            const clickableItems = document.querySelectorAll('.gallery-card, .author-card');
-
-            clickableItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const imgSrc = item.dataset.modalImage;
-                    const titleText = item.dataset.modalTitle;
-
-                    modalImg.src = imgSrc;
-                    modalTitle.textContent = titleText;
-                    modal.classList.add('active');
-                });
-            });
-
-            const closeModal = () => {
-                modal.classList.remove('active');
-            };
-
-            closeModalBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
         });
+
+        // Touch navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) nextSlide();
+            if (touchEndX > touchStartX + swipeThreshold) prevSlide();
+        }
+
+        // Modal functions
+        function openModal(title, image, text) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalImage').src = image;
+            document.getElementById('modalText').textContent = text;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal on background click
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') closeModal();
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initialize
+        initNavDots();
+        updateNavigation();
     </script>
 </body>
 </html>
