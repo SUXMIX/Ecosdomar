@@ -30,7 +30,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 2px solid rgba(6, 81, 147, 0.1);
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,20 +38,20 @@
         }
 
         .logo-container img {
-            height: 50px;
+            height: 45px;
         }
 
         .nav-controls {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .nav-dots {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            max-width: 200px;
+            max-width: 150px;
         }
 
         .nav-dot {
@@ -113,7 +113,7 @@
         .slide {
             min-width: 100vw;
             min-height: 100vh;
-            padding-top: 70px;
+            padding-top: 65px;
             overflow-y: auto;
         }
 
@@ -122,24 +122,13 @@
             background: linear-gradient(135deg, #065193 0%, #043d6e 50%, #022947 100%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             color: white;
             text-align: center;
             position: relative;
             overflow: hidden;
-            padding: 80px 20px 40px;
-        }
-
-        .hero-slide::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.ibb.co/nMtK3KDK/1.png') no-repeat center;
-            background-size: 50%;
-            opacity: 0.05;
-            animation: float 20s ease-in-out infinite;
+            padding: 100px 20px 40px;
         }
 
         .hero-content {
@@ -148,34 +137,21 @@
             padding: 20px;
             width: 100%;
             max-width: 800px;
+            margin-top: 40px;
         }
 
-        .snct-badge {
-            background: rgba(0, 217, 255, 0.2);
-            border: 2px solid #00D9FF;
-            padding: 10px 25px;
-            border-radius: 25px;
-            display: inline-block;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .snct-year {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #00D9FF;
-            letter-spacing: 2px;
-        }
-
-        .hero-logo {
-            max-width: 400px;
-            width: 90%;
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: 8px;
             margin-bottom: 30px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             animation: fadeInUp 1s ease;
         }
 
         .hero-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: #00D9FF;
             margin-bottom: 30px;
             animation: fadeInUp 1.4s ease;
@@ -183,7 +159,7 @@
         }
 
         .snct-full-name {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.9);
             margin-top: 30px;
             padding: 20px;
@@ -218,7 +194,7 @@
         }
 
         .slide-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: #065193;
             margin-bottom: 15px;
@@ -247,8 +223,8 @@
         }
 
         .text-block p {
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: 1.15rem;
+            line-height: 1.9;
             color: #444;
             margin-bottom: 20px;
         }
@@ -277,6 +253,11 @@
             color: #065193;
             font-weight: 600;
             margin-bottom: 5px;
+            font-size: 1.05rem;
+        }
+
+        .info-item span {
+            font-size: 1.05rem;
         }
 
         .interactive-image {
@@ -300,10 +281,26 @@
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #065193 #f0f0f0;
+        }
+
+        .timeline-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .timeline-container::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+
+        .timeline-container::-webkit-scrollbar-thumb {
+            background: #065193;
+            border-radius: 10px;
         }
 
         .timeline-card {
-            min-width: 280px;
+            min-width: 300px;
             background: white;
             border-radius: 15px;
             overflow: hidden;
@@ -311,6 +308,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             scroll-snap-align: start;
+            flex-shrink: 0;
         }
 
         .timeline-card:hover {
@@ -339,13 +337,13 @@
 
         .timeline-text h3 {
             color: #065193;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 12px;
             font-weight: 700;
         }
 
         .timeline-text p {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             color: #666;
             line-height: 1.6;
         }
@@ -376,62 +374,21 @@
 
         .info-card-item h3 {
             color: #065193;
-            font-size: 1.2rem;
+            font-size: 1.35rem;
             margin-bottom: 12px;
             font-weight: 700;
         }
 
         .info-card-item p {
             color: #666;
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        /* Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            padding: 20px 0;
-        }
-
-        .gallery-card {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            cursor: pointer;
-            height: 220px;
-            box-shadow: 0 10px 40px rgba(6, 81, 147, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .gallery-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
-        }
-
-        .gallery-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(6, 81, 147, 0.95));
-            padding: 60px 20px 20px;
-            color: white;
-            font-weight: 600;
-            font-size: 0.95rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
         }
 
         /* Authors Grid */
         .authors-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 20px;
             padding: 20px 0;
         }
@@ -469,7 +426,7 @@
 
         .author-card h3 {
             color: #065193;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             font-weight: 600;
             line-height: 1.4;
         }
@@ -492,13 +449,13 @@
         }
 
         .footer-content h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 20px;
             font-weight: 800;
         }
 
         .footer-content p:first-of-type {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 20px;
             opacity: 0.9;
         }
@@ -511,7 +468,7 @@
         }
 
         .footer-content p:last-of-type {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             opacity: 0.8;
             margin-top: 20px;
         }
@@ -578,7 +535,7 @@
 
         .modal-title {
             color: #065193;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
             font-weight: 700;
         }
@@ -586,7 +543,7 @@
         .modal-text {
             color: #444;
             line-height: 1.8;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         /* Animations */
@@ -606,11 +563,6 @@
             50% { transform: translateY(-15px); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
         @keyframes modalAppear {
             from {
                 opacity: 0;
@@ -625,15 +577,15 @@
         /* Desktop Responsive */
         @media (min-width: 768px) {
             .nav-header {
-                padding: 15px 40px;
+                padding: 12px 40px;
             }
 
             .logo-container img {
-                height: 70px;
+                height: 60px;
             }
 
             .nav-controls {
-                gap: 30px;
+                gap: 35px;
             }
 
             .nav-dots {
@@ -652,29 +604,25 @@
             }
 
             .slide {
-                padding-top: 80px;
+                padding-top: 75px;
             }
 
             .hero-slide {
-                padding: 100px 40px 60px;
+                padding: 120px 40px 60px;
             }
 
-            .snct-year {
-                font-size: 1.4rem;
-            }
-
-            .hero-logo {
-                max-width: 500px;
-                margin-bottom: 40px;
+            .hero-title {
+                font-size: 5rem;
+                letter-spacing: 12px;
             }
 
             .hero-subtitle {
-                font-size: 1.8rem;
+                font-size: 2rem;
                 margin-bottom: 50px;
             }
 
             .snct-full-name {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 margin-top: 40px;
             }
 
@@ -683,7 +631,7 @@
             }
 
             .slide-title {
-                font-size: 2.8rem;
+                font-size: 3rem;
             }
 
             .info-grid {
@@ -692,7 +640,7 @@
             }
 
             .text-block p {
-                font-size: 1.1rem;
+                font-size: 1.25rem;
             }
 
             .info-card {
@@ -706,8 +654,13 @@
             }
 
             .info-item strong {
-                min-width: 120px;
+                min-width: 140px;
                 margin-bottom: 0;
+                font-size: 1.1rem;
+            }
+
+            .info-item span {
+                font-size: 1.1rem;
             }
 
             .interactive-image {
@@ -719,7 +672,7 @@
             }
 
             .timeline-card {
-                min-width: 350px;
+                min-width: 380px;
                 border-radius: 20px;
             }
 
@@ -737,12 +690,12 @@
             }
 
             .timeline-text h3 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
                 margin-bottom: 15px;
             }
 
             .timeline-text p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             .cards-grid {
@@ -756,31 +709,12 @@
             }
 
             .info-card-item h3 {
-                font-size: 1.3rem;
+                font-size: 1.45rem;
                 margin-bottom: 15px;
             }
 
             .info-card-item p {
-                font-size: 1rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 25px;
-            }
-
-            .gallery-card {
-                border-radius: 20px;
-                height: 280px;
-            }
-
-            .gallery-overlay {
-                transform: translateY(100%);
-                font-size: 1rem;
-            }
-
-            .gallery-card:hover .gallery-overlay {
-                transform: translateY(0);
+                font-size: 1.1rem;
             }
 
             .authors-grid {
@@ -800,16 +734,16 @@
             }
 
             .author-card h3 {
-                font-size: 0.95rem;
+                font-size: 1.05rem;
             }
 
             .footer-content h2 {
-                font-size: 3rem;
+                font-size: 3.2rem;
                 margin-bottom: 30px;
             }
 
             .footer-content p:first-of-type {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
                 margin-bottom: 30px;
             }
 
@@ -819,7 +753,7 @@
             }
 
             .footer-content p:last-of-type {
-                font-size: 1.1rem;
+                font-size: 1.15rem;
                 margin-top: 30px;
             }
 
@@ -840,12 +774,12 @@
             }
 
             .modal-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
                 margin-bottom: 20px;
             }
 
             .modal-text {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -872,10 +806,7 @@
             <!-- Slide 1: Hero -->
             <div class="slide hero-slide">
                 <div class="hero-content">
-                    <div class="snct-badge">
-                        <div class="snct-year">SNCT 2025</div>
-                    </div>
-                    <img src="https://i.ibb.co/9H4kDrVH/3.png" alt="Ecos do Mar" class="hero-logo">
+                    <h1 class="hero-title">ECOS DO MAR</h1>
                     <p class="hero-subtitle">Descubra nosso projeto para a SNCeT Irecê 2025!</p>
                     <div class="snct-full-name">
                         XV SEMANA NACIONAL DE CIÊNCIA E TECNOLOGIA<br>DO TERRITÓRIO DE IRECÊ
@@ -992,27 +923,27 @@
                         <h2 class="slide-title">Resultados da Pesquisa</h2>
                     </div>
                     <div class="cards-grid">
-                        <div class="info-card-item" onclick="openModal('', 'https://i.ibb.co/LhRFjmjp/gua-pot-vel.png')">
+                        <div class="info-card-item" onclick="openModal('Acesso à água potável', 'https://i.ibb.co/LhRFjmjp/gua-pot-vel.png', 'A maioria dos participantes (95,2%) declarou possuir acesso à água potável em suas residências.')">
                             <h3>Acesso à água potável</h3>
                             <p>A maioria dos participantes (95,2%) declarou possuir acesso à água potável em suas residências.</p>
                         </div>
-                        <div class="info-card-item" onclick="openModal('', 'https://i.ibb.co/hJyftyR1/Tratamento-de-gua.png')">
+                        <div class="info-card-item" onclick="openModal('Tratamento da água', 'https://i.ibb.co/hJyftyR1/Tratamento-de-gua.png', '42,9% afirmaram receber água tratada, mas não confiam plenamente na sua qualidade; 52,4% informaram que recebem água tratada e confiam no serviço; enquanto 4,7% relataram não receber água tratada.')">
                             <h3>Tratamento da água</h3>
                             <p>42,9% afirmaram receber água tratada, mas não confiam plenamente na sua qualidade; 52,4% informaram que recebem água tratada e confiam no serviço; enquanto 4,7% relataram não receber água tratada.</p>
                         </div>
-                        <div class="info-card-item" onclick="openModal('', 'https://i.ibb.co/mV4VjYb2/Esgotamento-sanit-rio.png')">
+                        <div class="info-card-item" onclick="openModal('Esgotamento sanitário', 'https://i.ibb.co/mV4VjYb2/Esgotamento-sanit-rio.png', '90% dos respondentes disseram que suas residências são atendidas pela rede de esgoto, enquanto 10% afirmaram não ter acesso a esse serviço.')">
                             <h3>Esgotamento sanitário</h3>
                             <p>90% dos respondentes disseram que suas residências são atendidas pela rede de esgoto, enquanto 10% afirmaram não ter acesso a esse serviço.</p>
                         </div>
-                        <div class="info-card-item" onclick="openModal('', 'https://i.ibb.co/dsbM7jZ0/Coleta-de-lixo.png')">
+                        <div class="info-card-item" onclick="openModal('Coleta de lixo', 'https://i.ibb.co/dsbM7jZ0/Coleta-de-lixo.png', '95,2% relataram que a coleta de resíduos ocorre regularmente, em dias específicos da semana.')">
                             <h3>Coleta de lixo</h3>
                             <p>95,2% relataram que a coleta de resíduos ocorre regularmente, em dias específicos da semana.</p>
                         </div>
-                        <div class="info-card-item" onclick="openModal('', 'https://i.ibb.co/hR5rQFp3/Drenagem-urbana.png')">
+                        <div class="info-card-item" onclick="openModal('Drenagem urbana', 'https://i.ibb.co/hR5rQFp3/Drenagem-urbana.png', '66,7% afirmaram residir em áreas sem infraestrutura adequada para o escoamento de águas pluviais. Além disso, 28,6% declararam enfrentar problemas com alagamentos em períodos de chuva.')">
                             <h3>Drenagem urbana</h3>
                             <p>66,7% afirmaram residir em áreas sem infraestrutura adequada para o escoamento de águas pluviais. Além disso, 28,6% declararam enfrentar problemas com alagamentos em períodos de chuva.</p>
                         </div>
-                        <div class="info-card-item" onclick="openModal('', 'https://i.ibb.co/Vcdk49ZM/Informa-es.png')">
+                        <div class="info-card-item" onclick="openModal('Informação sobre saneamento', 'https://i.ibb.co/Vcdk49ZM/Informa-es.png', 'Apenas 23,8% dos participantes disseram receber informações sobre saneamento básico.')">
                             <h3>Informação sobre saneamento</h3> 
                             <p>Apenas 23,8% dos participantes disseram receber informações sobre saneamento básico.</p>
                         </div>
@@ -1060,42 +991,7 @@
                 </div>
             </div>
 
-            <!-- Slide 10: Galeria -->
-            <div class="slide content-slide">
-                <div class="slide-content">
-                    <div class="slide-header">
-                        <h2 class="slide-title">Galeria de Imagens</h2>
-                    </div>
-                    <div class="gallery-grid">
-                        <div class="gallery-card" onclick="openModal('Montagem inicial', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png', 'Primeiras etapas da montagem do experimento com preparação dos materiais.')">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png" class="gallery-image">
-                            <div class="gallery-overlay">Montagem inicial</div>
-                        </div>
-                        <div class="gallery-card" onclick="openModal('Detalhes técnicos', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png', 'Aspectos técnicos e detalhes importantes da construção do projeto.')">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png" class="gallery-image">
-                            <div class="gallery-overlay">Detalhes técnicos</div>
-                        </div>
-                        <div class="gallery-card" onclick="openModal('Testes em ação', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png', 'Realização dos testes experimentais e coleta de dados.')">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png" class="gallery-image">
-                            <div class="gallery-overlay">Testes em ação</div>
-                        </div>
-                        <div class="gallery-card" onclick="openModal('Resultados visuais', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4aea5c04-c4b7-47c8-9f69-05df7ac6ea9f.png', 'Visualização dos resultados obtidos durante os experimentos.')">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4aea5c04-c4b7-47c8-9f69-05df7ac6ea9f.png" class="gallery-image">
-                            <div class="gallery-overlay">Resultados visuais</div>
-                        </div>
-                        <div class="gallery-card" onclick="openModal('Equipe de trabalho', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f5625b48-40d0-4a5a-934b-5d4dc8b203f8.png', 'Nossa equipe em ação durante o desenvolvimento do projeto.')">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f5625b48-40d0-4a5a-934b-5d4dc8b203f8.png" class="gallery-image">
-                            <div class="gallery-overlay">Equipe de trabalho</div>
-                        </div>
-                        <div class="gallery-card" onclick="openModal('Apresentação final', 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bd863663-078e-478b-8875-547a054a44de.png', 'Momento da apresentação do projeto na feira de ciências.')">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bd863663-078e-478b-8875-547a054a44de.png" class="gallery-image">
-                            <div class="gallery-overlay">Apresentação final</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 11: Resultados Finais -->
+            <!-- Slide 10: Resultados Finais -->
             <div class="slide content-slide">
                 <div class="slide-content">
                     <div class="slide-header">
@@ -1120,7 +1016,7 @@
                 </div>
             </div>
 
-            <!-- Slide 12: Autores -->
+            <!-- Slide 11: Autores -->
             <div class="slide content-slide">
                 <div class="slide-content">
                     <div class="slide-header">
@@ -1185,7 +1081,7 @@
                 </div>
             </div>
 
-            <!-- Slide 13: Footer -->
+            <!-- Slide 12: Footer -->
             <div class="slide footer-slide">
                 <div class="footer-content">
                     <h2>Obrigado!</h2>
@@ -1210,7 +1106,7 @@
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 13;
+        const totalSlides = 12;
         const container = document.getElementById('slidesContainer');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
