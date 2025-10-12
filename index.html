@@ -30,7 +30,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 2px solid rgba(6, 81, 147, 0.1);
-            padding: 15px 40px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,23 +38,25 @@
         }
 
         .logo-container img {
-            height: 70px;
+            height: 50px;
         }
 
         .nav-controls {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 15px;
         }
 
         .nav-dots {
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            flex-wrap: wrap;
+            max-width: 200px;
         }
 
         .nav-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #ddd;
             cursor: pointer;
@@ -69,18 +71,18 @@
 
         .nav-arrows {
             display: flex;
-            gap: 12px;
+            gap: 8px;
         }
 
         .nav-arrow {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             background: #065193;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -111,7 +113,7 @@
         .slide {
             min-width: 100vw;
             min-height: 100vh;
-            padding-top: 80px;
+            padding-top: 70px;
             overflow-y: auto;
         }
 
@@ -126,6 +128,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            padding: 80px 20px 40px;
         }
 
         .hero-slide::before {
@@ -142,35 +145,66 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            padding: 40px;
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .snct-badge {
+            background: rgba(0, 217, 255, 0.2);
+            border: 2px solid #00D9FF;
+            padding: 10px 25px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .snct-year {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #00D9FF;
+            letter-spacing: 2px;
         }
 
         .hero-logo {
-            max-width: 500px;
+            max-width: 400px;
             width: 90%;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             animation: fadeInUp 1s ease;
         }
 
         .hero-subtitle {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: #00D9FF;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             animation: fadeInUp 1.4s ease;
+            line-height: 1.6;
+        }
+
+        .snct-full-name {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 2px solid rgba(0, 217, 255, 0.3);
+            animation: fadeInUp 1.8s ease;
+            line-height: 1.8;
+            font-weight: 500;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             color: white;
-            font-size: 14px;
+            font-size: 13px;
             animation: bounce 2s infinite;
         }
 
         /* Content Slides */
         .content-slide {
             background: linear-gradient(to bottom, #f8fbff 0%, #ffffff 100%);
-            padding: 100px 40px 60px;
+            padding: 80px 20px 40px;
         }
 
         .slide-content {
@@ -180,11 +214,11 @@
 
         .slide-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .slide-title {
-            font-size: 2.8rem;
+            font-size: 2rem;
             font-weight: 800;
             color: #065193;
             margin-bottom: 15px;
@@ -207,22 +241,22 @@
         /* Info Grid */
         .info-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 30px;
             align-items: center;
         }
 
         .text-block p {
-            font-size: 1.1rem;
-            line-height: 1.9;
+            font-size: 1rem;
+            line-height: 1.8;
             color: #444;
             margin-bottom: 20px;
         }
 
         .info-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 15px;
+            padding: 25px;
             box-shadow: 0 10px 40px rgba(6, 81, 147, 0.1);
             border: 2px solid #065193;
             margin-top: 20px;
@@ -230,7 +264,8 @@
 
         .info-item {
             display: flex;
-            padding: 15px 0;
+            flex-direction: column;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(6, 81, 147, 0.1);
         }
 
@@ -240,36 +275,37 @@
 
         .info-item strong {
             color: #065193;
-            min-width: 120px;
             font-weight: 600;
+            margin-bottom: 5px;
         }
 
         .interactive-image {
             width: 100%;
-            border-radius: 20px;
+            border-radius: 15px;
             box-shadow: 0 20px 60px rgba(6, 81, 147, 0.2);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .interactive-image:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
             box-shadow: 0 30px 80px rgba(0, 217, 255, 0.3);
         }
 
         /* Timeline */
         .timeline-container {
             display: flex;
-            gap: 30px;
-            padding: 30px 0;
+            gap: 20px;
+            padding: 20px 0;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
 
         .timeline-card {
-            min-width: 350px;
+            min-width: 280px;
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(6, 81, 147, 0.1);
             cursor: pointer;
@@ -285,41 +321,47 @@
         .timeline-number {
             background: linear-gradient(135deg, #065193, #00D9FF);
             color: white;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            padding: 30px;
+            padding: 25px;
             text-align: center;
         }
 
         .timeline-image {
             width: 100%;
-            height: 220px;
+            height: 180px;
             object-fit: cover;
         }
 
         .timeline-text {
-            padding: 25px;
+            padding: 20px;
         }
 
         .timeline-text h3 {
             color: #065193;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
             font-weight: 700;
+        }
+
+        .timeline-text p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
         }
 
         /* Cards Grid */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 20px;
             padding: 20px 0;
         }
 
         .info-card-item {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 15px;
+            padding: 25px;
             box-shadow: 0 10px 40px rgba(6, 81, 147, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
@@ -327,43 +369,44 @@
         }
 
         .info-card-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: #00D9FF;
             box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
         }
 
         .info-card-item h3 {
             color: #065193;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
             font-weight: 700;
         }
 
         .info-card-item p {
             color: #666;
             line-height: 1.7;
+            font-size: 0.95rem;
         }
 
         /* Gallery Grid */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: 1fr;
+            gap: 20px;
             padding: 20px 0;
         }
 
         .gallery-card {
             position: relative;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
-            height: 280px;
+            height: 220px;
             box-shadow: 0 10px 40px rgba(6, 81, 147, 0.15);
             transition: all 0.3s ease;
         }
 
         .gallery-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
             box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3);
         }
 
@@ -382,26 +425,21 @@
             padding: 60px 20px 20px;
             color: white;
             font-weight: 600;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-card:hover .gallery-overlay {
-            transform: translateY(0);
+            font-size: 0.95rem;
         }
 
         /* Authors Grid */
         .authors-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
             padding: 20px 0;
         }
 
         .author-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px 20px;
+            border-radius: 15px;
+            padding: 20px 15px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(6, 81, 147, 0.1);
             transition: all 0.3s ease;
@@ -413,9 +451,9 @@
         }
 
         .author-image-wrapper {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
             border-radius: 50%;
             padding: 3px;
             background: linear-gradient(135deg, #065193, #00D9FF);
@@ -431,7 +469,7 @@
 
         .author-card h3 {
             color: #065193;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             line-height: 1.4;
         }
@@ -445,18 +483,37 @@
             align-items: center;
             color: white;
             text-align: center;
+            padding: 80px 20px 40px;
         }
 
         .footer-content {
             max-width: 800px;
-            padding: 40px;
+            padding: 20px;
+        }
+
+        .footer-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .footer-content p:first-of-type {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
         }
 
         .institution-logo {
-            max-width: 400px;
+            max-width: 350px;
             width: 90%;
-            margin: 30px 0;
+            margin: 20px 0;
             opacity: 0.9;
+        }
+
+        .footer-content p:last-of-type {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-top: 20px;
         }
 
         /* Modal */
@@ -480,26 +537,27 @@
 
         .modal-content {
             background: white;
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: 15px;
+            padding: 30px 20px;
             max-width: 900px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             animation: modalAppear 0.3s ease;
+            width: 100%;
         }
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             background: #065193;
             color: white;
             border: none;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -514,21 +572,21 @@
 
         .modal-image {
             width: 100%;
-            border-radius: 15px;
-            margin-bottom: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
         }
 
         .modal-title {
             color: #065193;
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             font-weight: 700;
         }
 
         .modal-text {
             color: #444;
             line-height: 1.8;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         /* Animations */
@@ -564,26 +622,230 @@
             }
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .slide-title {
-                font-size: 2rem;
-            }
-
+        /* Desktop Responsive */
+        @media (min-width: 768px) {
             .nav-header {
-                padding: 15px 20px;
+                padding: 15px 40px;
             }
 
             .logo-container img {
+                height: 70px;
+            }
+
+            .nav-controls {
+                gap: 30px;
+            }
+
+            .nav-dots {
+                max-width: none;
+            }
+
+            .nav-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .nav-arrow {
+                width: 40px;
                 height: 40px;
+                font-size: 18px;
+            }
+
+            .slide {
+                padding-top: 80px;
+            }
+
+            .hero-slide {
+                padding: 100px 40px 60px;
+            }
+
+            .snct-year {
+                font-size: 1.4rem;
+            }
+
+            .hero-logo {
+                max-width: 500px;
+                margin-bottom: 40px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.8rem;
+                margin-bottom: 50px;
+            }
+
+            .snct-full-name {
+                font-size: 1.1rem;
+                margin-top: 40px;
+            }
+
+            .content-slide {
+                padding: 100px 40px 60px;
+            }
+
+            .slide-title {
+                font-size: 2.8rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+
+            .text-block p {
+                font-size: 1.1rem;
+            }
+
+            .info-card {
+                border-radius: 20px;
+                padding: 30px;
+            }
+
+            .info-item {
+                flex-direction: row;
+                padding: 15px 0;
+            }
+
+            .info-item strong {
+                min-width: 120px;
+                margin-bottom: 0;
+            }
+
+            .interactive-image {
+                border-radius: 20px;
+            }
+
+            .interactive-image:hover {
+                transform: scale(1.05);
             }
 
             .timeline-card {
-                min-width: 280px;
+                min-width: 350px;
+                border-radius: 20px;
+            }
+
+            .timeline-number {
+                font-size: 3rem;
+                padding: 30px;
+            }
+
+            .timeline-image {
+                height: 220px;
+            }
+
+            .timeline-text {
+                padding: 25px;
+            }
+
+            .timeline-text h3 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .timeline-text p {
+                font-size: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 30px;
+            }
+
+            .info-card-item {
+                border-radius: 20px;
+                padding: 30px;
+            }
+
+            .info-card-item h3 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+
+            .info-card-item p {
+                font-size: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 25px;
+            }
+
+            .gallery-card {
+                border-radius: 20px;
+                height: 280px;
+            }
+
+            .gallery-overlay {
+                transform: translateY(100%);
+                font-size: 1rem;
+            }
+
+            .gallery-card:hover .gallery-overlay {
+                transform: translateY(0);
+            }
+
+            .authors-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 30px;
+            }
+
+            .author-card {
+                border-radius: 20px;
+                padding: 30px 20px;
+            }
+
+            .author-image-wrapper {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 20px;
+            }
+
+            .author-card h3 {
+                font-size: 0.95rem;
+            }
+
+            .footer-content h2 {
+                font-size: 3rem;
+                margin-bottom: 30px;
+            }
+
+            .footer-content p:first-of-type {
+                font-size: 1.3rem;
+                margin-bottom: 30px;
+            }
+
+            .institution-logo {
+                max-width: 400px;
+                margin: 30px 0;
+            }
+
+            .footer-content p:last-of-type {
+                font-size: 1.1rem;
+                margin-top: 30px;
+            }
+
+            .modal-content {
+                border-radius: 20px;
+                padding: 40px;
+            }
+
+            .modal-close {
+                width: 40px;
+                height: 40px;
+                font-size: 24px;
+            }
+
+            .modal-image {
+                border-radius: 15px;
+                margin-bottom: 25px;
+            }
+
+            .modal-title {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            .modal-text {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -610,8 +872,14 @@
             <!-- Slide 1: Hero -->
             <div class="slide hero-slide">
                 <div class="hero-content">
+                    <div class="snct-badge">
+                        <div class="snct-year">SNCT 2025</div>
+                    </div>
                     <img src="https://i.ibb.co/9H4kDrVH/3.png" alt="Ecos do Mar" class="hero-logo">
                     <p class="hero-subtitle">Descubra nosso projeto para a SNCeT Irecê 2025!</p>
+                    <div class="snct-full-name">
+                        XV SEMANA NACIONAL DE CIÊNCIA E TECNOLOGIA<br>DO TERRITÓRIO DE IRECÊ
+                    </div>
                 </div>
                 <div class="scroll-indicator">
                     <div style="font-size: 24px;">↓</div>
@@ -920,10 +1188,10 @@
             <!-- Slide 13: Footer -->
             <div class="slide footer-slide">
                 <div class="footer-content">
-                    <h2 style="font-size: 3rem; margin-bottom: 30px; font-weight: 800;">Obrigado!</h2>
-                    <p style="font-size: 1.3rem; margin-bottom: 30px; opacity: 0.9;">Instituição:</p>
+                    <h2>Obrigado!</h2>
+                    <p>Instituição:</p>
                     <img src="https://i.postimg.cc/7Y5WjFxK/MARCA-IFBA-CAMPUS-HORIZONTAL-completa-negativa-BRANCA-IRECE.png" alt="IFBA" class="institution-logo">
-                    <p style="font-size: 1.1rem; opacity: 0.8; margin-top: 30px;">&copy; 2025 Ecos do Mar. Desenvolvido com paixão pela ciência.</p>
+                    <p>&copy; 2025 Ecos do Mar. Desenvolvido com paixão pela ciência.</p>
                 </div>
             </div>
 
@@ -947,7 +1215,6 @@
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
 
-        // Initialize navigation dots
         function initNavDots() {
             const dotsContainer = document.getElementById('navDots');
             for (let i = 0; i < totalSlides; i++) {
@@ -959,7 +1226,6 @@
             }
         }
 
-        // Go to specific slide
         function goToSlide(index) {
             if (index < 0 || index >= totalSlides) return;
             currentSlide = index;
@@ -967,21 +1233,18 @@
             updateNavigation();
         }
 
-        // Next slide
         function nextSlide() {
             if (currentSlide < totalSlides - 1) {
                 goToSlide(currentSlide + 1);
             }
         }
 
-        // Previous slide
         function prevSlide() {
             if (currentSlide > 0) {
                 goToSlide(currentSlide - 1);
             }
         }
 
-        // Update navigation state
         function updateNavigation() {
             document.querySelectorAll('.nav-dot').forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
@@ -990,17 +1253,14 @@
             nextBtn.disabled = currentSlide === totalSlides - 1;
         }
 
-        // Event listeners for arrow buttons
         prevBtn.addEventListener('click', prevSlide);
         nextBtn.addEventListener('click', nextSlide);
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
         });
 
-        // Touch navigation
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -1019,11 +1279,10 @@
             if (touchEndX > touchStartX + swipeThreshold) prevSlide();
         }
 
-        // Modal functions
         function openModal(title, image, text) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalImage').src = image;
-            document.getElementById('modalText').textContent = text;
+            document.getElementById('modalText').textContent = text || '';
             document.getElementById('modal').classList.add('active');
         }
 
@@ -1031,17 +1290,14 @@
             document.getElementById('modal').classList.remove('active');
         }
 
-        // Close modal on background click
         document.getElementById('modal').addEventListener('click', (e) => {
             if (e.target.id === 'modal') closeModal();
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
         });
 
-        // Initialize
         initNavDots();
         updateNavigation();
     </script>
