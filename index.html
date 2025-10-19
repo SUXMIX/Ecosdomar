@@ -281,32 +281,149 @@
             text-justify: inter-word;
         }
 
-        .project-info {
+        /* ===== REPOLHO ROXO SECTION ===== */
+        .repolho-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .repolho-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .repolho-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .repolho-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #000;
+            margin-bottom: 2rem;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .repolho-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #083161;
+            margin: 2.5rem 0 1.5rem;
+            text-align: center;
+        }
+
+        .ph-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .ph-indicator {
+            background: #fff;
+            border: 2px solid #5ea1e5;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .ph-indicator:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(94, 161, 229, 0.3);
+        }
+
+        .ph-indicator.acidic {
+            border-color: #e74c3c;
+        }
+
+        .ph-indicator.neutral {
+            border-color: #9b59b6;
+        }
+
+        .ph-indicator.basic {
+            border-color: #2ecc71;
+        }
+
+        .ph-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .ph-title.acidic {
+            color: #e74c3c;
+        }
+
+        .ph-title.neutral {
+            color: #9b59b6;
+        }
+
+        .ph-title.basic {
+            color: #2ecc71;
+        }
+
+        .ph-description {
+            font-size: 1.1rem;
+            color: #000;
+            margin-bottom: 1.5rem;
+        }
+
+        .ph-color {
+            width: 100%;
+            height: 40px;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+
+        .ph-color.acidic {
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+        }
+
+        .ph-color.neutral {
+            background: linear-gradient(to right, #9b59b6, #bb8fce);
+        }
+
+        .ph-color.basic {
+            background: linear-gradient(to right, #2ecc71, #58d68d);
+        }
+
+        .importance-section {
             background: #fff;
             border: 2px solid #5ea1e5;
             border-radius: 30px;
             padding: 2.5rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
-        .info-item {
-            display: flex;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(94, 161, 229, 0.3);
+        .importance-section h3 {
+            text-align: left;
+            margin-bottom: 1.5rem;
         }
 
-        .info-item:last-child {
-            border-bottom: none;
+        .importance-list {
+            list-style: none;
         }
 
-        .info-item strong {
-            color: #083161;
-            min-width: 120px;
-            font-weight: 600;
-        }
-
-        .info-item span {
+        .importance-list li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
             color: #000;
+            font-size: 1.1rem;
+        }
+
+        .importance-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #5ea1e5;
+            font-weight: 700;
+            font-size: 1.2rem;
         }
 
         /* ===== TEXT SECTIONS ===== */
@@ -873,7 +990,7 @@
 
             <ul class="nav-list" id="nav-list">
                 <li><a href="#sobre">Conheça Nosso Projeto</a></li>
-                <li><a href="#construcao">Construção</a></li>
+                <li><a href="#repolho">Repolho Roxo</a></li>
                 <li><a href="#testes">Testes</a></li>
                 <li><a href="#saneamento">Saneamento</a></li>
                 <li><a href="#galeria">Galeria</a></li>
@@ -907,50 +1024,47 @@
                         <p>Ao longo do projeto, aprendemos sobre química ambiental, saneamento básico e os impactos da poluição nos ecossistemas. Também desenvolvemos habilidades como organização em grupo, análise de dados, comunicação científica e consciência sobre os problemas ambientais que afetam nossa região.</p>
                         
                         <p>Com materiais simples e uma abordagem prática, mostramos que é possível fazer ciência de forma acessível, relevante e conectada à realidade das comunidades.</p>
-                        
-                        <div class="project-info">
-                            <div class="info-item">
-                                <strong>Tema:</strong> <span>Fenômenos Naturais e suas Aplicações</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Período:</strong> <span>3 meses de pesquisa e desenvolvimento</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Equipe:</strong> <span>Grupo de pesquisa em ciências</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Restante do código permanece igual -->
-        <section id="construcao" class="section">
+        <!-- Nova seção: O Repolho Roxo como Indicador Natural -->
+        <section id="repolho" class="section">
             <div class="container">
-                <h2 class="section-title">Como Construímos</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker">1</div>
-                        <div class="timeline-content">
-                            <h3>Planejamento</h3>
-                            <p>Definição dos objetivos, pesquisa bibliográfica e seleção de materiais necessários para o experimento.</p>
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d6ded32c-ebc1-4674-842f-90b47494db5f.png" alt="Planejamento" class="timeline-img">
+                <h2 class="section-title">O Repolho Roxo como Indicador Natural</h2>
+                <div class="repolho-section">
+                    <div class="repolho-content">
+                        <p>O <strong>repolho roxo</strong> é muito mais do que um simples vegetal: ele contém uma substância especial chamada <strong>antocianina</strong>, que funciona como um "detetive químico" natural. Essa substância muda de cor dependendo do nível de acidez ou alcalinidade (pH) do meio em que se encontra.</p>
+                        
+                        <div class="ph-indicators">
+                            <div class="ph-indicator acidic">
+                                <h3 class="ph-title acidic">Meio Ácido</h3>
+                                <p class="ph-description">pH menor que 7: o extrato fica vermelho ou rosa</p>
+                                <div class="ph-color acidic"></div>
+                            </div>
+                            <div class="ph-indicator neutral">
+                                <h3 class="ph-title neutral">Meio Neutro</h3>
+                                <p class="ph-description">pH próximo de 7: o extrato mantém cor roxa ou violeta</p>
+                                <div class="ph-color neutral"></div>
+                            </div>
+                            <div class="ph-indicator basic">
+                                <h3 class="ph-title basic">Meio Básico</h3>
+                                <p class="ph-description">pH maior que 7: o extrato fica verde ou amarelo</p>
+                                <div class="ph-color basic"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker">2</div>
-                        <div class="timeline-content">
-                            <h3>Coleta de Materiais</h3>
-                            <p>Seleção cuidadosa de todos os componentes e ferramentas necessárias para a construção do experimento.</p>
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fb880cf6-a559-451b-bafb-be07e9bc61b0.png" alt="Materiais" class="timeline-img">
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker">3</div>
-                        <div class="timeline-content">
-                            <h3>Montagem</h3>
-                            <p>Processo de construção passo a passo, com atenção aos detalhes técnicos e segurança.</p>
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1b4561b6-a7e1-498f-9a0f-0b588b7c8d40.png" alt="Montagem" class="timeline-img">
+                        
+                        <div class="importance-section">
+                            <h3>Por que isso é importante?</h3>
+                            <ul class="importance-list">
+                                <li><strong>Acessível e sustentável:</strong> Utiliza um vegetal comum e barato, tornando a ciência acessível a todos</li>
+                                <li><strong>Educação ambiental:</strong> Permite que qualquer pessoa compreenda o conceito de pH de forma visual e prática</li>
+                                <li><strong>Detecção de contaminação:</strong> Mudanças no pH da água podem indicar poluição industrial, esgotos ou outros contaminantes</li>
+                                <li><strong>Ciência cidadã:</strong> Qualquer comunidade pode monitorar a qualidade da água usando esse método simples e natural</li>
+                            </ul>
+                            
+                            <p style="margin-top: 2rem;">No projeto <strong>Ecos do Mar</strong>, utilizamos o extrato de repolho roxo em nossa bola flutuante para monitorar continuamente a qualidade da água. Quando há mudanças significativas no pH — que podem indicar contaminação por poluentes, vazamentos industriais ou despejo de esgoto — a cor do extrato se altera, funcionando como um alerta visual imediato e compreensível para todos.</p>
                         </div>
                     </div>
                 </div>
@@ -986,17 +1100,6 @@
                 <div class="text-section">
                     <div class="text-section-content">
                         <p>O saneamento básico é um elemento essencial para a promoção da saúde pública e para a melhoria da qualidade de vida da população. Com o intuito de compreender a situação atual e a percepção das pessoas em relação a esse tema, foi aplicado um questionário por meio do Google Forms, respondido por um grupo de participantes. As questões contemplaram aspectos como acesso à água, coleta de resíduos sólidos, esgotamento sanitário e drenagem urbana.</p>
-                        <div class="project-info">
-                            <div class="info-item">
-                                <strong>Tema:</strong> <span>Pesquisa sobre saneamento básico</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Período:</strong> <span>Duração de 1 semana</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Equipe:</strong> <span>Grupo de pesquisa Ecos do Mar</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1296,7 +1399,7 @@
 
         // Observe all animated elements
         const animatedElements = document.querySelectorAll(
-            '.text-content, .image-content, .timeline-item, .test-card, .result-card, .gallery-item, .video-card, .author-card, .text-section-content'
+            '.text-content, .repolho-content, .timeline-item, .test-card, .result-card, .gallery-item, .video-card, .author-card, .text-section-content'
         );
 
         animatedElements.forEach(el => observer.observe(el));
