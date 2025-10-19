@@ -45,6 +45,7 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(94, 161, 229, 0.3);
             transition: all 0.3s ease;
+            padding: 10px 0;
         }
 
         .navbar.scrolled {
@@ -56,14 +57,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 0 40px;
         }
 
         .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #5ea1e5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.05);
         }
 
         .nav-list {
@@ -159,7 +169,7 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(3rem, 8vw, 7rem);
             font-weight: 900;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: #edeff1;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             line-height: 1.1;
@@ -169,8 +179,17 @@
             font-size: clamp(1.2rem, 3vw, 2rem);
             color: #edeff1;
             font-weight: 300;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle-small {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: #edeff1;
+            font-weight: 300;
             margin-bottom: 3rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            opacity: 0.9;
         }
 
         .hero-cta {
@@ -232,7 +251,7 @@
 
         .content-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 4rem;
             align-items: center;
         }
@@ -283,29 +302,6 @@
 
         .info-item span {
             color: #000;
-        }
-
-        .image-content {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
-        }
-
-        .image-content.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .responsive-img {
-            width: 100%;
-            border-radius: 30px;
-            box-shadow: 0 30px 80px rgba(8, 49, 97, 0.3);
-            transition: transform 0.5s ease;
-            border: 3px solid #5ea1e5;
-        }
-
-        .responsive-img:hover {
-            transform: scale(1.05) rotate(2deg);
         }
 
         /* ===== TEXT SECTIONS ===== */
@@ -793,6 +789,10 @@
                 padding: 0 20px;
             }
 
+            .navbar .container {
+                padding: 0 20px;
+            }
+
             /* Mantém o texto justificado no celular */
             .text-content p, .text-section-content p {
                 text-align: justify;
@@ -821,6 +821,10 @@
                 padding: 0 15px;
             }
 
+            .navbar .container {
+                padding: 0 15px;
+            }
+
             /* Ajusta o tamanho da fonte para melhor legibilidade no celular */
             .text-content p, .text-section-content p {
                 font-size: 1.1rem;
@@ -842,13 +846,19 @@
             .container {
                 padding: 0 10px;
             }
+
+            .navbar .container {
+                padding: 0 10px;
+            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Ecos do Mar</div>
+            <div class="logo">
+                <img src="https://i.ibb.co/nMtK3KDK/1.png" alt="Ecos do Mar" class="logo-img">
+            </div>
             
             <button class="menu-toggle" aria-controls="nav-list" aria-expanded="false">
                 <span class="hamburger-line"></span>
@@ -857,7 +867,7 @@
             </button>
 
             <ul class="nav-list" id="nav-list">
-                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#sobre">Conheça Nosso Projeto</a></li>
                 <li><a href="#construcao">Construção</a></li>
                 <li><a href="#testes">Testes</a></li>
                 <li><a href="#saneamento">Saneamento</a></li>
@@ -873,7 +883,8 @@
         <div class="particles" id="particles"></div>
         <div class="hero-content">
             <h1 class="hero-title">Ecos do Mar</h1>
-            <p class="hero-subtitle">Descubra nosso projeto para a SNCeT Irecê 2025!</p>
+            <p class="hero-subtitle">SNCT 2025</p>
+            <p class="hero-subtitle-small">XV SEMANA NACIONAL DE CIÊNCIA E TECNOLOGIA DO TERRITÓRIO DE IRECÊ</p>
             <a href="#sobre" class="hero-cta">Explorar Projeto</a>
         </div>
     </header>
@@ -881,10 +892,17 @@
     <main>
         <section id="sobre" class="section">
             <div class="container">
-                <h2 class="section-title">Sobre o Projeto</h2>
+                <h2 class="section-title">Conheça Nosso Projeto</h2>
                 <div class="content-grid">
                     <div class="text-content">
-                        <p>Este projeto explora conceitos fundamentais de ciência através de experimentos práticos e observações cuidadosas. Nosso objetivo é entender melhor os fenômenos naturais e suas aplicações no mundo real.</p>
+                        <p>O Ecos do Mar é um projeto escolar desenvolvido por estudantes do Ensino Médio com o objetivo de investigar a qualidade da água em áreas costeiras e estuarinas. Inspirados na reportagem Colores del Río, de Melissa Ortiz — que apresenta o uso do repolho roxo como ferramenta biológica para detectar contaminação — adaptamos essa ideia à nossa realidade local.</p>
+                        
+                        <p>Utilizamos o repolho roxo como reagente natural, que muda de cor conforme o pH da água, permitindo identificar possíveis sinais de poluição. Nosso foco foi o sabão em pó, um contaminante comum no descarte doméstico e presente em ambientes urbanos.</p>
+                        
+                        <p>Ao longo do projeto, aprendemos sobre química ambiental, saneamento básico e os impactos da poluição nos ecossistemas. Também desenvolvemos habilidades como organização em grupo, análise de dados, comunicação científica e consciência sobre os problemas ambientais que afetam nossa região.</p>
+                        
+                        <p>Com materiais simples e uma abordagem prática, mostramos que é possível fazer ciência de forma acessível, relevante e conectada à realidade das comunidades.</p>
+                        
                         <div class="project-info">
                             <div class="info-item">
                                 <strong>Tema:</strong> <span>Fenômenos Naturais e suas Aplicações</span>
@@ -896,9 +914,6 @@
                                 <strong>Equipe:</strong> <span>Grupo de pesquisa em ciências</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="image-content">
-                        <img src="https://i.postimg.cc/WzXkHNPg/Design-sem-nome-2.png" alt="Projeto de ciências" class="responsive-img">
                     </div>
                 </div>
             </div>
