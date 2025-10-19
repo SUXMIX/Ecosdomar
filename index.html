@@ -915,10 +915,19 @@
                 padding: 0 20px;
             }
 
-            /* Mantém o texto justificado no celular */
-            .text-content p, .text-section-content p {
+            /* Melhorias para dispositivos móveis - Margens internas */
+            .text-content p, .text-section-content p, .repolho-content p {
                 text-align: justify;
                 text-justify: inter-word;
+                padding: 0 10px;
+            }
+
+            .section-title {
+                padding: 0 15px;
+            }
+
+            .timeline-content, .test-card, .result-card, .importance-section {
+                margin: 0 10px;
             }
         }
 
@@ -940,37 +949,91 @@
             }
 
             .container {
-                padding: 0 15px;
+                padding: 0 20px; /* Aumentado para 20px */
             }
 
             .navbar .container {
-                padding: 0 15px;
+                padding: 0 20px; /* Aumentado para 20px */
             }
 
             /* Ajusta o tamanho da fonte para melhor legibilidade no celular */
-            .text-content p, .text-section-content p {
+            .text-content p, .text-section-content p, .repolho-content p {
                 font-size: 1.1rem;
                 line-height: 1.8;
                 text-align: justify;
                 text-justify: inter-word;
+                padding: 0 10px;
+            }
+
+            /* Melhorias adicionais para telas menores */
+            .section-title {
+                padding: 0 15px;
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+
+            .timeline-content, .test-card, .result-card, .importance-section, .ph-indicator {
+                margin: 0 10px;
+                padding: 1.5rem;
+            }
+
+            .gallery-grid, .video-grid, .test-grid, .results-content, .authors-grid {
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .gallery-item, .video-card {
+                margin: 0 5px;
             }
         }
 
         /* Melhoria adicional para telas muito pequenas */
         @media (max-width: 480px) {
-            .text-content p, .text-section-content p {
+            .text-content p, .text-section-content p, .repolho-content p {
                 font-size: 1.05rem;
                 line-height: 1.7;
                 text-align: justify;
                 text-justify: inter-word;
+                padding: 0 15px; /* Aumentado para 15px */
             }
             
             .container {
-                padding: 0 10px;
+                padding: 0 15px; /* Aumentado para 15px */
             }
 
             .navbar .container {
-                padding: 0 10px;
+                padding: 0 15px; /* Aumentado para 15px */
+            }
+
+            .section-title {
+                padding: 0 20px;
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+            }
+
+            .timeline-content, .test-card, .result-card, .importance-section, .ph-indicator {
+                margin: 0 5px;
+                padding: 1.2rem;
+            }
+
+            .gallery-grid, .video-grid, .test-grid, .results-content, .authors-grid {
+                gap: 1rem;
+            }
+        }
+
+        /* Melhorias específicas para a seção do repolho roxo em dispositivos móveis */
+        @media (max-width: 768px) {
+            .ph-indicators {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin: 2rem 10px;
+            }
+
+            .ph-indicator {
+                margin: 0 5px;
+            }
+
+            .importance-section {
+                margin: 2rem 10px;
+                padding: 1.5rem;
             }
         }
     </style>
