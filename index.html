@@ -254,6 +254,7 @@
             color: #000;
             margin-bottom: 2rem;
             text-align: justify;
+            text-justify: inter-word;
         }
 
         .project-info {
@@ -318,6 +319,7 @@
             transform: translateY(30px);
             transition: all 0.8s ease;
             text-align: justify;
+            text-justify: inter-word;
         }
 
         .text-section-content.visible {
@@ -331,6 +333,7 @@
             color: #000;
             margin-bottom: 2rem;
             text-align: justify;
+            text-justify: inter-word;
         }
 
         /* ===== TIMELINE ===== */
@@ -790,8 +793,10 @@
                 padding: 0 20px;
             }
 
+            /* Mantém o texto justificado no celular */
             .text-content p, .text-section-content p {
-                text-align: left;
+                text-align: justify;
+                text-justify: inter-word;
             }
         }
 
@@ -810,6 +815,32 @@
 
             .institution-logo {
                 max-width: 250px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            /* Ajusta o tamanho da fonte para melhor legibilidade no celular */
+            .text-content p, .text-section-content p {
+                font-size: 1.1rem;
+                line-height: 1.8;
+                text-align: justify;
+                text-justify: inter-word;
+            }
+        }
+
+        /* Melhoria adicional para telas muito pequenas */
+        @media (max-width: 480px) {
+            .text-content p, .text-section-content p {
+                font-size: 1.05rem;
+                line-height: 1.7;
+                text-align: justify;
+                text-justify: inter-word;
+            }
+            
+            .container {
+                padding: 0 10px;
             }
         }
     </style>
