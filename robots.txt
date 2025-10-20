@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://sncetecosdomar.com.br/sitemap.xml
