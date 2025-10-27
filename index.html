@@ -847,6 +847,116 @@
             font-weight: 500;
         }
 
+        /* ===== ECOH2O PROMOTION CARD ===== */
+        .ecoh2o-card {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            padding: 25px;
+            border: 3px solid #5ea1e5;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .ecoh2o-card.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .ecoh2o-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .ecoh2o-card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #083161;
+            margin: 0;
+        }
+
+        .ecoh2o-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #083161;
+            transition: color 0.3s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .ecoh2o-close:hover {
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .ecoh2o-card-body {
+            margin-bottom: 20px;
+        }
+
+        .ecoh2o-card-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .ecoh2o-card-features {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .ecoh2o-card-features li {
+            padding: 5px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.9rem;
+            color: #000;
+        }
+
+        .ecoh2o-card-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #5ea1e5;
+            font-weight: 700;
+        }
+
+        .ecoh2o-card-link {
+            display: block;
+            text-align: center;
+            padding: 12px 20px;
+            background: #5ea1e5;
+            color: #083161;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .ecoh2o-card-link:hover {
+            background: #083161;
+            color: #edeff1;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(8, 49, 97, 0.3);
+        }
+
         /* ===== ANIMATIONS ===== */
         @keyframes float {
             0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
@@ -925,6 +1035,13 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            /* EcoH2O Card Responsivo */
+            .ecoh2o-card {
+                width: 300px;
+                right: 10px;
+                bottom: 10px;
+            }
         }
 
         @media (max-width: 640px) {
@@ -983,6 +1100,14 @@
 
             .referencias-section {
                 padding: 1.5rem;
+            }
+
+            /* EcoH2O Card Responsivo */
+            .ecoh2o-card {
+                width: calc(100% - 20px);
+                right: 10px;
+                bottom: 10px;
+                left: 10px;
             }
         }
 
@@ -1043,6 +1168,24 @@
     </style>
 </head>
 <body>
+    <!-- Card de divulgação do EcoH2O -->
+    <div id="ecoh2o-card" class="ecoh2o-card">
+        <div class="ecoh2o-card-header">
+            <h3 class="ecoh2o-card-title">Conheça o EcoH₂O</h3>
+            <button class="ecoh2o-close" id="ecoh2o-close">&times;</button>
+        </div>
+        <div class="ecoh2o-card-body">
+            <p class="ecoh2o-card-description">Um kit doméstico sustentável para monitoramento da qualidade da água usando reagentes naturais.</p>
+            <ul class="ecoh2o-card-features">
+                <li>Teste de pH com repolho roxo</li>
+                <li>Detecção de cloro residual</li>
+                <li>Monitoramento de matéria orgânica</li>
+                <li>Materiais acessíveis e sustentáveis</li>
+            </ul>
+        </div>
+        <a href="https://sncetecosdomar.com.br/ecoh2o" class="ecoh2o-card-link" target="_blank">Saiba Mais</a>
+    </div>
+
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -1576,6 +1719,55 @@
                 chartLegend.appendChild(legendItem);
             });
         }
+
+        // EcoH2O Card Functionality
+        const ecoh2oCard = document.getElementById('ecoh2o-card');
+        const ecoh2oClose = document.getElementById('ecoh2o-close');
+        let ecoh2oTimer = null;
+        let ecoh2oInterval = null;
+
+        // Função para mostrar o card
+        function showEcoh2oCard() {
+            ecoh2oCard.classList.add('show');
+        }
+
+        // Função para esconder o card
+        function hideEcoh2oCard() {
+            ecoh2oCard.classList.remove('show');
+            
+            // Limpar timer anterior
+            if (ecoh2oTimer) {
+                clearTimeout(ecoh2oTimer);
+            }
+            
+            // Configurar para reaparecer após 10 minutos (600000 ms)
+            ecoh2oTimer = setTimeout(showEcoh2oCard, 600000); // 10 minutos
+        }
+
+        // Event listener para fechar o card
+        ecoh2oClose.addEventListener('click', hideEcoh2oCard);
+
+        // Configurar para mostrar o card após 10 segundos (10000 ms)
+        ecoh2oInterval = setTimeout(showEcoh2oCard, 10000);
+
+        // Verificar se o usuário já fechou o card anteriormente (usando localStorage)
+        window.addEventListener('DOMContentLoaded', function() {
+            const lastClosed = localStorage.getItem('ecoh2oCardLastClosed');
+            const now = Date.now();
+            
+            // Se o usuário fechou o card há menos de 10 minutos, não mostrar
+            if (lastClosed && (now - lastClosed) < 600000) {
+                clearTimeout(ecoh2oInterval);
+                // Configurar para mostrar após o tempo restante
+                const timeRemaining = 600000 - (now - lastClosed);
+                ecoh2oInterval = setTimeout(showEcoh2oCard, timeRemaining);
+            }
+        });
+
+        // Atualizar localStorage quando o card for fechado
+        ecoh2oClose.addEventListener('click', function() {
+            localStorage.setItem('ecoh2oCardLastClosed', Date.now().toString());
+        });
     </script>
 </body>
 </html>
