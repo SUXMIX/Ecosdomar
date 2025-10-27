@@ -513,98 +513,6 @@
             text-justify: inter-word;
         }
 
-        /* ===== TIMELINE ===== */
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: #5ea1e5;
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 5rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-right: 55%;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 55%;
-        }
-
-        .timeline-marker {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 50px;
-            height: 50px;
-            background: #5ea1e5;
-            border: 4px solid #083161;
-            border-radius: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: #083161;
-            box-shadow: 0 10px 30px rgba(94, 161, 229, 0.5);
-            z-index: 2;
-        }
-
-        .timeline-content {
-            background: #fff;
-            border: 2px solid #5ea1e5;
-            border-radius: 30px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(94, 161, 229, 0.3);
-        }
-
-        .timeline-content h3 {
-            color: #083161;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .timeline-content p {
-            color: #000;
-        }
-
-        .timeline-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 20px;
-            margin-top: 1.5rem;
-            border: 2px solid #5ea1e5;
-        }
-
         /* ===== CARDS ===== */
         .test-grid, .results-content {
             display: grid;
@@ -621,6 +529,9 @@
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .test-card.visible, .result-card.visible {
@@ -674,129 +585,82 @@
             font-size: 1.2rem;
         }
 
-        /* ===== GALLERY ===== */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        /* ===== GRÁFICOS ===== */
+        .chart-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
         }
 
-        .gallery-item {
-            position: relative;
+        .chart-content {
+            background: #fff;
             border-radius: 30px;
-            overflow: hidden;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .chart-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
             cursor: pointer;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: all 0.5s ease;
-            border: 3px solid #5ea1e5;
+            color: #083161;
+            transition: color 0.3s ease;
         }
 
-        .gallery-item.visible {
-            opacity: 1;
-            transform: scale(1);
+        .chart-close:hover {
+            color: #e74c3c;
         }
 
-        .gallery-img {
+        .chart-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: #083161;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .chart-wrapper {
             width: 100%;
             height: 300px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover .gallery-img {
-            transform: scale(1.15);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(8, 49, 97, 0.95));
-            padding: 3rem 1.5rem 1.5rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-            color: #edeff1;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        /* ===== VIDEO CARDS ===== */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .video-card {
-            background: #fff;
-            border: 2px solid #5ea1e5;
-            border-radius: 30px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .video-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .video-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(94, 161, 229, 0.3);
-        }
-
-        .video-placeholder {
-            height: 220px;
-            background: linear-gradient(135deg, #083161, #5ea1e5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             position: relative;
-            cursor: pointer;
         }
 
-        .play-button {
-            width: 70px;
-            height: 70px;
-            background: rgba(237, 239, 241, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .legend-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: #edeff1;
-            transition: all 0.3s ease;
-            margin-bottom: 1rem;
+            gap: 0.5rem;
         }
 
-        .video-placeholder:hover .play-button {
-            background: rgba(237, 239, 241, 0.5);
-            transform: scale(1.15);
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
         }
 
-        .video-placeholder p {
-            color: #edeff1;
-        }
-
-        .video-card h3 {
-            padding: 1.5rem;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #083161;
-        }
-
-        .video-card p {
-            padding: 0 1.5rem 1.5rem;
+        .legend-text {
+            font-size: 0.9rem;
             color: #000;
         }
 
@@ -918,20 +782,6 @@
             .content-grid {
                 grid-template-columns: 1fr;
                 gap: 3rem;
-            }
-
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-marker {
-                left: 20px;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                margin-left: 70px;
-                margin-right: 0;
             }
 
             .nav-list {
@@ -1114,9 +964,6 @@
                 <li><a href="#sobre">Conheça o Projeto</a></li>
                 <li><a href="#repolho">Repolho Roxo</a></li>
                 <li><a href="#saneamento">Saneamento</a></li>
-                <li><a href="#galeria">Galeria</a></li>
-                <li><a href="#videos">Vídeos</a></li>
-                <li><a href="#resultados2">Resultados</a></li>
                 <li><a href="#autores">Autores</a></li>
             </ul>
         </div>
@@ -1207,27 +1054,27 @@
             <div class="container">
                 <h2 class="section-title">Resultados da Pesquisa</h2>
                 <div class="test-grid">
-                    <div class="test-card">
+                    <div class="test-card" data-chart="agua-potavel">
                         <h3>Acesso à água potável:</h3>
                         <p>A maioria dos participantes (95,2%) declarou possuir acesso à água potável em suas residências.</p>
                     </div>
-                    <div class="test-card">
+                    <div class="test-card" data-chart="tratamento-agua">
                         <h3>Tratamento da água:</h3>
                         <p>42,9% afirmaram receber água tratada, mas não confiam plenamente na sua qualidade; 52,4% informaram que recebem água tratada e confiam no serviço; enquanto 4,7% relataram não receber água tratada.</p>
                     </div>
-                    <div class="test-card">
+                    <div class="test-card" data-chart="esgotamento-sanitario">
                         <h3>Esgotamento sanitário:</h3>
                         <p>90% dos respondentes disseram que suas residências são atendidas pela rede de esgoto, enquanto 10% afirmaram não ter acesso a esse serviço.</p>
                     </div>
-                    <div class="test-card">
+                    <div class="test-card" data-chart="coleta-lixo">
                         <h3>Coleta de lixo:</h3>
                         <p>95,2% relataram que a coleta de resíduos ocorre regularmente, em dias específicos da semana.</p>
                     </div>
-                    <div class="test-card">
+                    <div class="test-card" data-chart="drenagem-urbana">
                         <h3>Drenagem urbana:</h3>
                         <p>66,7% afirmaram residir em áreas sem infraestrutura adequada para o escoamento de águas pluviais. Além disso, 28,6% declararam enfrentar problemas com alagamentos em períodos de chuva.</p>
                     </div>
-                    <div class="test-card">
+                    <div class="test-card" data-chart="informacao-saneamento">
                         <h3>Informação sobre saneamento:</h3>
                         <p>Apenas 23,8% dos participantes disseram receber informações sobre saneamento básico.</p>
                     </div>
@@ -1270,106 +1117,6 @@
                 <div class="text-section">
                     <div class="text-section-content">
                         <p>Espera-se que a boia proporcione detecção preliminar de contaminação, sirva como ferramenta educativa e promova práticas sustentáveis e a consciência ambiental em comunidades costeiras e escolas.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="galeria" class="section">
-            <div class="container">
-                <h2 class="section-title">Galeria de Imagens</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f599c6a3-d95a-4e39-b107-be80992da923.png" alt="Montagem inicial do projeto Ecos do Mar - Construção do experimento" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <p>Montagem inicial</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/352f817b-7e4a-44bf-b56a-e9fd1c812266.png" alt="Detalhes técnicos do projeto Ecos do Mar - Estrutura do experimento" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <p>Detalhes técnicos</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78917c4f-e2fc-4470-8fdf-127df00ea87c.png" alt="Testes em ação do projeto Ecos do Mar - Monitoramento da água" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <p>Testes em ação</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4aea5c04-c4b7-47c8-9f69-05df7ac6ea9f.png" alt="Resultados visuais do projeto Ecos do Mar - Mudança de cor do repolho roxo" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <p>Resultados visuais</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f5625b48-40d0-4a5a-934b-5d4dc8b203f8.png" alt="Equipe de trabalho do projeto Ecos do Mar - Estudantes participantes" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <p>Equipe de trabalho</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bd863663-078e-478b-8875-547a054a44de.png" alt="Apresentação final do projeto Ecos do Mar - SNCT Irecê 2025" class="gallery-img">
-                        <div class="gallery-overlay">
-                            <p>Apresentação final</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="videos" class="section">
-            <div class="container">
-                <h2 class="section-title">Vídeos do Projeto</h2>
-                <div class="video-grid">
-                    <div class="video-card">
-                        <div class="video-placeholder">
-                            <div class="play-button">▶</div>
-                            <p>Construção do Experimento</p>
-                        </div>
-                        <h3>Processo de Montagem</h3>
-                        <p>Vídeo completo mostrando cada etapa da construção do experimento.</p>
-                    </div>
-                    <div class="video-card">
-                        <div class="video-placeholder">
-                            <div class="play-button">▶</div>
-                            <p>Testes e Resultados</p>
-                        </div>
-                        <h3>Execução dos Testes</h3>
-                        <p>Registro em vídeo de todos os testes realizados e seus resultados.</p>
-                    </div>
-                    <div class="video-card">
-                        <div class="video-placeholder">
-                            <div class="play-button">▶</div>
-                            <p>Análise Final</p>
-                        </div>
-                        <h3>Conclusões do Projeto</h3>
-                        <p>Análise detalhada dos resultados obtidos e suas implicações científicas.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="resultados2" class="section">
-            <div class="container">
-                <h2 class="section-title">Resultados e Conclusões</h2>
-                <div class="results-content">
-                    <div class="result-card">
-                        <h3>Descobertas Principais</h3>
-                        <ul>
-                            <li>Validação da hipótese inicial sobre o fenômeno estudado</li>
-                            <li>Identificação de variáveis críticas no processo</li>
-                            <li>Correlação entre teoria e prática observada</li>
-                        </ul>
-                    </div>
-                    <div class="result-card">
-                        <h3>Impacto do Projeto</h3>
-                        <p>Este projeto demonstrou a importância da metodologia científica na resolução de problemas reais, fornecendo insights valiosos para futuras pesquisas.</p>
-                    </div>
-                    <div class="result-card">
-                        <h3>Próximos Passos</h3>
-                        <p>Baseado nos resultados obtidos, identificamos oportunidades para expandir a pesquisa e explorar novas aplicações dos conceitos estudados.</p>
                     </div>
                 </div>
             </div>
@@ -1438,6 +1185,18 @@
         </section>
     </main>
 
+    <!-- Container para os gráficos -->
+    <div id="chart-modal" class="chart-container">
+        <div class="chart-content">
+            <button class="chart-close">&times;</button>
+            <h3 class="chart-title" id="chart-title">Gráfico de Resultados</h3>
+            <div class="chart-wrapper">
+                <canvas id="results-chart"></canvas>
+            </div>
+            <div class="chart-legend" id="chart-legend"></div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -1450,6 +1209,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Menu Mobile
         const menuToggle = document.querySelector('.menu-toggle');
@@ -1530,6 +1290,179 @@
                 }
             });
         });
+
+        // Gráficos interativos
+        const chartModal = document.getElementById('chart-modal');
+        const chartClose = document.querySelector('.chart-close');
+        const chartCanvas = document.getElementById('results-chart');
+        const chartTitle = document.getElementById('chart-title');
+        const chartLegend = document.getElementById('chart-legend');
+        let resultsChart = null;
+
+        // Dados dos gráficos
+        const chartData = {
+            'agua-potavel': {
+                title: 'Acesso à Água Potável',
+                data: {
+                    labels: ['Possui acesso (95,2%)', 'Não possui acesso (4,8%)'],
+                    datasets: [{
+                        data: [95.2, 4.8],
+                        backgroundColor: ['#2ecc71', '#e74c3c'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                }
+            },
+            'tratamento-agua': {
+                title: 'Tratamento da Água',
+                data: {
+                    labels: ['Água tratada com confiança (52,4%)', 'Água tratada sem confiança (42,9%)', 'Não recebe água tratada (4,7%)'],
+                    datasets: [{
+                        data: [52.4, 42.9, 4.7],
+                        backgroundColor: ['#2ecc71', '#f39c12', '#e74c3c'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                }
+            },
+            'esgotamento-sanitario': {
+                title: 'Esgotamento Sanitário',
+                data: {
+                    labels: ['Atendido pela rede (90%)', 'Não atendido (10%)'],
+                    datasets: [{
+                        data: [90, 10],
+                        backgroundColor: ['#2ecc71', '#e74c3c'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                }
+            },
+            'coleta-lixo': {
+                title: 'Coleta de Lixo',
+                data: {
+                    labels: ['Coleta regular (95,2%)', 'Coleta irregular (4,8%)'],
+                    datasets: [{
+                        data: [95.2, 4.8],
+                        backgroundColor: ['#2ecc71', '#e74c3c'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                }
+            },
+            'drenagem-urbana': {
+                title: 'Drenagem Urbana',
+                data: {
+                    labels: ['Sem infraestrutura adequada (66,7%)', 'Com infraestrutura adequada (33,3%)', 'Com problemas de alagamento (28,6%)'],
+                    datasets: [{
+                        data: [66.7, 33.3, 28.6],
+                        backgroundColor: ['#e74c3c', '#2ecc71', '#f39c12'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                }
+            },
+            'informacao-saneamento': {
+                title: 'Informação sobre Saneamento',
+                data: {
+                    labels: ['Recebe informações (23,8%)', 'Não recebe informações (76,2%)'],
+                    datasets: [{
+                        data: [23.8, 76.2],
+                        backgroundColor: ['#2ecc71', '#e74c3c'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                }
+            }
+        };
+
+        // Event listeners para os cards
+        document.querySelectorAll('.test-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const chartId = this.getAttribute('data-chart');
+                showChart(chartId);
+            });
+        });
+
+        // Fechar gráfico
+        chartClose.addEventListener('click', closeChart);
+        chartModal.addEventListener('click', function(e) {
+            if (e.target === chartModal) {
+                closeChart();
+            }
+        });
+
+        // Função para mostrar gráfico
+        function showChart(chartId) {
+            const data = chartData[chartId];
+            if (!data) return;
+
+            chartTitle.textContent = data.title;
+            chartModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // Destruir gráfico anterior se existir
+            if (resultsChart) {
+                resultsChart.destroy();
+            }
+
+            // Criar novo gráfico
+            resultsChart = new Chart(chartCanvas, {
+                type: 'pie',
+                data: data.data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    return `${label}: ${value}%`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+
+            // Atualizar legenda
+            updateLegend(data.data.labels, data.data.datasets[0].backgroundColor);
+        }
+
+        // Função para fechar gráfico
+        function closeChart() {
+            chartModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Função para atualizar legenda
+        function updateLegend(labels, colors) {
+            chartLegend.innerHTML = '';
+            labels.forEach((label, index) => {
+                const legendItem = document.createElement('div');
+                legendItem.className = 'legend-item';
+                
+                const colorBox = document.createElement('div');
+                colorBox.className = 'legend-color';
+                colorBox.style.backgroundColor = colors[index];
+                
+                const text = document.createElement('span');
+                text.className = 'legend-text';
+                text.textContent = label;
+                
+                legendItem.appendChild(colorBox);
+                legendItem.appendChild(text);
+                chartLegend.appendChild(legendItem);
+            });
+        }
     </script>
 </body>
 </html>
