@@ -1,0 +1,10 @@
+# Ativa o motor de reescrita de URLs do Apache
+RewriteEngine On
+
+# Evita que a regra seja aplicada a arquivos ou diretórios que já existem
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Regra principal: Pega a URL amigável e a reescreve internamente para o arquivo .html correspondente
+# Ex: Transforma "desenvolvimento-de-software" em "desenvolvimento-de-software.html"
+RewriteRule ^([^/]+)$ $1.html [L]
