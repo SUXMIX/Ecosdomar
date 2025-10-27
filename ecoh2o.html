@@ -203,6 +203,8 @@
             font-size: 1.3rem;
             max-width: 800px;
             margin: 0 auto 2rem;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         /* ===== SECTIONS ===== */
@@ -232,6 +234,7 @@
             color: #083161;
             margin-bottom: 1.5rem;
             font-weight: 700;
+            text-align: justify;
         }
 
         .content-card p {
@@ -251,6 +254,7 @@
             margin-bottom: 0.8rem;
             font-size: 1.1rem;
             text-align: justify;
+            text-justify: inter-word;
         }
 
         /* ===== KIT SECTION ===== */
@@ -273,10 +277,12 @@
             color: #083161;
             margin-bottom: 1rem;
             font-weight: 600;
+            text-align: center;
         }
 
         .kit-item p {
-            text-align: center;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         /* ===== INTERVIEW SECTION ===== */
@@ -297,6 +303,11 @@
             backdrop-filter: blur(10px);
         }
 
+        .interview-card p {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
         .interview-image {
             width: 100%;
             max-width: 600px;
@@ -313,6 +324,7 @@
             padding-left: 1.5rem;
             margin: 2rem 0;
             text-align: justify;
+            text-justify: inter-word;
         }
 
         .image-caption {
@@ -383,13 +395,18 @@
 
         .gallery-caption {
             padding: 1.5rem;
-            text-align: center;
         }
 
         .gallery-caption h4 {
             color: #083161;
             margin-bottom: 0.5rem;
             font-weight: 600;
+            text-align: justify;
+        }
+
+        .gallery-caption p {
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         /* ===== FOOTER ===== */
@@ -418,6 +435,7 @@
             color: #edeff1;
             font-size: 1rem;
             font-weight: 500;
+            text-align: center;
         }
 
         .institution-logo {
@@ -494,6 +512,11 @@
             .header {
                 padding: 120px 0 80px;
             }
+
+            .header p {
+                text-align: justify;
+                padding: 0 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -519,6 +542,19 @@
 
             .header p {
                 font-size: 1.1rem;
+                text-align: justify;
+                padding: 0 10px;
+            }
+
+            .kit-item p {
+                text-align: justify;
+                padding: 0 5px;
+            }
+
+            .gallery-caption h4,
+            .gallery-caption p {
+                text-align: justify;
+                padding: 0 5px;
             }
         }
     </style>
@@ -550,7 +586,7 @@
     <header class="header">
         <div class="container">
             <h1>Projeto EcoH₂O</h1>
-            <p>Monitoramento Popular da Água - Uma iniciativa de ciência cidadã para garantir água de qualidade para todos</p>
+            <p>Monitoramento Popular da Água - Uma iniciativa de ciência cidadã para garantir água de qualidade para todos. Desenvolvido por estudantes do IFBA Campus Irecê, o projeto utiliza reagentes naturais como repolho roxo para monitorar parâmetros como pH, cloro residual e matéria orgânica na água consumida pela população.</p>
             <a href="/" class="back-button">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -622,32 +658,32 @@
                     <div class="kit-grid">
                         <div class="kit-item">
                             <h4>Frasco de Coleta</h4>
-                            <p>Frasco de 250mL transparente para observar mudanças de cor ou turbidez</p>
+                            <p>Frasco de 250mL transparente para observar mudanças de cor ou turbidez na água coletada para análise.</p>
                         </div>
                         
                         <div class="kit-item">
                             <h4>Indicador de pH</h4>
-                            <p>Suco de repolho roxo para verificar se a água é ácida ou alcalina</p>
+                            <p>Suco de repolho roxo para verificar se a água é ácida ou alcalina através da mudança de coloração.</p>
                         </div>
                         
                         <div class="kit-item">
                             <h4>Indicador de Cloro</h4>
-                            <p>Alga seca ou solução de fécula de batata para detectar cloro residual</p>
+                            <p>Alga seca ou solução de fécula de batata para detectar cloro residual presente na água tratada.</p>
                         </div>
                         
                         <div class="kit-item">
                             <h4>Indicador de Matéria Orgânica</h4>
-                            <p>Solução de iodo ou vinagre diluído para detectar poluição orgânica</p>
+                            <p>Solução de iodo ou vinagre diluído para detectar poluição orgânica através de reações químicas visíveis.</p>
                         </div>
                         
                         <div class="kit-item">
                             <h4>Acessórios</h4>
-                            <p>Mini funil, colheres medidoras, cartão de instruções visuais e caderno de registro</p>
+                            <p>Mini funil, colheres medidoras, cartão de instruções visuais e caderno de registro para anotações sistemáticas.</p>
                         </div>
                         
                         <div class="kit-item">
                             <h4>Material Educativo</h4>
-                            <p>Tabela de referência da água segura e selos mensais para acompanhamento</p>
+                            <p>Tabela de referência da água segura e selos mensais para acompanhamento contínuo da qualidade da água.</p>
                         </div>
                     </div>
                 </div>
@@ -657,41 +693,41 @@
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
                         <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
-                            <h4 style="color: #083161; margin-bottom: 1rem;">Mês 1 – Teste de pH</h4>
-                            <p style="text-align: justify;">Utiliza suco de repolho roxo ou chá de hibisco para indicar o nível de acidez ou alcalinidade da água.</p>
+                            <h4 style="color: #083161; margin-bottom: 1rem; text-align: justify;">Mês 1 – Teste de pH</h4>
+                            <p style="text-align: justify;">Utiliza suco de repolho roxo ou chá de hibisco para indicar o nível de acidez ou alcalinidade da água através de mudanças de coloração características.</p>
                         </div>
                         
                         <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
-                            <h4 style="color: #083161; margin-bottom: 1rem;">Mês 2 – Teste de Cloro Residual</h4>
-                            <p style="text-align: justify;">Verifica a presença de cloro, reagindo com iodo para indicar se há excesso ou falta do desinfetante.</p>
+                            <h4 style="color: #083161; margin-bottom: 1rem; text-align: justify;">Mês 2 – Teste de Cloro Residual</h4>
+                            <p style="text-align: justify;">Verifica a presença de cloro, reagindo com iodo para indicar se há excesso ou falta do desinfetante utilizado no tratamento da água.</p>
                         </div>
                         
                         <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
-                            <h4 style="color: #083161; margin-bottom: 1rem;">Mês 3 – Teste de Matéria Orgânica</h4>
-                            <p style="text-align: justify;">Avalia possíveis sinais de poluição doméstica utilizando vinagre diluído e iodo.</p>
+                            <h4 style="color: #083161; margin-bottom: 1rem; text-align: justify;">Mês 3 – Teste de Matéria Orgânica</h4>
+                            <p style="text-align: justify;">Avalia possíveis sinais de poluição doméstica utilizando vinagre diluído e iodo para observar alterações que indiquem resíduos orgânicos.</p>
                         </div>
                         
                         <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
-                            <h4 style="color: #083161; margin-bottom: 1rem;">Mês 4 – Repetição e Comparação</h4>
-                            <p style="text-align: justify;">Os testes são repetidos, permitindo comparar resultados e analisar variações.</p>
+                            <h4 style="color: #083161; margin-bottom: 1rem; text-align: justify;">Mês 4 – Repetição e Comparação</h4>
+                            <p style="text-align: justify;">Os testes são repetidos, permitindo comparar resultados e analisar variações entre diferentes pontos de coleta ao longo do tempo.</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="content-card">
                     <h3>Estimativa de Custo</h3>
-                    <p>O custo estimado para produção de cada kit completo é de aproximadamente R$ 50,50, incluindo:</p>
+                    <p>O custo estimado para produção de cada kit completo é de aproximadamente R$ 50,50, incluindo todos os componentes necessários para quatro meses de monitoramento:</p>
                     
                     <ul>
-                        <li>Frasco 250 mL: R$ 4/unidade</li>
-                        <li>Mini funil + colheres medidoras: R$ 3/unidade</li>
-                        <li>Cartão de instruções visual: R$ 2,50/unidade</li>
-                        <li>Caderno de registro: R$ 4/unidade</li>
-                        <li>Reagentes naturais para 4 meses: R$ 30/unidade</li>
-                        <li>Embalagem segura e transporte: R$ 7/unidade</li>
+                        <li>Frasco 250 mL: R$ 4/unidade - recipiente transparente para coleta e observação</li>
+                        <li>Mini funil + colheres medidoras: R$ 3/unidade - acessórios para manuseio seguro</li>
+                        <li>Cartão de instruções visual: R$ 2,50/unidade - guia ilustrado com interpretação</li>
+                        <li>Caderno de registro: R$ 4/unidade - para anotações sistemáticas dos resultados</li>
+                        <li>Reagentes naturais para 4 meses: R$ 30/unidade - conjunto completo de indicadores</li>
+                        <li>Embalagem segura e transporte: R$ 7/unidade - proteção e logística de distribuição</li>
                     </ul>
                     
-                    <p>Também está sendo considerada uma versão básica com materiais + 1 mês de reagentes por R$ 15 a R$ 25,00.</p>
+                    <p>Também está sendo considerada uma versão básica com materiais essenciais + 1 mês de reagentes por R$ 15 a R$ 25,00, tornando o projeto ainda mais acessível à população.</p>
                 </div>
             </div>
         </section>
@@ -700,7 +736,7 @@
         <section id="vicente" class="section interview-section">
             <div class="container">
                 <h2 class="section-title">Entrevista com Vicente de Paula Dourado</h2>
-                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Conexão entre Prefeitura e o Projeto Ecos do Mar</p>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; text-align: justify;">Conexão entre Prefeitura e o Projeto Ecos do Mar - Diálogo sobre qualidade da água e saneamento básico</p>
                 
                 <div class="interview-card">
                     <p>No dia 21 de outubro de 2025, nós, do grupo Ecos do Mar, recebemos no IFBA Campus Irecê a visita de Vicente de Paula Dourado, representante da Prefeitura Municipal. O encontro teve como objetivo apresentar o nosso projeto EcoH₂O e compreender melhor a relação entre a Prefeitura, a Embasa e os cidadãos no que se refere à qualidade da água e ao saneamento básico.</p>
@@ -712,18 +748,14 @@
                     <img src="https://i.ibb.co/0pwyp6br/FOTO-1.jpg" alt="Vicente de Paula Dourado conhecendo o projeto EcoH₂O no IFBA Campus Irecê" class="interview-image">
                     
                     <div class="quote">
-                        "Eu achei muito interessante essa preocupação de vocês e a capacidade de desenvolver um aparelhinho tão simples, mas com uma utilidade e importância enormes.
-                        É um projeto que mostra engajamento, consciência e vontade de transformar a realidade. Vocês estão desenvolvendo algo que pode trazer benefícios reais à população, e isso é digno de reconhecimento.
-                        Quero conversar com o município e, posteriormente, também com a Embasa sobre o projeto. Boa parte das perguntas eu consegui responder, e as demais orientei para o órgão responsável, no caso, a Embasa.
-                        Fiquei muito satisfeito em ver jovens interessados em criar um mecanismo capaz de medir a qualidade da água que a população consome. Tenho certeza de que as pessoas vão apoiar e abraçar essa ideia, porque o acesso à água limpa e segura é um direito de todos.
-                        Continuem nessa luta, e contem com o nosso apoio dentro das nossas condições. Acredito muito na força de iniciativas como essa, que nascem do interesse coletivo e do desejo de fazer a diferença."
+                        "Eu achei muito interessante essa preocupação de vocês e a capacidade de desenvolver um aparelhinho tão simples, mas com uma utilidade e importância enormes. É um projeto que mostra engajamento, consciência e vontade de transformar a realidade. Vocês estão desenvolvendo algo que pode trazer benefícios reais à população, e isso é digno de reconhecimento. Quero conversar com o município e, posteriormente, também com a Embasa sobre o projeto. Boa parte das perguntas eu consegui responder, e as demais orientei para o órgão responsável, no caso, a Embasa. Fiquei muito satisfeito em ver jovens interessados em criar um mecanismo capaz de medir a qualidade da água que a população consome. Tenho certeza de que as pessoas vão apoiar e abraçar essa ideia, porque o acesso à água limpa e segura é um direito de todos. Continuem nessa luta, e contem com o nosso apoio dentro das nossas condições. Acredito muito na força de iniciativas como essa, que nascem do interesse coletivo e do desejo de fazer a diferença."
                     </div>
                     
                     <p>A visita foi marcada por diálogo, incentivo e troca de conhecimentos, reforçando o compromisso do grupo Ecos do Mar com a ciência, a sustentabilidade e a participação popular na busca por um futuro mais consciente e saudável para todos.</p>
                     
                     <img src="https://i.ibb.co/kg5jpwzb/FOTO-2.jpg" alt="Integrantes do grupo Ecos do Mar ao lado de Vicente de Paula Dourado" class="interview-image">
                     
-                    <p class="image-caption">Integrantes do grupo Ecos do Mar ao lado de Vicente de Paula Dourado durante a visita ao IFBA Campus Irecê, apresentando o projeto EcoH₂O.</p>
+                    <p class="image-caption">Integrantes do grupo Ecos do Mar ao lado de Vicente de Paula Dourado durante a visita ao IFBA Campus Irecê, apresentando o projeto EcoH₂O e discutindo sobre qualidade da água e saneamento básico na região.</p>
                 </div>
             </div>
         </section>
@@ -732,7 +764,7 @@
         <section id="embasa" class="section embasa-section">
             <div class="container">
                 <h2 class="section-title">Entrevista com a Embasa</h2>
-                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Gerente da Divisão de Operação Água da Embasa em Irecê fala sobre tratamento, desafios e conscientização hídrica</p>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; text-align: justify;">Gerente da Divisão de Operação Água da Embasa em Irecê fala sobre tratamento, desafios e conscientização hídrica - Visita técnica e diálogo sobre saneamento básico</p>
                 
                 <div class="content-card">
                     <p>Durante uma visita técnica à Embasa, o grupo Ecos do Mar, do IFBA Campus Irecê, responsável pelo projeto Estação Flutuante e Eco H₂O, realizou uma entrevista com o Gerente Thiago Vasconcelos para compreender o funcionamento do saneamento básico e o tratamento da água na cidade.</p>
@@ -740,103 +772,103 @@
                     <p>O grupo apresentou a proposta do projeto, explicando que ele nasceu a partir da criação de uma Estação Flutuante de Monitoramento, desenvolvida durante a Semana Nacional de Ciência e Tecnologia. O objetivo era estudar a qualidade da água e conscientizar a população sobre a preservação dos recursos hídricos.</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "Nós fizemos uma pesquisa no campus e descobrimos que, embora 90% dos alunos afirmem receber água da Embasa, 40% não confiam totalmente na sua qualidade", explicou Eduarda Almeida. "Com o Eco H₂O, queremos devolver essa confiança, permitindo que qualquer pessoa possa testar a água que consome em casa."
+                        "Nós fizemos uma pesquisa no campus e descobrimos que, embora 90% dos alunos afirmem receber água da Embasa, 40% não confiam totalmente na sua qualidade", explicou Eduarda Almeida. "Com o Eco H₂O, queremos devolver essa confiança, permitindo que qualquer pessoa possa testar a água que consome em casa de forma simples e acessível."
                     </div>
                     
-                    <p>A professora responsável Vivian Santana complementou que o projeto faz parte da Semana Nacional de Ciência e Tecnologia e que os alunos criaram reagentes naturais, como o chá de repolho roxo, capazes de identificar contaminações na água com materiais recicláveis e de baixo custo.</p>
+                    <p>A professora responsável Vivian Santana complementou que o projeto faz parte da Semana Nacional de Ciência e Tecnologia e que os alunos criaram reagentes naturais, como o chá de repolho roxo, capazes de identificar contaminações na água com materiais recicláveis e de baixo custo, promovendo a educação ambiental e a cidadania.</p>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Processo de Tratamento da Água</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Processo de Tratamento da Água</h3>
                     
-                    <p>Questionado sobre as etapas do tratamento, o gerente explicou:</p>
+                    <p>Questionado sobre as etapas do tratamento, o gerente explicou com detalhes o processo completo realizado pela empresa:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "As etapas variam conforme o tipo de manancial. Em poços, adicionamos apenas cloro para eliminar micro-organismos. Já nos superficiais, como rios e barragens, o processo é completo: floculação, decantação, filtração, cloração e fluoretação. O cloro é obrigatório por lei, e o flúor é essencial para a saúde bucal das crianças."
+                        "As etapas variam conforme o tipo de manancial. Em poços, adicionamos apenas cloro para eliminar micro-organismos. Já nos superficiais, como rios e barragens, o processo é completo: floculação, decantação, filtração, cloração e fluoretação. O cloro é obrigatório por lei, e o flúor é essencial para a saúde bucal das crianças, sendo um importante complemento para a saúde pública."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Monitoramento da Qualidade</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Monitoramento da Qualidade</h3>
                     
-                    <p>Ao falar sobre o monitoramento da qualidade da água, ele destacou o rigor do controle realizado pela empresa:</p>
+                    <p>Ao falar sobre o monitoramento da qualidade da água, ele destacou o rigor do controle realizado pela empresa e os múltiplos níveis de verificação:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "A cada duas horas fazemos análises na Estação de Tratamento, verificando pH, turbidez, cor e teor de cloro. Também coletamos amostras diárias em diversos pontos da cidade para garantir que a água chegue às casas dentro dos padrões de potabilidade. Além disso, a Vigilância Sanitária realiza coletas independentes e envia amostras ao Laboratório Central de Saúde Pública (LACEN), em Salvador, como forma de fiscalização externa e complementar. Esse trabalho conjunto assegura transparência e segurança na qualidade da água."
+                        "A cada duas horas fazemos análises na Estação de Tratamento, verificando pH, turbidez, cor e teor de cloro. Também coletamos amostras diárias em diversos pontos da cidade para garantir que a água chegue às casas dentro dos padrões de potabilidade. Além disso, a Vigilância Sanitária realiza coletas independentes e envia amostras ao Laboratório Central de Saúde Pública (LACEN), em Salvador, como forma de fiscalização externa e complementar. Esse trabalho conjunto assegura transparência e segurança na qualidade da água distribuída à população."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Escassez Hídrica e Conscientização</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Escassez Hídrica e Conscientização</h3>
                     
-                    <p>Quanto a escassez hídrica, Thiago Vasconcelos foi enfático:</p>
+                    <p>Quanto a escassez hídrica, Thiago Vasconcelos foi enfático sobre a importância da conscientização e das medidas adotadas pela empresa:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "A primeira medida é conscientizar. Se há crise, é preciso economizar. Hoje enfrentamos escassez em parte da região de Irecê, mas estamos controlando com o sistema adutor do Rio São Francisco e perfuração de novos poços. A qualidade, porém, nunca é comprometida. Cada real investido na água é um real economizado na saúde pública."
+                        "A primeira medida é conscientizar. Se há crise, é preciso economizar. Hoje enfrentamos escassez em parte da região de Irecê, mas estamos controlando com o sistema adutor do Rio São Francisco e perfuração de novos poços. A qualidade, porém, nunca é comprometida. Cada real investido na água é um real economizado na saúde pública, demonstrando a importância do saneamento básico para o desenvolvimento social."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Comunicação e Educação</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Comunicação e Educação</h3>
                     
-                    <p>Sobre a comunicação com os cidadãos, ele citou o trabalho social da empresa:</p>
+                    <p>Sobre a comunicação com os cidadãos, ele citou o trabalho social da empresa e as estratégias de aproximação com a comunidade:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "Temos uma assistente social, Ana Karina, que coordena ações educativas em escolas e comunidades. Em períodos de crise, reforçamos com reuniões, carro de som, informativos digitais e presença direta nas localidades. Essa aproximação faz diferença."
+                        "Temos uma assistente social, Ana Karina, que coordena ações educativas em escolas e comunidades. Em períodos de crise, reforçamos com reuniões, carro de som, informativos digitais e presença direta nas localidades. Essa aproximação faz diferença na construção de uma relação de confiança com a população."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Tratamento de Esgoto</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Tratamento de Esgoto</h3>
                     
-                    <p>Em relação ao tratamento de esgoto, ele explicou:</p>
+                    <p>Em relação ao tratamento de esgoto, ele explicou o processo completo e a infraestrutura disponível no município:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "A Embasa coleta o esgoto e o leva às estações de tratamento. Em Irecê, temos cinco unidades e estamos construindo uma central maior. O processo envolve gradeamento, caixas de areia, decantadores e leitos de maturação, onde bactérias e o sol ajudam na decomposição. O efluente tratado é devolvido ao meio ambiente em condições seguras, com análises semanais."
+                        "A Embasa coleta o esgoto e o leva às estações de tratamento. Em Irecê, temos cinco unidades e estamos construindo uma central maior. O processo envolve gradeamento, caixas de areia, decantadores e leitos de maturação, onde bactérias e o sol ajudam na decomposição. O efluente tratado é devolvido ao meio ambiente em condições seguras, com análises semanais que garantem o cumprimento das normas ambientais."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Práticas Sustentáveis</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Práticas Sustentáveis</h3>
                     
-                    <p>Quando perguntado sobre práticas sustentáveis, o coordenador destacou o avanço da empresa:</p>
+                    <p>Quando perguntado sobre práticas sustentáveis, o coordenador destacou o avanço da empresa em termos de eficiência energética e redução de impactos:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "Usamos válvulas redutoras de pressão em áreas com muito vazamento e 80% da energia consumida pela Embasa já vem de fontes renováveis — solar e eólica. Isso reduz custos e impactos ambientais."
+                        "Usamos válvulas redutoras de pressão em áreas com muito vazamento e 80% da energia consumida pela Embasa já vem de fontes renováveis — solar e eólica. Isso reduz custos e impactos ambientais, alinhando nossa operação com os princípios da sustentabilidade e responsabilidade ambiental."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Reaproveitamento de Água da Chuva</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Reaproveitamento de Água da Chuva</h3>
                     
-                    <p>Sobre o reaproveitamento da água da chuva, ele esclareceu:</p>
+                    <p>Sobre o reaproveitamento da água da chuva, ele esclareceu as limitações legais e técnicas da empresa:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "A legislação não permite que a Embasa trabalhe com águas pluviais. Podemos apenas captar, tratar e distribuir água potável e tratar esgoto. Em residências, o uso é viável, mas em larga escala seria economicamente inviável pela baixa constância das chuvas na região."
+                        "A legislação não permite que a Embasa trabalhe com águas pluviais. Podemos apenas captar, tratar e distribuir água potável e tratar esgoto. Em residências, o uso é viável, mas em larga escala seria economicamente inviável pela baixa constância das chuvas na região, que caracteriza nosso clima semiárido."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Educação Ambiental</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Educação Ambiental</h3>
                     
-                    <p>A entrevista também abordou o trabalho educativo da empresa:</p>
+                    <p>A entrevista também abordou o trabalho educativo da empresa e sua importância para a formação de cidadãos conscientes:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "Temos um calendário anual de visitas e palestras em escolas públicas. Durante a Semana da Água e no projeto Amigos do Viveiro, falamos sobre consumo consciente e preservação dos recursos hídricos. Tudo começa na educação."
+                        "Temos um calendário anual de visitas e palestras em escolas públicas. Durante a Semana da Água e no projeto Amigos do Viveiro, falamos sobre consumo consciente e preservação dos recursos hídricos. Tudo começa na educação, que é fundamental para construirmos uma sociedade mais sustentável e responsável."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Confiança na Qualidade da Água</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Confiança na Qualidade da Água</h3>
                     
-                    <p>Questionado se a população poderia confiar na Embasa, o coordenador respondeu com firmeza:</p>
+                    <p>Questionado se a população poderia confiar na Embasa, o coordenador respondeu com firmeza sobre a transparência dos processos:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "Com certeza. Todas as análises estão detalhadas na conta de água, mas muitos olham apenas o valor e esquecem o relatório. Lá constam os parâmetros, as coletas e os resultados. Trabalhamos com seriedade e transparência."
+                        "Com certeza. Todas as análises estão detalhadas na conta de água, mas muitos olham apenas o valor e esquecem o relatório. Lá constam os parâmetros, as coletas e os resultados. Trabalhamos com seriedade e transparência, seguindo rigorosos protocolos de qualidade que garantem água segura para o consumo."
                     </div>
                     
-                    <h3 style="color: #083161; margin-top: 2rem;">Principais Desafios</h3>
+                    <h3 style="color: #083161; margin-top: 2rem; text-align: justify;">Principais Desafios</h3>
                     
-                    <p>Sobre os principais desafios do saneamento no município, ele disse:</p>
+                    <p>Sobre os principais desafios do saneamento no município, ele destacou as questões hídricas e de conscientização:</p>
                     
                     <div class="quote" style="border-left-color: #083161;">
-                        "O maior desafio é a escassez hídrica. Desde 2018 enfrentamos longos períodos de seca, mas estamos avançando com a ampliação da adutora do São Francisco e novas estações de tratamento. Outro problema é a conscientização — ainda há quem não ligue sua casa à rede de esgoto, o que é ilegal e prejudica o meio ambiente. Cuidar da água é cuidar da própria saúde e do futuro."
+                        "O maior desafio é a escassez hídrica. Desde 2018 enfrentamos longos períodos de seca, mas estamos avançando com a ampliação da adutora do São Francisco e novas estações de tratamento. Outro problema é a conscientização — ainda há quem não ligue sua casa à rede de esgoto, o que é ilegal e prejudica o meio ambiente. Cuidar da água é cuidar da própria saúde e do futuro das próximas gerações."
                     </div>
                     
                     <img src="https://i.ibb.co/9H5yJRBt/FOTO-3.jpg" alt="Thiago Vasconcelos durante entrevista com o grupo Ecos do Mar" class="interview-image" style="max-width: 500px;">
                     
-                    <div class="quote" style="border-left-color: #083161; text-align: center;">
-                        "A água não é um bem infinito. Dois terços do planeta são cobertos por água, mas a maior parte não é potável. Precisamos valorizar o que temos. Cada vazamento, cada desperdício, afeta todos. Hoje, 35% de toda a água tratada é perdida — e boa parte por vazamentos não comunicados. Viu um vazamento? Avise à Embasa. Cuidar da água é um dever de todos."
+                    <div class="quote" style="border-left-color: #083161; text-align: justify;">
+                        "A água não é um bem infinito. Dois terços do planeta são cobertos por água, mas a maior parte não é potável. Precisamos valorizar o que temos. Cada vazamento, cada desperdício, afeta todos. Hoje, 35% de toda a água tratada é perdida — e boa parte por vazamentos não comunicados. Viu um vazamento? Avise à Embasa. Cuidar da água é um dever de todos, uma responsabilidade compartilhada que garante nosso futuro comum."
                     </div>
                     
-                    <p>Após a entrevista, Thiago Vasconcelos direcionou o grupo até o Laboratório. Aonde Vanessa Souza - Bacterologista e Josenilton Teixeira - Coordenador do laboratório, receberam e apresentaram o funcionamento do mesmo.</p>
+                    <p>Após a entrevista, Thiago Vasconcelos direcionou o grupo até o Laboratório, onde Vanessa Souza - Bacteriologista e Josenilton Teixeira - Coordenador do laboratório, receberam e apresentaram o funcionamento do mesmo, demonstrando os rigorosos controles de qualidade realizados periodicamente.</p>
                     
                     <img src="https://i.ibb.co/Cs7DB5m4/FOTO-4.jpg" alt="Grupo Ecos do Mar com equipe da Embasa no laboratório" class="interview-image">
                     
-                    <div class="quote" style="border-left-color: #083161; text-align: center; font-weight: bold;">
-                        "Confiem no trabalho da Embasa. Nosso compromisso é garantir água de qualidade, com responsabilidade e respeito pela vida. Cuidar da água é cuidar do futuro."<br>
+                    <div class="quote" style="border-left-color: #083161; text-align: justify; font-weight: bold;">
+                        "Confiem no trabalho da Embasa. Nosso compromisso é garantir água de qualidade, com responsabilidade e respeito pela vida. Cuidar da água é cuidar do futuro, e essa é uma missão que levamos muito a sério, investindo em tecnologia, capacitação e transparência para servir cada vez melhor à população."<br>
                         <span style="font-style: italic;">Thiago Vasconcelos - Embasa 2025</span>
                     </div>
                 </div>
@@ -847,15 +879,15 @@
         <section id="galeria" class="section gallery-section">
             <div class="container">
                 <h2 class="section-title">Galeria do Projeto</h2>
-                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Registros visuais do desenvolvimento e apresentação do Projeto EcoH₂O</p>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; text-align: justify;">Registros visuais do desenvolvimento e apresentação do Projeto EcoH₂O - Momentos importantes das visitas técnicas e entrevistas realizadas</p>
                 
                 <div class="gallery-grid">
                     <!-- Imagem 1 -->
                     <div class="gallery-item">
-                        <img src="https://i.ibb.co/SX4YS9c9/IMAGEM-1.jpg" alt="Desenvolvimento do protótipo do kit EcoH₂O" class="gallery-image">
+                        <img src="https://i.ibb.co/SX4YS9c9/IMAGEM-1.jpg" alt="Reunião com Vicente de Paula Dourado - Representante da Prefeitura Municipal de Irecê" class="gallery-image">
                         <div class="gallery-caption">
                             <h4>Reunião com Vicente de Paula Dourado</h4>
-                            <p>Momento de perguntas feita ao representante da Prefeitura Municipal de Irecê</p>
+                            <p>Momento de perguntas feita ao representante da Prefeitura Municipal de Irecê sobre saneamento básico e qualidade da água durante visita ao IFBA Campus Irecê.</p>
                         </div>
                     </div>
                     
@@ -866,7 +898,7 @@
                         </div>
                         <div class="gallery-caption">
                             <h4>Apresentação do laboratório da EMBASA</h4>
-                            <p>Vanessa Souza apresenta como funciona o bacteriológico</p>
+                            <p>Vanessa Souza apresenta como funciona o setor bacteriológico da Embasa, explicando os procedimentos de análise microbiológica da água durante visita técnica do grupo Ecos do Mar.</p>
                         </div>
                     </div>
                     
@@ -877,34 +909,34 @@
                         </div>
                         <div class="gallery-caption">
                             <h4>Reunião com Thiago Vasconcelos</h4>
-                            <p>Conversa com o Gerente da Divisão de Operação Água da Embasa em Irecê sobre as dúvidas referente ao saneamento básico</p>
+                            <p>Conversa com o Gerente da Divisão de Operação Água da Embasa em Irecê sobre as dúvidas referente ao saneamento básico, tratamento da água e desafios hídricos na região.</p>
                         </div>
                     </div>
                     
                     <!-- Imagem 2 -->
                     <div class="gallery-item">
-                        <img src="https://i.ibb.co/gbXg3FD0/IMAGEM-2.jpg" alt="Equipe do projeto trabalhando no laboratório" class="gallery-image">
+                        <img src="https://i.ibb.co/gbXg3FD0/IMAGEM-2.jpg" alt="Apresentação de outro laboratório da EMBASA - Funcionário explicando procedimentos" class="gallery-image">
                         <div class="gallery-caption">
                             <h4>Apresentação de outro laboratório da EMBASA</h4>
-                            <p>Outro funcionário também explica qual é sua função dentro dos laboratórios da EMBASA</p>
+                            <p>Outro funcionário também explica qual é sua função dentro dos laboratórios da EMBASA, demonstrando equipamentos e metodologias utilizadas no controle de qualidade da água.</p>
                         </div>
                     </div>
                     
                     <!-- Imagem 3 -->
                     <div class="gallery-item">
-                        <img src="https://i.ibb.co/xqngbxzd/IMAGEM-3.jpg" alt="Apresentação para a comunidade" class="gallery-image">
+                        <img src="https://i.ibb.co/xqngbxzd/IMAGEM-3.jpg" alt="Teste de turbidez na EMBASA - Demonstração prática do procedimento" class="gallery-image">
                         <div class="gallery-caption">
-                            <h4>Turbidez</h4>
-                            <p>O funcionário da EMBASA mostra na prática como fazer o teste de turbidez de uma amostra</p>
+                            <h4>Turbidez - Análise da Água</h4>
+                            <p>O funcionário da EMBASA mostra na prática como fazer o teste de turbidez de uma amostra, explicando a importância deste parâmetro para a qualidade da água distribuída.</p>
                         </div>
                     </div>
                     
                     <!-- Imagem 4 -->
                     <div class="gallery-item">
-                        <img src="https://i.ibb.co/N2rPqz2V/IMAGEM-4.jpg" alt="Materiais e reagentes utilizados" class="gallery-image">
+                        <img src="https://i.ibb.co/N2rPqz2V/IMAGEM-4.jpg" alt="Vanessa Souza mostrando listas de amostras - Controle de qualidade da EMBASA" class="gallery-image">
                         <div class="gallery-caption">
                             <h4>Vanessa Souza mostra as listas de amostras</h4>
-                            <p>As listas servem para guardar todas as informações que foram coletadas das amostras, mostra Vanessa Souza</p>
+                            <p>As listas servem para guardar todas as informações que foram coletadas das amostras, mostra Vanessa Souza durante explicação sobre o rigoroso sistema de registro e controle de qualidade implementado pela Embasa.</p>
                         </div>
                     </div>
                 </div>
@@ -920,7 +952,7 @@
                     <img src="https://i.postimg.cc/7Y5WjFxK/MARCA-IFBA-CAMPUS-HORIZONTAL-completa-negativa-BRANCA-IRECE.png" alt="IFBA Campus Irecê - Instituição responsável pelo projeto EcoH₂O" class="institution-logo">
                 </div>
                 <p class="footer-text">&copy; 2025 Projeto EcoH₂O - IFBA Campus Irecê</p>
-                <p class="footer-text">Desenvolvido com dedicação pela equipe Ecos do Mar</p>
+                <p class="footer-text">Desenvolvido com dedicação pela equipe Ecos do Mar - Promovendo ciência cidadã e educação ambiental através do monitoramento popular da qualidade da água</p>
                 <a href="/" class="back-button" style="margin-bottom: 0;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M19 12H5M12 19l-7-7 7-7"/>
