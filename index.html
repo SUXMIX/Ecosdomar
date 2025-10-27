@@ -810,8 +810,6 @@
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease;
-            text-align: justify;
-            text-justify: inter-word;
         }
 
         .referencias-content.visible {
@@ -961,21 +959,20 @@
         .ecoh2o-section {
             background: #fff;
             padding: 80px 0;
-            text-align: center;
         }
 
         .ecoh2o-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px;
         }
 
         .ecoh2o-section p {
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: 1.15rem;
+            line-height: 1.9;
             color: #000;
             margin-bottom: 2rem;
-            text-align: center;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .ecoh2o-btn {
@@ -990,6 +987,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(94, 161, 229, 0.4);
             border: 2px solid #5ea1e5;
+            text-align: center;
         }
 
         .ecoh2o-btn:hover {
@@ -998,6 +996,11 @@
             background: #083161;
             color: #edeff1;
             border-color: #083161;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 2rem;
         }
 
         /* ===== ANIMATIONS ===== */
@@ -1056,7 +1059,7 @@
             }
 
             /* Melhorias para dispositivos móveis - Margens internas */
-            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p {
+            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p, .ecoh2o-section p {
                 text-align: justify;
                 text-justify: inter-word;
                 padding: 0 10px;
@@ -1122,7 +1125,7 @@
             }
 
             /* Ajusta o tamanho da fonte para melhor legibilidade no celular */
-            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p {
+            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p, .ecoh2o-section p {
                 font-size: 1.1rem;
                 line-height: 1.8;
                 text-align: justify;
@@ -1179,7 +1182,7 @@
 
         /* Melhoria adicional para telas muito pequenas */
         @media (max-width: 480px) {
-            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p {
+            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p, .ecoh2o-section p {
                 font-size: 1.05rem;
                 line-height: 1.7;
                 text-align: justify;
@@ -1513,10 +1516,16 @@
 
         <!-- NOVA SEÇÃO: ECOH2O -->
         <section id="ecoh2o" class="ecoh2o-section">
-            <div class="ecoh2o-container">
+            <div class="container">
                 <h2 class="section-title">Conheça Também o Projeto EcoH₂O</h2>
-                <p>Além do Ecos do Mar, nossa equipe desenvolveu o <strong>EcoH₂O</strong> - um kit doméstico sustentável para monitoramento da qualidade da água usando reagentes naturais. Uma iniciativa que leva a ciência cidadã para dentro de cada residência, permitindo que qualquer pessoa possa acompanhar a qualidade da água que consome.</p>
-                <a href="https://sncetecosdomar.com.br/ecoh2o" class="ecoh2o-btn" target="_blank">Conhecer o Projeto EcoH₂O</a>
+                <div class="text-section">
+                    <div class="text-section-content">
+                        <p>Além do Ecos do Mar, nossa equipe desenvolveu o <strong>EcoH₂O</strong> - um kit doméstico sustentável para monitoramento da qualidade da água usando reagentes naturais. Uma iniciativa que leva a ciência cidadã para dentro de cada residência, permitindo que qualquer pessoa possa acompanhar a qualidade da água que consome. O projeto representa uma evolução natural do nosso trabalho com indicadores naturais, agora aplicado de forma prática e acessível para o dia a dia das famílias.</p>
+                    </div>
+                </div>
+                <div class="btn-container">
+                    <a href="https://sncetecosdomar.com.br/ecoh2o" class="ecoh2o-btn" target="_blank">Conhecer o Projeto EcoH₂O</a>
+                </div>
             </div>
         </section>
     </main>
