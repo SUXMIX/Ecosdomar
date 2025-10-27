@@ -597,6 +597,13 @@
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .chart-container.active {
+            display: flex;
+            opacity: 1;
         }
 
         .chart-content {
@@ -607,6 +614,12 @@
             width: 90%;
             position: relative;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .chart-container.active .chart-content {
+            transform: scale(1);
         }
 
         .chart-close {
@@ -1299,7 +1312,7 @@
         const chartLegend = document.getElementById('chart-legend');
         let resultsChart = null;
 
-        // Dados dos gráficos
+        // Dados dos gráficos - CORRIGIDOS
         const chartData = {
             'agua-potavel': {
                 title: 'Acesso à Água Potável',
@@ -1391,13 +1404,20 @@
             }
         });
 
+        // Fechar com tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeChart();
+            }
+        });
+
         // Função para mostrar gráfico
         function showChart(chartId) {
             const data = chartData[chartId];
             if (!data) return;
 
             chartTitle.textContent = data.title;
-            chartModal.style.display = 'flex';
+            chartModal.classList.add('active');
             document.body.style.overflow = 'hidden';
 
             // Destruir gráfico anterior se existir
@@ -1428,7 +1448,9 @@
                     },
                     animation: {
                         animateScale: true,
-                        animateRotate: true
+                        animateRotate: true,
+                        duration: 800,
+                        easing: 'easeOutQuart'
                     }
                 }
             });
@@ -1439,8 +1461,13 @@
 
         // Função para fechar gráfico
         function closeChart() {
-            chartModal.style.display = 'none';
+            chartModal.classList.remove('active');
             document.body.style.overflow = 'auto';
+            
+            // Aguardar a transição terminar antes de esconder completamente
+            setTimeout(() => {
+                chartModal.style.display = 'none';
+            }, 300);
         }
 
         // Função para atualizar legenda
