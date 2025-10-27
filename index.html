@@ -772,18 +772,16 @@
 
         /* ===== REFERÊNCIAS SECTION ===== */
         .referencias-section {
-            background: #fff;
-            border: 2px solid #5ea1e5;
-            border-radius: 30px;
-            padding: 2.5rem;
-            margin: 0 auto;
             max-width: 1000px;
+            margin: 0 auto;
         }
 
         .referencias-content {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .referencias-content.visible {
@@ -795,8 +793,9 @@
             font-size: 1.15rem;
             line-height: 1.9;
             color: #000;
-            margin-bottom: 1rem;
-            text-align: center;
+            margin-bottom: 2rem;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .referencias-list {
@@ -874,7 +873,7 @@
             }
 
             /* Melhorias para dispositivos móveis - Margens internas */
-            .text-content p, .text-section-content p, .repolho-content p {
+            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p {
                 text-align: justify;
                 text-justify: inter-word;
                 padding: 0 10px;
@@ -924,7 +923,7 @@
             }
 
             /* Ajusta o tamanho da fonte para melhor legibilidade no celular */
-            .text-content p, .text-section-content p, .repolho-content p {
+            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p {
                 font-size: 1.1rem;
                 line-height: 1.8;
                 text-align: justify;
@@ -959,7 +958,7 @@
 
         /* Melhoria adicional para telas muito pequenas */
         @media (max-width: 480px) {
-            .text-content p, .text-section-content p, .repolho-content p {
+            .text-content p, .text-section-content p, .repolho-content p, .referencias-content p {
                 font-size: 1.05rem;
                 line-height: 1.7;
                 text-align: justify;
@@ -1194,7 +1193,14 @@
                 <h2 class="section-title">Referências</h2>
                 <div class="referencias-section">
                     <div class="referencias-content">
-                        <p>Este projeto foi desenvolvido com base em pesquisas e informações de fontes confiáveis relacionadas à ciência ambiental, monitoramento da qualidade da água e sustentabilidade:</p>
+                        <p>Este projeto foi desenvolvido com base em pesquisas e informações de fontes confiáveis relacionadas à ciência ambiental, monitoramento da qualidade da água e sustentabilidade. As principais referências que embasaram nosso trabalho incluem:</p>
+                        
+                        <p>A <strong>Marinha do Brasil</strong>, por meio de suas publicações sobre monitoramento ambiental marinho, forneceu dados essenciais sobre as condições dos ecossistemas costeiros brasileiros. A <strong>Oceana Brasil</strong> contribuiu com pesquisas sobre a saúde dos oceanos e os impactos da poluição marinha.</p>
+                        
+                        <p>O <strong>Ministério do Meio Ambiente</strong> ofereceu diretrizes e dados oficiais sobre políticas ambientais e qualidade da água no território nacional. A cobertura da <strong>CNN Brasil</strong> sobre questões ambientais contemporâneas também foi relevante para contextualizar nosso projeto dentro dos debates atuais sobre sustentabilidade.</p>
+                        
+                        <p>Além dessas fontes, consultamos materiais do <strong>Instituto Chico Mendes de Conservação da Biodiversidade</strong> e da <strong>Agência Nacional de Águas</strong>, que forneceram informações técnicas sobre monitoramento ambiental e gestão de recursos hídricos.</p>
+
                         <ul class="referencias-list">
                             <li>Marinha do Brasil</li>
                             <li>Oceana Brasil</li>
