@@ -40,6 +40,10 @@
             line-height: 1.6;
         }
 
+        body.menu-open {
+            overflow: hidden;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -56,6 +60,12 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(94, 161, 229, 0.3);
             padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(8, 49, 97, 0.98);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         .navbar .container {
@@ -73,6 +83,11 @@
         .logo-img {
             height: 40px;
             width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.05);
         }
 
         .nav-list {
@@ -88,11 +103,82 @@
             padding: 8px 20px;
             border-radius: 50px;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-list a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #5ea1e5;
+            transition: width 0.3s ease;
         }
 
         .nav-list a:hover {
             color: #5ea1e5;
-            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-list a:hover::before {
+            width: 80%;
+        }
+
+        /* Menu Mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1010;
+        }
+
+        .hamburger-line {
+            width: 30px;
+            height: 3px;
+            background: #edeff1;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+            transform: translateY(10.5px) rotate(45deg);
+        }
+
+        .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+            transform: translateY(-10.5px) rotate(-45deg);
+        }
+
+        /* Botão Voltar */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background: #5ea1e5;
+            color: #083161;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(94, 161, 229, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(94, 161, 229, 0.5);
+            background: #4a8fd4;
         }
 
         /* ===== HEADER ===== */
@@ -152,6 +238,8 @@
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
             line-height: 1.8;
+            text-align: justify;
+            text-justify: inter-word;
         }
 
         .content-card ul {
@@ -162,6 +250,7 @@
         .content-card li {
             margin-bottom: 0.8rem;
             font-size: 1.1rem;
+            text-align: justify;
         }
 
         /* ===== KIT SECTION ===== */
@@ -184,6 +273,10 @@
             color: #083161;
             margin-bottom: 1rem;
             font-weight: 600;
+        }
+
+        .kit-item p {
+            text-align: center;
         }
 
         /* ===== INTERVIEW SECTION ===== */
@@ -219,6 +312,7 @@
             border-left: 4px solid #5ea1e5;
             padding-left: 1.5rem;
             margin: 2rem 0;
+            text-align: justify;
         }
 
         .image-caption {
@@ -239,10 +333,142 @@
             display: block;
         }
 
+        /* ===== GALERIA ===== */
+        .gallery-section {
+            background: #f8f9fa;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            margin-bottom: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .gallery-caption {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .gallery-caption h4 {
+            color: #083161;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #083161;
+            border-top: 2px solid #5ea1e5;
+            padding: 3rem 0;
+            color: white;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .institution {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .institution-label {
+            color: #edeff1;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .institution-logo {
+            max-width: 300px;
+            height: auto;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .institution-logo:hover {
+            opacity: 1;
+        }
+
+        .footer-text {
+            color: #edeff1;
+            font-size: 1rem;
+            text-align: center;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .nav-list {
-                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(8, 49, 97, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2.5rem;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+            }
+
+            .nav-list[data-visible="true"] {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-list a {
+                font-size: 1.8rem;
+            }
+
+            .menu-toggle {
+                display: flex;
             }
             
             .content-card {
@@ -256,6 +482,44 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 120px 0 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-card {
+                padding: 1.5rem;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .header h1 {
+                font-size: clamp(2rem, 8vw, 3.5rem);
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -267,11 +531,18 @@
                 <span style="color: white; font-weight: 600;">EcoH₂O</span>
             </div>
             
-            <ul class="nav-list">
+            <button class="menu-toggle" aria-controls="nav-list" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <ul class="nav-list" id="nav-list">
                 <li><a href="#projeto">O Projeto</a></li>
                 <li><a href="#kit">Kit EcoH₂O</a></li>
                 <li><a href="#vicente">Visita da Prefeitura</a></li>
                 <li><a href="#embasa">Entrevista Embasa</a></li>
+                <li><a href="#galeria">Galeria</a></li>
             </ul>
         </div>
     </nav>
@@ -280,6 +551,12 @@
         <div class="container">
             <h1>Projeto EcoH₂O</h1>
             <p>Monitoramento Popular da Água - Uma iniciativa de ciência cidadã para garantir água de qualidade para todos</p>
+            <a href="/" class="back-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Voltar à Página Principal
+            </a>
         </div>
     </header>
 
@@ -381,22 +658,22 @@
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
                         <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
                             <h4 style="color: #083161; margin-bottom: 1rem;">Mês 1 – Teste de pH</h4>
-                            <p>Utiliza suco de repolho roxo ou chá de hibisco para indicar o nível de acidez ou alcalinidade da água.</p>
+                            <p style="text-align: justify;">Utiliza suco de repolho roxo ou chá de hibisco para indicar o nível de acidez ou alcalinidade da água.</p>
                         </div>
                         
                         <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
                             <h4 style="color: #083161; margin-bottom: 1rem;">Mês 2 – Teste de Cloro Residual</h4>
-                            <p>Verifica a presença de cloro, reagindo com iodo para indicar se há excesso ou falta do desinfetante.</p>
+                            <p style="text-align: justify;">Verifica a presença de cloro, reagindo com iodo para indicar se há excesso ou falta do desinfetante.</p>
                         </div>
                         
                         <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
                             <h4 style="color: #083161; margin-bottom: 1rem;">Mês 3 – Teste de Matéria Orgânica</h4>
-                            <p>Avalia possíveis sinais de poluição doméstica utilizando vinagre diluído e iodo.</p>
+                            <p style="text-align: justify;">Avalia possíveis sinais de poluição doméstica utilizando vinagre diluído e iodo.</p>
                         </div>
                         
                         <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
                             <h4 style="color: #083161; margin-bottom: 1rem;">Mês 4 – Repetição e Comparação</h4>
-                            <p>Os testes são repetidos, permitindo comparar resultados e analisar variações.</p>
+                            <p style="text-align: justify;">Os testes são repetidos, permitindo comparar resultados e analisar variações.</p>
                         </div>
                     </div>
                 </div>
@@ -565,13 +842,140 @@
                 </div>
             </div>
         </section>
+
+        <!-- SEÇÃO: GALERIA -->
+        <section id="galeria" class="section gallery-section">
+            <div class="container">
+                <h2 class="section-title">Galeria do Projeto</h2>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Registros visuais do desenvolvimento e apresentação do Projeto EcoH₂O</p>
+                
+                <div class="gallery-grid">
+                    <!-- Imagem 1 -->
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/SX4YS9c9/IMAGEM-1.jpg" alt="Desenvolvimento do protótipo do kit EcoH₂O" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h4>Protótipo do Kit EcoH₂O</h4>
+                            <p>Fase de desenvolvimento dos componentes do kit de monitoramento</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Vídeo 1 -->
+                    <div class="gallery-item">
+                        <div class="video-container">
+                            <iframe src="https://drive.google.com/file/d/15iyZic5x0gBD8GbZUPpByDwAJ26uL3r7/preview" allow="autoplay"></iframe>
+                        </div>
+                        <div class="gallery-caption">
+                            <h4>Apresentação do Projeto</h4>
+                            <p>Demonstração do funcionamento do kit EcoH₂O</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Vídeo 2 -->
+                    <div class="gallery-item">
+                        <div class="video-container">
+                            <iframe src="https://drive.google.com/file/d/1LBcJr_52tYYWcV42z63U7HY4RFJtyqQ1/preview" allow="autoplay"></iframe>
+                        </div>
+                        <div class="gallery-caption">
+                            <h4>Testes com Reagentes Naturais</h4>
+                            <p>Experimentos utilizando repolho roxo como indicador de pH</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Imagem 2 -->
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/gbXg3FD0/IMAGEM-2.jpg" alt="Equipe do projeto trabalhando no laboratório" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h4>Trabalho em Equipe</h4>
+                            <p>Integrantes do projeto desenvolvendo os experimentos</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Imagem 3 -->
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/xqngbxzd/IMAGEM-3.jpg" alt="Apresentação para a comunidade" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h4>Divulgação Científica</h4>
+                            <p>Apresentação do projeto para a comunidade escolar</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Imagem 4 -->
+                    <div class="gallery-item">
+                        <img src="https://i.ibb.co/N2rPqz2V/IMAGEM-4.jpg" alt="Materiais e reagentes utilizados" class="gallery-image">
+                        <div class="gallery-caption">
+                            <h4>Materiais do Projeto</h4>
+                            <p>Reagentes naturais e componentes do kit EcoH₂O</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer style="background: #083161; color: white; padding: 3rem 0; text-align: center;">
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Projeto EcoH₂O - IFBA Campus Irecê</p>
-            <p>Desenvolvido com dedicação pela equipe Ecos do Mar</p>
+            <div class="footer-content">
+                <div class="institution">
+                    <p class="institution-label">Instituição:</p>
+                    <img src="https://i.postimg.cc/7Y5WjFxK/MARCA-IFBA-CAMPUS-HORIZONTAL-completa-negativa-BRANCA-IRECE.png" alt="IFBA Campus Irecê - Instituição responsável pelo projeto EcoH₂O" class="institution-logo">
+                </div>
+                <p class="footer-text">&copy; 2025 Projeto EcoH₂O - IFBA Campus Irecê</p>
+                <p class="footer-text">Desenvolvido com dedicação pela equipe Ecos do Mar</p>
+                <a href="/" class="back-button" style="margin-bottom: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Voltar à Página Principal
+                </a>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Menu Mobile
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navList = document.querySelector('.nav-list');
+        const navLinks = document.querySelectorAll('.nav-list a');
+
+        menuToggle.addEventListener('click', () => {
+            const isVisible = navList.getAttribute('data-visible') === 'true';
+            navList.setAttribute('data-visible', isVisible ? 'false' : 'true');
+            menuToggle.setAttribute('aria-expanded', isVisible ? 'false' : 'true');
+            document.body.classList.toggle('menu-open');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navList.setAttribute('data-visible', 'false');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('menu-open');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
