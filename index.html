@@ -254,6 +254,7 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            padding: 0 20px; /* Adicionado padding para evitar que o texto toque nas bordas */
         }
 
         .hero-cta {
@@ -597,13 +598,6 @@
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .chart-container.active {
-            display: flex;
-            opacity: 1;
         }
 
         .chart-content {
@@ -614,12 +608,6 @@
             width: 90%;
             position: relative;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
-        }
-
-        .chart-container.active .chart-content {
-            transform: scale(1);
         }
 
         .chart-close {
@@ -782,6 +770,54 @@
             line-height: 1.4;
         }
 
+        /* ===== REFERÊNCIAS SECTION ===== */
+        .referencias-section {
+            background: #fff;
+            border: 2px solid #5ea1e5;
+            border-radius: 30px;
+            padding: 2.5rem;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+
+        .referencias-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .referencias-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .referencias-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #000;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .referencias-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .referencias-list li {
+            padding: 0.8rem 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 1px solid #5ea1e5;
+            font-size: 1rem;
+            color: #083161;
+            font-weight: 500;
+        }
+
         /* ===== ANIMATIONS ===== */
         @keyframes float {
             0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
@@ -851,6 +887,15 @@
             .timeline-content, .test-card, .result-card, .importance-section {
                 margin: 0 10px;
             }
+
+            .referencias-section {
+                margin: 0 10px;
+            }
+
+            .referencias-list {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
         @media (max-width: 640px) {
@@ -906,6 +951,10 @@
             .gallery-item, .video-card {
                 margin: 0 5px;
             }
+
+            .referencias-section {
+                padding: 1.5rem;
+            }
         }
 
         /* Melhoria adicional para telas muito pequenas */
@@ -938,6 +987,10 @@
 
             .gallery-grid, .video-grid, .test-grid, .results-content, .authors-grid {
                 gap: 1rem;
+            }
+
+            .referencias-section {
+                padding: 1.2rem;
             }
         }
 
@@ -1135,6 +1188,26 @@
             </div>
         </section>
 
+        <!-- NOVA SEÇÃO: REFERÊNCIAS -->
+        <section id="referencias" class="section">
+            <div class="container">
+                <h2 class="section-title">Referências</h2>
+                <div class="referencias-section">
+                    <div class="referencias-content">
+                        <p>Este projeto foi desenvolvido com base em pesquisas e informações de fontes confiáveis relacionadas à ciência ambiental, monitoramento da qualidade da água e sustentabilidade:</p>
+                        <ul class="referencias-list">
+                            <li>Marinha do Brasil</li>
+                            <li>Oceana Brasil</li>
+                            <li>Ministério do Meio Ambiente</li>
+                            <li>CNN Brasil</li>
+                            <li>Instituto Chico Mendes</li>
+                            <li>Agência Nacional de Águas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="autores" class="section">
             <div class="container">
                 <h2 class="section-title">Autores do Projeto</h2>
@@ -1270,7 +1343,7 @@
 
         // Observe all animated elements
         const animatedElements = document.querySelectorAll(
-            '.text-content, .repolho-content, .timeline-item, .test-card, .result-card, .gallery-item, .video-card, .author-card, .text-section-content'
+            '.text-content, .repolho-content, .timeline-item, .test-card, .result-card, .gallery-item, .video-card, .author-card, .text-section-content, .referencias-content'
         );
 
         animatedElements.forEach(el => observer.observe(el));
@@ -1312,7 +1385,7 @@
         const chartLegend = document.getElementById('chart-legend');
         let resultsChart = null;
 
-        // Dados dos gráficos - CORRIGIDOS
+        // Dados dos gráficos
         const chartData = {
             'agua-potavel': {
                 title: 'Acesso à Água Potável',
@@ -1404,20 +1477,13 @@
             }
         });
 
-        // Fechar com tecla ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeChart();
-            }
-        });
-
         // Função para mostrar gráfico
         function showChart(chartId) {
             const data = chartData[chartId];
             if (!data) return;
 
             chartTitle.textContent = data.title;
-            chartModal.classList.add('active');
+            chartModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
 
             // Destruir gráfico anterior se existir
@@ -1448,9 +1514,7 @@
                     },
                     animation: {
                         animateScale: true,
-                        animateRotate: true,
-                        duration: 800,
-                        easing: 'easeOutQuart'
+                        animateRotate: true
                     }
                 }
             });
@@ -1461,13 +1525,8 @@
 
         // Função para fechar gráfico
         function closeChart() {
-            chartModal.classList.remove('active');
+            chartModal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            
-            // Aguardar a transição terminar antes de esconder completamente
-            setTimeout(() => {
-                chartModal.style.display = 'none';
-            }, 300);
         }
 
         // Função para atualizar legenda
