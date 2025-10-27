@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Otimizado para o Projeto EcoH₂O -->
+    <title>Projeto EcoH₂O - Monitoramento Popular da Água | IFBA Campus Irecê</title>
+    <meta name="description" content="Projeto EcoH₂O: Kit doméstico sustentável para monitoramento da qualidade da água usando reagentes naturais. Desenvolvido por estudantes do IFBA Campus Irecê.">
+    
+    <meta name="keywords" content="EcoH₂O, monitoramento da água, qualidade da água, reagentes naturais, repolho roxo, pH, cloro residual, matéria orgânica, IFBA Irecê, projeto escolar, sustentabilidade, saneamento básico, educação ambiental">
+    
+    <meta name="author" content="Projeto EcoH₂O - IFBA Campus Irecê">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Projeto EcoH₂O - Monitoramento Popular da Água">
+    <meta property="og:description" content="Kit doméstico sustentável para monitoramento da qualidade da água usando reagentes naturais">
+    <meta property="og:image" content="https://i.ibb.co/1YPhN7py/Design-sem-nome-2.png">
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #edeff1;
+            color: #000;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 49, 97, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(94, 161, 229, 0.3);
+            padding: 15px 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: #edeff1;
+            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-list a:hover {
+            color: #5ea1e5;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(rgba(8, 49, 97, 0.8), rgba(10, 74, 122, 0.8)), url('https://super.abril.com.br/wp-content/uploads/2020/04/diane-keough-oraculo-sete-mares-site.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #083161;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .content-card h3 {
+            font-size: 1.8rem;
+            color: #083161;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .content-card p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .content-card ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card li {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===== KIT SECTION ===== */
+        .kit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .kit-item {
+            background: #f8f9fa;
+            border: 2px solid #5ea1e5;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .kit-item h4 {
+            color: #083161;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* ===== INTERVIEW SECTION ===== */
+        .interview-section {
+            background: #083161;
+            color: white;
+        }
+
+        .interview-section .section-title {
+            color: white;
+        }
+
+        .interview-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .interview-image {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            border-left: 4px solid #5ea1e5;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ===== EMBASA SECTION ===== */
+        .embasa-section {
+            background: #e8f4f8;
+        }
+
+        .embasa-logo {
+            max-width: 200px;
+            margin: 0 auto 2rem;
+            display: block;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+            }
+            
+            .content-card {
+                padding: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="https://i.ibb.co/nMtK3KDK/1.png" alt="Projeto EcoH₂O - IFBA Campus Irecê" class="logo-img">
+                <span style="color: white; font-weight: 600;">EcoH₂O</span>
+            </div>
+            
+            <ul class="nav-list">
+                <li><a href="#projeto">O Projeto</a></li>
+                <li><a href="#kit">Kit EcoH₂O</a></li>
+                <li><a href="#vicente">Visita da Prefeitura</a></li>
+                <li><a href="#embasa">Entrevista Embasa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container">
+            <h1>Projeto EcoH₂O</h1>
+            <p>Monitoramento Popular da Água - Uma iniciativa de ciência cidadã para garantir água de qualidade para todos</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- SEÇÃO: DESCRIÇÃO DO PROJETO -->
+        <section id="projeto" class="section">
+            <div class="container">
+                <h2 class="section-title">Sobre o Projeto EcoH₂O</h2>
+                
+                <div class="content-card">
+                    <h3>Introdução</h3>
+                    <p>O Projeto EcoH₂O – Monitoramento Popular da Água surgiu a partir da criação de uma Estação Flutuante de Monitoramento, desenvolvida para a Semana Nacional de Ciência e Tecnologia (SNCT), com o intuito de compreender como a poluição afeta os oceanos e de que forma a ciência pode contribuir para sua preservação.</p>
+                    
+                    <p>A estação, construída com garrafas PET recicladas e equipada com reagentes naturais, identificava alterações na qualidade da água por meio da mudança de cor, representando uma forma simples e sustentável de observar fenômenos químicos ligados à poluição hídrica.</p>
+                    
+                    <p>A partir dessa experiência, o grupo idealizou o kit EcoH₂O, uma versão doméstica e acessível da estação, capaz de avaliar a qualidade da água utilizada no cotidiano. O projeto busca democratizar o monitoramento hídrico, promover a educação ambiental e reforçar a cultura oceânica, reconhecendo que toda água poluída nos rios e nas cidades, inevitavelmente, chega ao mar.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Contexto e Problema</h3>
+                    <p>Durante a pesquisa realizada no Instituto Federal da Bahia (IFBA) – Campus Irecê, verificou-se que, embora 90,2% dos entrevistados afirmem receber água tratada, 45,1% não confiam em sua qualidade. Esse dado revela uma significativa desconfiança da população em relação aos serviços de saneamento básico e evidencia a necessidade de maior transparência e participação social nesse processo.</p>
+                    
+                    <p>O EcoH₂O surge, portanto, como uma ferramenta educativa e prática, permitindo que cada cidadão realize testes simples em sua própria residência, compreendendo melhor os parâmetros que indicam a potabilidade da água.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Metodologia e Sustentabilidade</h3>
+                    <p>O uso de reagentes naturais, como suco de repolho roxo, chá de hibisco, vinagre diluído e iodo, demonstra uma preocupação com a sustentabilidade e a segurança química, evitando substâncias tóxicas e valorizando recursos acessíveis.</p>
+                    
+                    <p>O formato modular do kit, com a realização de testes mensais (pH, cloro residual e matéria orgânica), favorece o acompanhamento contínuo e o desenvolvimento de hábitos de monitoramento ambiental. Essa dinâmica contribui tanto para a educação científica quanto para a conscientização ecológica, estimulando o senso de responsabilidade coletiva sobre a qualidade da água consumida.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Desafios e Próximas Etapas</h3>
+                    <p>O projeto também apresenta desafios que devem ser considerados para o aprimoramento de suas futuras etapas:</p>
+                    
+                    <ul>
+                        <li>Padronização dos testes, uma vez que reagentes naturais podem apresentar variações de coloração</li>
+                        <li>Parceria com órgãos públicos de saneamento para validar os procedimentos</li>
+                        <li>Logística de distribuição dos kits e reagentes mensais</li>
+                        <li>Formação educativa contínua dos participantes</li>
+                    </ul>
+                    
+                    <p>As próximas etapas envolvem realizar uma entrevista com o órgão público de saneamento da cidade e criar um formulário para que os cidadãos possam solicitar o Kit EcoH₂O. Os kits seriam distribuídos gratuitamente à população, com novas remessas a cada trimestre ou semestre.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Conclusão</h3>
+                    <p>O Projeto EcoH₂O mostrou como a ciência e a sustentabilidade podem caminhar juntas na busca pela preservação da água. Com o kit doméstico, o monitoramento se torna acessível à população, promovendo educação ambiental e participação social.</p>
+                    
+                    <p>Sua implementação demonstra o potencial transformador das práticas de monitoramento popular e reforça o papel da educação científica como ferramenta de conscientização e transformação ambiental.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: KIT ECOH₂O -->
+        <section id="kit" class="section" style="background: #f8f9fa;">
+            <div class="container">
+                <h2 class="section-title">Kit EcoH₂O - Monitoramento Doméstico</h2>
+                
+                <div class="content-card">
+                    <h3>Itens do Kit</h3>
+                    <div class="kit-grid">
+                        <div class="kit-item">
+                            <h4>Frasco de Coleta</h4>
+                            <p>Frasco de 250mL transparente para observar mudanças de cor ou turbidez</p>
+                        </div>
+                        
+                        <div class="kit-item">
+                            <h4>Indicador de pH</h4>
+                            <p>Suco de repolho roxo para verificar se a água é ácida ou alcalina</p>
+                        </div>
+                        
+                        <div class="kit-item">
+                            <h4>Indicador de Cloro</h4>
+                            <p>Alga seca ou solução de fécula de batata para detectar cloro residual</p>
+                        </div>
+                        
+                        <div class="kit-item">
+                            <h4>Indicador de Matéria Orgânica</h4>
+                            <p>Solução de iodo ou vinagre diluído para detectar poluição orgânica</p>
+                        </div>
+                        
+                        <div class="kit-item">
+                            <h4>Acessórios</h4>
+                            <p>Mini funil, colheres medidoras, cartão de instruções visuais e caderno de registro</p>
+                        </div>
+                        
+                        <div class="kit-item">
+                            <h4>Material Educativo</h4>
+                            <p>Tabela de referência da água segura e selos mensais para acompanhamento</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Funcionamento Mensal</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                        <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
+                            <h4 style="color: #083161; margin-bottom: 1rem;">Mês 1 – Teste de pH</h4>
+                            <p>Utiliza suco de repolho roxo ou chá de hibisco para indicar o nível de acidez ou alcalinidade da água.</p>
+                        </div>
+                        
+                        <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
+                            <h4 style="color: #083161; margin-bottom: 1rem;">Mês 2 – Teste de Cloro Residual</h4>
+                            <p>Verifica a presença de cloro, reagindo com iodo para indicar se há excesso ou falta do desinfetante.</p>
+                        </div>
+                        
+                        <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
+                            <h4 style="color: #083161; margin-bottom: 1rem;">Mês 3 – Teste de Matéria Orgânica</h4>
+                            <p>Avalia possíveis sinais de poluição doméstica utilizando vinagre diluído e iodo.</p>
+                        </div>
+                        
+                        <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #5ea1e5;">
+                            <h4 style="color: #083161; margin-bottom: 1rem;">Mês 4 – Repetição e Comparação</h4>
+                            <p>Os testes são repetidos, permitindo comparar resultados e analisar variações.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Estimativa de Custo</h3>
+                    <p>O custo estimado para produção de cada kit completo é de aproximadamente R$ 50,50, incluindo:</p>
+                    
+                    <ul>
+                        <li>Frasco 250 mL: R$ 4/unidade</li>
+                        <li>Mini funil + colheres medidoras: R$ 3/unidade</li>
+                        <li>Cartão de instruções visual: R$ 2,50/unidade</li>
+                        <li>Caderno de registro: R$ 4/unidade</li>
+                        <li>Reagentes naturais para 4 meses: R$ 30/unidade</li>
+                        <li>Embalagem segura e transporte: R$ 7/unidade</li>
+                    </ul>
+                    
+                    <p>Também está sendo considerada uma versão básica com materiais + 1 mês de reagentes por R$ 15 a R$ 25,00.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: ENTREVISTA COM VICENTE -->
+        <section id="vicente" class="section interview-section">
+            <div class="container">
+                <h2 class="section-title">Entrevista com Vicente de Paula Dourado</h2>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Conexão entre Prefeitura e o Projeto Ecos do Mar</p>
+                
+                <div class="interview-card">
+                    <p>No dia 21 de outubro de 2025, nós, do grupo Ecos do Mar, recebemos no IFBA Campus Irecê a visita de Vicente de Paula Dourado, representante da Prefeitura Municipal. O encontro teve como objetivo apresentar o nosso projeto EcoH₂O e compreender melhor a relação entre a Prefeitura, a Embasa e os cidadãos no que se refere à qualidade da água e ao saneamento básico.</p>
+                    
+                    <p>Durante a visita, mostramos o funcionamento do protótipo de monitoramento da qualidade da água, desenvolvido pelo grupo como parte do projeto Ecos do Mar. O dispositivo tem como proposta permitir que a população acompanhe, de forma acessível e educativa, a qualidade da água que consome.</p>
+                    
+                    <p>Ao conhecer de perto a iniciativa, Vicente demonstrou grande interesse e fez questão de destacar a relevância do trabalho:</p>
+                    
+                    <img src="https://i.ibb.co/0pwyp6br/FOTO-1.jpg" alt="Vicente de Paula Dourado conhecendo o projeto EcoH₂O no IFBA Campus Irecê" class="interview-image">
+                    
+                    <div class="quote">
+                        "Eu achei muito interessante essa preocupação de vocês e a capacidade de desenvolver um aparelhinho tão simples, mas com uma utilidade e importância enormes.
+                        É um projeto que mostra engajamento, consciência e vontade de transformar a realidade. Vocês estão desenvolvendo algo que pode trazer benefícios reais à população, e isso é digno de reconhecimento.
+                        Quero conversar com o município e, posteriormente, também com a Embasa sobre o projeto. Boa parte das perguntas eu consegui responder, e as demais orientei para o órgão responsável, no caso, a Embasa.
+                        Fiquei muito satisfeito em ver jovens interessados em criar um mecanismo capaz de medir a qualidade da água que a população consome. Tenho certeza de que as pessoas vão apoiar e abraçar essa ideia, porque o acesso à água limpa e segura é um direito de todos.
+                        Continuem nessa luta, e contem com o nosso apoio dentro das nossas condições. Acredito muito na força de iniciativas como essa, que nascem do interesse coletivo e do desejo de fazer a diferença."
+                    </div>
+                    
+                    <p>A visita foi marcada por diálogo, incentivo e troca de conhecimentos, reforçando o compromisso do grupo Ecos do Mar com a ciência, a sustentabilidade e a participação popular na busca por um futuro mais consciente e saudável para todos.</p>
+                    
+                    <img src="https://i.ibb.co/kg5jpwzb/FOTO-2.jpg" alt="Integrantes do grupo Ecos do Mar ao lado de Vicente de Paula Dourado" class="interview-image">
+                    
+                    <p class="image-caption">Integrantes do grupo Ecos do Mar ao lado de Vicente de Paula Dourado durante a visita ao IFBA Campus Irecê, apresentando o projeto EcoH₂O.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: ENTREVISTA COM EMBASA -->
+        <section id="embasa" class="section embasa-section">
+            <div class="container">
+                <h2 class="section-title">Entrevista com a Embasa</h2>
+                <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem;">Gerente da Divisão de Operação Água da Embasa em Irecê fala sobre tratamento, desafios e conscientização hídrica</p>
+                
+                <div class="content-card">
+                    <p>Durante uma visita técnica à Embasa, o grupo Ecos do Mar, do IFBA Campus Irecê, responsável pelo projeto Estação Flutuante e Eco H₂O, realizou uma entrevista com o Gerente Thiago Vasconcelos para compreender o funcionamento do saneamento básico e o tratamento da água na cidade.</p>
+                    
+                    <p>O grupo apresentou a proposta do projeto, explicando que ele nasceu a partir da criação de uma Estação Flutuante de Monitoramento, desenvolvida durante a Semana Nacional de Ciência e Tecnologia. O objetivo era estudar a qualidade da água e conscientizar a população sobre a preservação dos recursos hídricos.</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "Nós fizemos uma pesquisa no campus e descobrimos que, embora 90% dos alunos afirmem receber água da Embasa, 40% não confiam totalmente na sua qualidade", explicou Eduarda Almeida. "Com o Eco H₂O, queremos devolver essa confiança, permitindo que qualquer pessoa possa testar a água que consome em casa."
+                    </div>
+                    
+                    <p>A professora responsável Vivian Santana complementou que o projeto faz parte da Semana Nacional de Ciência e Tecnologia e que os alunos criaram reagentes naturais, como o chá de repolho roxo, capazes de identificar contaminações na água com materiais recicláveis e de baixo custo.</p>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Processo de Tratamento da Água</h3>
+                    
+                    <p>Questionado sobre as etapas do tratamento, o gerente explicou:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "As etapas variam conforme o tipo de manancial. Em poços, adicionamos apenas cloro para eliminar micro-organismos. Já nos superficiais, como rios e barragens, o processo é completo: floculação, decantação, filtração, cloração e fluoretação. O cloro é obrigatório por lei, e o flúor é essencial para a saúde bucal das crianças."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Monitoramento da Qualidade</h3>
+                    
+                    <p>Ao falar sobre o monitoramento da qualidade da água, ele destacou o rigor do controle realizado pela empresa:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "A cada duas horas fazemos análises na Estação de Tratamento, verificando pH, turbidez, cor e teor de cloro. Também coletamos amostras diárias em diversos pontos da cidade para garantir que a água chegue às casas dentro dos padrões de potabilidade. Além disso, a Vigilância Sanitária realiza coletas independentes e envia amostras ao Laboratório Central de Saúde Pública (LACEN), em Salvador, como forma de fiscalização externa e complementar. Esse trabalho conjunto assegura transparência e segurança na qualidade da água."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Escassez Hídrica e Conscientização</h3>
+                    
+                    <p>Quanto a escassez hídrica, Thiago Vasconcelos foi enfático:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "A primeira medida é conscientizar. Se há crise, é preciso economizar. Hoje enfrentamos escassez em parte da região de Irecê, mas estamos controlando com o sistema adutor do Rio São Francisco e perfuração de novos poços. A qualidade, porém, nunca é comprometida. Cada real investido na água é um real economizado na saúde pública."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Comunicação e Educação</h3>
+                    
+                    <p>Sobre a comunicação com os cidadãos, ele citou o trabalho social da empresa:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "Temos uma assistente social, Ana Karina, que coordena ações educativas em escolas e comunidades. Em períodos de crise, reforçamos com reuniões, carro de som, informativos digitais e presença direta nas localidades. Essa aproximação faz diferença."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Tratamento de Esgoto</h3>
+                    
+                    <p>Em relação ao tratamento de esgoto, ele explicou:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "A Embasa coleta o esgoto e o leva às estações de tratamento. Em Irecê, temos cinco unidades e estamos construindo uma central maior. O processo envolve gradeamento, caixas de areia, decantadores e leitos de maturação, onde bactérias e o sol ajudam na decomposição. O efluente tratado é devolvido ao meio ambiente em condições seguras, com análises semanais."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Práticas Sustentáveis</h3>
+                    
+                    <p>Quando perguntado sobre práticas sustentáveis, o coordenador destacou o avanço da empresa:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "Usamos válvulas redutoras de pressão em áreas com muito vazamento e 80% da energia consumida pela Embasa já vem de fontes renováveis — solar e eólica. Isso reduz custos e impactos ambientais."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Reaproveitamento de Água da Chuva</h3>
+                    
+                    <p>Sobre o reaproveitamento da água da chuva, ele esclareceu:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "A legislação não permite que a Embasa trabalhe com águas pluviais. Podemos apenas captar, tratar e distribuir água potável e tratar esgoto. Em residências, o uso é viável, mas em larga escala seria economicamente inviável pela baixa constância das chuvas na região."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Educação Ambiental</h3>
+                    
+                    <p>A entrevista também abordou o trabalho educativo da empresa:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "Temos um calendário anual de visitas e palestras em escolas públicas. Durante a Semana da Água e no projeto Amigos do Viveiro, falamos sobre consumo consciente e preservação dos recursos hídricos. Tudo começa na educação."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Confiança na Qualidade da Água</h3>
+                    
+                    <p>Questionado se a população poderia confiar na Embasa, o coordenador respondeu com firmeza:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "Com certeza. Todas as análises estão detalhadas na conta de água, mas muitos olham apenas o valor e esquecem o relatório. Lá constam os parâmetros, as coletas e os resultados. Trabalhamos com seriedade e transparência."
+                    </div>
+                    
+                    <h3 style="color: #083161; margin-top: 2rem;">Principais Desafios</h3>
+                    
+                    <p>Sobre os principais desafios do saneamento no município, ele disse:</p>
+                    
+                    <div class="quote" style="border-left-color: #083161;">
+                        "O maior desafio é a escassez hídrica. Desde 2018 enfrentamos longos períodos de seca, mas estamos avançando com a ampliação da adutora do São Francisco e novas estações de tratamento. Outro problema é a conscientização — ainda há quem não ligue sua casa à rede de esgoto, o que é ilegal e prejudica o meio ambiente. Cuidar da água é cuidar da própria saúde e do futuro."
+                    </div>
+                    
+                    <img src="https://i.ibb.co/9H5yJRBt/FOTO-3.jpg" alt="Thiago Vasconcelos durante entrevista com o grupo Ecos do Mar" class="interview-image" style="max-width: 500px;">
+                    
+                    <div class="quote" style="border-left-color: #083161; text-align: center;">
+                        "A água não é um bem infinito. Dois terços do planeta são cobertos por água, mas a maior parte não é potável. Precisamos valorizar o que temos. Cada vazamento, cada desperdício, afeta todos. Hoje, 35% de toda a água tratada é perdida — e boa parte por vazamentos não comunicados. Viu um vazamento? Avise à Embasa. Cuidar da água é um dever de todos."
+                    </div>
+                    
+                    <p>Após a entrevista, Thiago Vasconcelos direcionou o grupo até o Laboratório. Aonde Vanessa Souza - Bacterologista e Josenilton Teixeira - Coordenador do laboratório, receberam e apresentaram o funcionamento do mesmo.</p>
+                    
+                    <img src="https://i.ibb.co/Cs7DB5m4/FOTO-4.jpg" alt="Grupo Ecos do Mar com equipe da Embasa no laboratório" class="interview-image">
+                    
+                    <div class="quote" style="border-left-color: #083161; text-align: center; font-weight: bold;">
+                        "Confiem no trabalho da Embasa. Nosso compromisso é garantir água de qualidade, com responsabilidade e respeito pela vida. Cuidar da água é cuidar do futuro."<br>
+                        <span style="font-style: italic;">Thiago Vasconcelos - Embasa 2025</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: #083161; color: white; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2025 Projeto EcoH₂O - IFBA Campus Irecê</p>
+            <p>Desenvolvido com dedicação pela equipe Ecos do Mar</p>
+        </div>
+    </footer>
+</body>
+</html>
