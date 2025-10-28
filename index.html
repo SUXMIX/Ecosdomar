@@ -413,30 +413,32 @@
             margin: 3rem 0;
         }
 
+        /* ESTILOS MODIFICADOS PARA AS FITAS DE CORES - MAIS ACHATADAS */
         .ph-indicator {
             background: #fff;
-            border: 2px solid #5ea1e5;
-            border-radius: 20px;
-            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .ph-indicator:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(94, 161, 229, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .ph-indicator.acidic {
-            border-color: #e74c3c;
+            border-left: 4px solid #e74c3c;
         }
 
         .ph-indicator.neutral {
-            border-color: #9b59b6;
+            border-left: 4px solid #9b59b6;
         }
 
         .ph-indicator.basic {
-            border-color: #2ecc71;
+            border-left: 4px solid #2ecc71;
         }
 
         .ph-title {
@@ -465,8 +467,8 @@
 
         .ph-color {
             width: 100%;
-            height: 40px;
-            border-radius: 10px;
+            height: 30px;
+            border-radius: 4px;
             margin: 0 auto;
         }
 
@@ -560,7 +562,6 @@
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
-            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
@@ -585,6 +586,30 @@
 
         .test-card p, .result-card p {
             color: #000;
+        }
+
+        /* BOTÃO DE GRÁFICO - NOVO ESTILO */
+        .chart-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #083161;
+            color: #edeff1;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(8, 49, 97, 0.3);
+        }
+
+        .chart-btn:hover {
+            background: #062448;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(8, 49, 97, 0.4);
         }
 
         .test-img {
@@ -1314,7 +1339,7 @@
                         
                         <p>Utilizamos o <strong>repolho roxo como reagente natural</strong>, que muda de cor conforme o pH da água, permitindo identificar possíveis sinais de poluição. Nosso foco foi o sabão em pó, um contaminante comum no descarte doméstico e presente em ambientes urbanos.</p>
                         
-                        <p>Ao longo do projeto, aprendemos sobre <strong>química ambiental, saneamento básico</strong> e os impactos da poluição nos ecossistemas. Também desenvolvemos habilidades como organização em grupo, análise de dados, comunicação científica e consciência sobre os problemas ambientais que afetam nossa região.</p>
+                        <p>Ao longo do projeto, aprendemos sobre <strong>química ambiental, saneamento básico</strong> e os impacts da poluição nos ecossistemas. Também desenvolvemos habilidades como organização em grupo, análise de dados, comunicação científica e consciência sobre os problemas ambientais que afetam nossa região.</p>
                         
                         <p>Com materiais simples e uma abordagem prática, mostramos que é possível fazer <strong>ciência de forma acessível</strong>, relevante e conectada à realidade das comunidades.</p>
                     </div>
@@ -1322,7 +1347,7 @@
             </div>
         </section>
 
-        <!-- Nova seção: O Repolho Roxo como Indicador Natural -->
+        <!-- NOVA SEÇÃO: O Repolho Roxo como Indicador Natural -->
         <section id="repolho" class="section">
             <div class="container">
                 <h2 class="section-title">O Repolho Roxo como Indicador Natural de pH</h2>
@@ -1379,29 +1404,35 @@
             <div class="container">
                 <h2 class="section-title">Resultados da Pesquisa sobre Saneamento Básico</h2>
                 <div class="test-grid">
-                    <div class="test-card" data-chart="agua-potavel">
+                    <div class="test-card">
                         <h3>Acesso à água potável:</h3>
                         <p>A maioria dos participantes (95,2%) declarou possuir acesso à água potável em suas residências.</p>
+                        <button class="chart-btn" data-chart="agua-potavel">📊</button>
                     </div>
-                    <div class="test-card" data-chart="tratamento-agua">
+                    <div class="test-card">
                         <h3>Tratamento da água:</h3>
                         <p>42,9% afirmaram receber água tratada, mas não confiam plenamente na sua qualidade; 52,4% informaram que recebem água tratada e confiam no serviço; enquanto 4,7% relataram não receber água tratada.</p>
+                        <button class="chart-btn" data-chart="tratamento-agua">📊</button>
                     </div>
-                    <div class="test-card" data-chart="esgotamento-sanitario">
+                    <div class="test-card">
                         <h3>Esgotamento sanitário:</h3>
                         <p>90% dos respondentes disseram que suas residências são atendidas pela rede de esgoto, enquanto 10% afirmaram não ter acesso a esse serviço.</p>
+                        <button class="chart-btn" data-chart="esgotamento-sanitario">📊</button>
                     </div>
-                    <div class="test-card" data-chart="coleta-lixo">
+                    <div class="test-card">
                         <h3>Coleta de lixo:</h3>
                         <p>95,2% relataram que a coleta de resíduos ocorre regularmente, em dias específicos da semana.</p>
+                        <button class="chart-btn" data-chart="coleta-lixo">📊</button>
                     </div>
-                    <div class="test-card" data-chart="drenagem-urbana">
+                    <div class="test-card">
                         <h3>Drenagem urbana:</h3>
                         <p>66,7% afirmaram residir em áreas sem infraestrutura adequada para o escoamento de águas pluviais. Além disso, 28,6% declararam enfrentar problemas com alagamentos em períodos de chuva.</p>
+                        <button class="chart-btn" data-chart="drenagem-urbana">📊</button>
                     </div>
-                    <div class="test-card" data-chart="informacao-saneamento">
+                    <div class="test-card">
                         <h3>Informação sobre saneamento:</h3>
                         <p>Apenas 23,8% dos participantes disseram receber informações sobre saneamento básico.</p>
+                        <button class="chart-btn" data-chart="informacao-saneamento">📊</button>
                     </div>
                 </div>
             </div>
@@ -1734,9 +1765,9 @@
             }
         };
 
-        // Event listeners para os cards
-        document.querySelectorAll('.test-card').forEach(card => {
-            card.addEventListener('click', function() {
+        // Event listeners para os botões de gráfico
+        document.querySelectorAll('.chart-btn').forEach(button => {
+            button.addEventListener('click', function() {
                 const chartId = this.getAttribute('data-chart');
                 showChart(chartId);
             });
